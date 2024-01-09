@@ -9,7 +9,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.navigation.Navigation
 import com.example.dogsandddapters.R
-import com.example.dogsandddapters.EntryFragmentDirections
+//import com.example.dogsandddapters.EntryFragmentDirections
 
 class AdapterRegisterFragment : Fragment() {
 

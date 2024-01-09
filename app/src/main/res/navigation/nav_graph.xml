@@ -8,7 +8,7 @@
 
     <fragment
         android:id="@+id/entryFragment"
-        android:name="com.idz.lecture4_demo3.EntryFragment"
+        android:name="com.example.dogsandddapters.EntryFragment"
         android:label="WELCOME"
         tools:layout="@layout/fragment_entry">
         <action
@@ -32,12 +32,12 @@
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.idz.lecture4_demo3.Modules.LogInFragment"
+        android:name="com.example.dogsandddapters.Modules.LogInFragment"
         android:label="LogIn"
         tools:layout="@layout/fragment_log_in" />
     <fragment
         android:id="@+id/registerFragment"
-        android:name="com.idz.lecture4_demo3.Modules.RegisterFragment"
+        android:name="com.example.dogsandddapters.Modules.RegisterFragment"
         android:label="Registration"
         tools:layout="@layout/fragment_register" >
         <action
@@ -49,7 +49,7 @@
     </fragment>
     <fragment
         android:id="@+id/dogRegisterFragment"
-        android:name="com.idz.lecture4_demo3.Modules.DogRegisterFragment"
+        android:name="com.example.dogsandddapters.Modules.DogRegisterFragment"
         android:label="fragment_dog_register"
         tools:layout="@layout/fragment_dog_register" >
         <action
@@ -58,7 +58,7 @@
     </fragment>
     <fragment
         android:id="@+id/adapterRegisterFragment"
-        android:name="com.idz.lecture4_demo3.Modules.AdapterRegisterFragment"
+        android:name="com.example.dogsandddapters.Modules.AdapterRegisterFragment"
         android:label="fragment_adapter_register"
         tools:layout="@layout/fragment_adapter_register" >
         <action
@@ -67,22 +67,22 @@
     </fragment>
     <fragment
         android:id="@+id/adaptersFragment"
-        android:name="com.idz.lecture4_demo3.AdaptersFragment"
+        android:name="com.example.dogsandddapters.AdaptersFragment"
         android:label="fragment_adapters"
         tools:layout="@layout/fragment_adapters" />
     <fragment
         android:id="@+id/dogsFragment"
-        android:name="com.idz.lecture4_demo3.DogsFragment"
+        android:name="com.example.dogsandddapters.DogsFragment"
         android:label="fragment_dogs"
         tools:layout="@layout/fragment_dogs" />
     <fragment
         android:id="@+id/profileFragment"
-        android:name="com.idz.lecture4_demo3.ProfileFragment"
+        android:name="com.example.dogsandddapters.ProfileFragment"
         android:label="fragment_profile"
         tools:layout="@layout/fragment_profile" />
     <fragment
         android:id="@+id/likesFragment"
-        android:name="com.idz.lecture4_demo3.LikesFragment"
+        android:name="com.example.dogsandddapters.LikesFragment"
         android:label="fragment_likes"
         tools:layout="@layout/fragment_likes" />
 </navigation>

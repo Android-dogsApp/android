@@ -1,13 +1,12 @@
 package com.example.dogsandddapters.Modules
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
-import android.widget.TextView
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dogsandddapters.R
 
@@ -21,8 +20,8 @@ class DogRegisterFragment : Fragment() {
     private  var etAddEnergyLevel: EditText? = null
     private  var etAddBackyard: EditText? = null
 
-    private  var btnAddDogSave: Button? = null
-    private  var btnAddDogCancel: Button? = null
+//    private  var btnAddDogSave: Button? = null
+//    private  var btnAddDogCancel: Button? = null
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -41,18 +40,16 @@ class DogRegisterFragment : Fragment() {
         etAddEnergyLevel = view.findViewById(R.id.etAddEnergyLevel)
         etAddBackyard = view.findViewById(R.id.etAddBackyard)
 
-        btnAddDogSave = view.findViewById(R.id.btnAddDogSave)
-        btnAddDogCancel = view.findViewById(R.id.btnAddDogCancel)
+        val btnAddDogSave: Button  = view.findViewById(R.id.btnAddDogSave)
+        val btnAddDogCancel: Button= view.findViewById(R.id.btnAddDogCancel)
 
-        btnAddDogCancel?.setOnClickListener {
-            // Navigation.findNavController(it).popBackStack(R.id.dogsFragment, false)
+        btnAddDogCancel.setOnClickListener {
             val action = DogRegisterFragmentDirections.actionDogRegisterFragmentToDogsFragment()
             Navigation.findNavController(view).navigate(action)
         }
 
 
-
-        btnAddDogSave?.setOnClickListener {
+        btnAddDogSave.setOnClickListener {
             val dogName = etAddDogName?.text.toString()
             val studentID = etAddStudentID?.text.toString()
             val repName = etAddRepName?.text.toString()
@@ -60,8 +57,6 @@ class DogRegisterFragment : Fragment() {
             val sheltersLocation = etAddSheltersLocation?.text.toString()
             val energyLevel = etAddEnergyLevel?.text.toString()
             val backyard = etAddBackyard?.text.toString()
-
-            // Navigation.findNavController(it).popBackStack(R.id.dogsFragment, false)
 
             val action = DogRegisterFragmentDirections.actionDogRegisterFragmentToDogsFragment()
             Navigation.findNavController(view).navigate(action)
