@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/entryFragment">
+
+
+    <fragment
+        android:id="@+id/entryFragment"
+        android:name="com.idz.lecture4_demo3.EntryFragment"
+        android:label="WELCOME"
+        tools:layout="@layout/fragment_entry">
+        <action
+            android:id="@+id/action_entryFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_loginFragment"
+            app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_adaptersFragment"
+            app:destination="@id/adaptersFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_dogsFragment"
+            app:destination="@id/dogsFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_likesFragment"
+            app:destination="@id/likesFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.idz.lecture4_demo3.Modules.LogInFragment"
+        android:label="LogIn"
+        tools:layout="@layout/fragment_log_in" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.idz.lecture4_demo3.Modules.RegisterFragment"
+        android:label="Registration"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_dogRegisterFragment"
+            app:destination="@id/dogRegisterFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_adapterRegisterFragment"
+            app:destination="@id/adapterRegisterFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/dogRegisterFragment"
+        android:name="com.idz.lecture4_demo3.Modules.DogRegisterFragment"
+        android:label="fragment_dog_register"
+        tools:layout="@layout/fragment_dog_register" >
+        <action
+            android:id="@+id/action_dogRegisterFragment_to_dogsFragment"
+            app:destination="@id/dogsFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adapterRegisterFragment"
+        android:name="com.idz.lecture4_demo3.Modules.AdapterRegisterFragment"
+        android:label="fragment_adapter_register"
+        tools:layout="@layout/fragment_adapter_register" >
+        <action
+            android:id="@+id/action_adapterRegisterFragment_to_adaptersFragment"
+            app:destination="@id/adaptersFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/adaptersFragment"
+        android:name="com.idz.lecture4_demo3.AdaptersFragment"
+        android:label="fragment_adapters"
+        tools:layout="@layout/fragment_adapters" />
+    <fragment
+        android:id="@+id/dogsFragment"
+        android:name="com.idz.lecture4_demo3.DogsFragment"
+        android:label="fragment_dogs"
+        tools:layout="@layout/fragment_dogs" />
+    <fragment
+        android:id="@+id/profileFragment"
+        android:name="com.idz.lecture4_demo3.ProfileFragment"
+        android:label="fragment_profile"
+        tools:layout="@layout/fragment_profile" />
+    <fragment
+        android:id="@+id/likesFragment"
+        android:name="com.idz.lecture4_demo3.LikesFragment"
+        android:label="fragment_likes"
+        tools:layout="@layout/fragment_likes" />
+</navigation>
