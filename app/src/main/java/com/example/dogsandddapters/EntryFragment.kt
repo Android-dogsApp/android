@@ -7,7 +7,6 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
-import com.example.dogsandddapters.R
 import androidx.navigation.Navigation
 
 
@@ -32,9 +31,9 @@ class EntryFragment : Fragment() {
             Navigation.findNavController(view).navigate(action)
         }
         // Hide BottomNavigationView
-        if (activity is MainActivity) {
-            (activity as MainActivity).hideBottomNavigationView()
-        }
+//        if (activity is MainActivity) {
+//            (activity as MainActivity).hideBottomNavigationView()
+//        }
 
 
 

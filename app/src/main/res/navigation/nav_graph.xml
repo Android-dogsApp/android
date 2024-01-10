@@ -29,6 +29,9 @@
         <action
             android:id="@+id/action_entryFragment_to_likesFragment"
             app:destination="@id/likesFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_addDogPostFragment2"
+            app:destination="@id/addDogPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/loginFragment"
@@ -85,4 +88,9 @@
         android:name="com.example.dogsandddapters.LikesFragment"
         android:label="fragment_likes"
         tools:layout="@layout/fragment_likes" />
+    <fragment
+        android:id="@+id/addDogPostFragment"
+        android:name="com.example.dogsandddapters.Modules.addDogPostFragment"
+        android:label="fragment_add_dog_post"
+        tools:layout="@layout/fragment_add_dog_post" />
 </navigation>
