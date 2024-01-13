@@ -16,10 +16,7 @@ class LogInFragment : Fragment() {
         // Inflate the layout for this fragment
         val view= inflater.inflate(R.layout.fragment_log_in, container, false)
 
-//        // Hide BottomNavigationView
-//        if (activity is MainActivity) {
-//            (activity as MainActivity).hideBottomNavigationView()
-//        }
+
         return view
     }
 

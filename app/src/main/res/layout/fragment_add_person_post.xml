@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<!-- res/layout/fragment_create_post.xml -->
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".Modules.addPersonPost.addPersonPostFragment"
+        android:padding="16dp">
+
+    <TextView
+        android:id="@+id/textViewRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Request (max 10 words)"
+        android:textSize="18sp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextRequest"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type your request here"
+        android:inputType="textMultiLine"
+        android:maxLines="2"
+        android:layout_below="@id/textViewRequest"
+        android:layout_marginBottom="8dp"/>
+
+    <TextView
+        android:id="@+id/textViewWordCount"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/editTextRequest"
+        android:text="0/10 words"
+        android:textSize="12sp"
+        android:layout_marginTop="4dp"
+        android:layout_marginBottom="16dp"
+        android:textColor="@android:color/darker_gray"
+        android:layout_alignParentEnd="true"/>
+
+    <TextView
+        android:id="@+id/textViewOffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="What I can offer to others"
+        android:textSize="18sp"
+        android:layout_below="@id/textViewWordCount"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextOffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Type your offer here"
+        android:inputType="textMultiLine"
+        android:maxLines="2"
+        android:layout_below="@id/textViewOffer"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Image upload section (you may replace this with your image upload implementation) -->
+    <Button
+        android:id="@+id/btnUploadImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:layout_below="@id/editTextOffer"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Contact information section -->
+    <TextView
+        android:id="@+id/textViewContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="Contact Information"
+        android:textSize="18sp"
+        android:layout_below="@id/btnUploadImage"
+        android:layout_marginTop="16dp"
+        android:layout_marginBottom="8dp"/>
+
+    <EditText
+        android:id="@+id/editTextContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Phone number or email address"
+        android:inputType="text"
+        android:layout_below="@id/textViewContact"
+        android:layout_marginBottom="16dp"/>
+
+    <!-- Post and Cancel buttons -->
+    <Button
+        android:id="@+id/btnPost"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Post"
+        android:layout_below="@id/editTextContact"
+        android:layout_marginTop="24dp"/>
+
+    <Button
+        android:id="@+id/btnCancel"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Cancel"
+        android:layout_below="@id/editTextContact"
+        android:layout_marginTop="24dp"
+        android:layout_toEndOf="@id/btnPost"
+        android:layout_marginStart="16dp"/>
+
+</RelativeLayout>
+
+

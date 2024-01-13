@@ -1,0 +1,62 @@
+<!-- res/layout/post_item_layout.xml -->
+
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:padding="16dp">
+
+    <!-- Image View for the post -->
+    <ImageView
+        android:id="@+id/postImageView"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginEnd="16dp"
+        android:scaleType="centerCrop"/>
+
+    <!-- Text View for the request -->
+    <TextView
+        android:id="@+id/requestTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_toEndOf="@id/postImageView"
+        android:text="Request: "
+        android:textSize="18sp"
+        android:layout_marginBottom="4dp"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Text View for the offer -->
+    <TextView
+        android:id="@+id/offerTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/requestTextView"
+        android:layout_toEndOf="@id/postImageView"
+        android:text="Offer: "
+        android:textSize="16sp"
+        android:layout_marginBottom="4dp"/>
+
+    <!-- Text View for contact information -->
+    <TextView
+        android:id="@+id/contactTextView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/offerTextView"
+        android:layout_toEndOf="@id/postImageView"
+        android:text="Contact: "
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"/>
+
+    <!-- Text View for general post ID -->
+    <TextView
+        android:id="@+id/generalPostIdTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/contactTextView"
+        android:layout_toEndOf="@id/postImageView"
+        android:text="General Post ID: "
+        android:textSize="14sp"
+        android:layout_marginTop="4dp"/>
+</RelativeLayout>
