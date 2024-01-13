@@ -4,13 +4,19 @@ import android.os.Bundle
 import android.text.Editable
 import android.text.TextWatcher
 import android.view.LayoutInflater
+import android.view.Menu
+import android.view.MenuInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.dogsandddapters.R
+import com.example.dogsandddapters.Models.PersonPostsModel
+import com.example.dogsandddapters.Models.PersonPosts
+
 
 class addPersonPostFragment : Fragment() {
 
@@ -63,18 +69,24 @@ class addPersonPostFragment : Fragment() {
 
 
         btnPost.setOnClickListener {
-            // Handle post logic here
-            // For example, you can retrieve the input values using:
-            // val request = editTextRequest.text.toString()
-            // val offer = editTextOffer.text.toString()
-            // val contact = editTextContact.text.toString()
-            // Perform the necessary actions for posting the content
+            val name = nameTextField?.text.toString()
+            val id = idTextField?.text.toString()
+
+            val student = PersonPosts(name, id, "", false)
+            PersonPosts.instance.addStudent(student) {
+                Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+            }
+        }
         }
 
         btnCancel.setOnClickListener {
-            // Handle cancel logic here
-            // For example, you might want to navigate back or clear the input fields
+            Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
         }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        menu.clear()
+        super.onCreateOptionsMenu(menu, inflater)
+    }
     }
 
 
