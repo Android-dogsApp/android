@@ -45,15 +45,7 @@ class MainActivity : AppCompatActivity() {
             else -> navController?.let { NavigationUI.onNavDestinationSelected(item, it) } ?: super.onOptionsItemSelected(item)
         }
     }
-//    fun hideBottomNavigationView() {
-//        // Hide the BottomNavigationView
-//        bottomNavigationView?.visibility = View.GONE
-//    }
 
-//    fun showBottomNavigationView() {
-//        // Show the BottomNavigationView
-//        bottomNavigationView?.visibility = View.VISIBLE
-//    }
 
 
 }
