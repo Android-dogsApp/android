@@ -14,8 +14,6 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dogsandddapters.R
-import com.example.dogsandddapters.Models.PersonPostsModel
-import com.example.dogsandddapters.Models.PersonPosts
 
 
 class addPersonPostFragment : Fragment() {
@@ -27,19 +25,24 @@ class addPersonPostFragment : Fragment() {
     private lateinit var btnPost: Button
     private lateinit var btnCancel: Button
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_add_person_post, container, false)
+        val view = inflater.inflate(R.layout.fragment_add_person_post, container, false)
+        setupUI(view)
+        return view
     }
 
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
+    private fun setupUI(view: View) {
 
-        // Initialize your views
         editTextRequest = view.findViewById(R.id.editTextRequest)
         textViewWordCount = view.findViewById(R.id.textViewWordCount)
         editTextOffer = view.findViewById(R.id.editTextOffer)
@@ -67,27 +70,26 @@ class addPersonPostFragment : Fragment() {
             }
         })
 
-
         btnPost.setOnClickListener {
-            val name = nameTextField?.text.toString()
-            val id = idTextField?.text.toString()
+            val request = editTextRequest.text.toString()
+            val offer = editTextOffer.text.toString()
+            val contact = editTextContact.text.toString()
 
-            val student = PersonPosts(name, id, "", false)
-            PersonPosts.instance.addStudent(student) {
-                Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
-            }
-        }
+//            val personPost = PersonPosts(request, offer, contact)
+//            PersonPostsModel.instance.addPersonPost(personPost) {
+//                Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+//            }
         }
 
         btnCancel.setOnClickListener {
             Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
         }
 
+    }
+
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         super.onCreateOptionsMenu(menu, inflater)
     }
-    }
-
 
 }

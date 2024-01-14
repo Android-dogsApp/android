@@ -1,20 +1,21 @@
 package com.example.dogsandddapters.Modules.GeneralPosts
 
+//import com.example.dogsandddapters.Models.GeneralPostModel
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageButton
 import android.widget.ProgressBar
+import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
 import com.example.dogsandddapters.R
+import com.example.dogsandddapters.databinding.FragmentGeneralPostsBinding
 
 class GeneralPostsFragment : Fragment() {
     var GeneralPostsRcyclerView: RecyclerView? = null
@@ -22,7 +23,7 @@ class GeneralPostsFragment : Fragment() {
     var adapter: GeneralPostsRecyclerAdapter? = null
     var progressBar: ProgressBar? = null
 
-    private var _binding: FragmentStudentsBinding? = null
+    private var _binding: FragmentGeneralPostsBinding? = null
     private val binding get() = _binding!!
 
     override fun onCreateView(
@@ -30,22 +31,22 @@ class GeneralPostsFragment : Fragment() {
         savedInstanceState: Bundle?
     ): View? {
 
-        _binding = FragmentStudentsBinding.inflate(inflater, container, false)
+        _binding = FragmentGeneralPostsBinding.inflate(inflater, container, false)
         val view = binding.root
 
         progressBar = binding.progressBar
 
         progressBar?.visibility = View.VISIBLE
 
-        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-            this.generalposts = generalposts
-            adapter?.generalposts = generalposts
-            adapter?.notifyDataSetChanged()
+//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
+//            this.generalposts = generalposts
+//            adapter?.generalposts = generalposts
+//            adapter?.notifyDataSetChanged()
+//
+//            progressBar?.visibility = View.GONE
+//        }
 
-            progressBar?.visibility = View.GONE
-        }
-
-        GeneralPostsRcyclerView = binding.rvStudentsFragmentList
+        GeneralPostsRcyclerView = binding.rvGeneralPostFragmentList
         GeneralPostsRcyclerView?.setHasFixedSize(true)
         GeneralPostsRcyclerView?.layoutManager = LinearLayoutManager(context)
         adapter = GeneralPostsRecyclerAdapter(generalposts)
@@ -62,9 +63,11 @@ class GeneralPostsFragment : Fragment() {
 
         GeneralPostsRcyclerView?.adapter = adapter
 
-        val addStudentButton: ImageButton = view.findViewById(R.id.ibtnGeneralPostFragmentAddGeneralPost)
-        val action = Navigation.createNavigateOnClickListener(GeneralPostsFragmentDirections.actionGlobalAddPostFragment())
-        addStudentButton.setOnClickListener(action)
+        val addGeneralPostButton: ImageButton = view.findViewById(R.id.ibtnGeneralPostFragmentAddGeneralPost)
+        addGeneralPostButton.setOnClickListener {
+            val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToAddPersonPostFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
 
         return view
     }
@@ -74,13 +77,13 @@ class GeneralPostsFragment : Fragment() {
 
         progressBar?.visibility = View.VISIBLE
 
-        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-            this.generalposts = generalposts
-            adapter?.generalposts = generalposts
-            adapter?.notifyDataSetChanged()
-
-            progressBar?.visibility = View.GONE
-        }
+//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
+//            this.generalposts = generalposts
+//            adapter?.generalposts = generalposts
+//            adapter?.notifyDataSetChanged()
+//
+//            progressBar?.visibility = View.GONE
+//        }
     }
 
     override fun onDestroy() {

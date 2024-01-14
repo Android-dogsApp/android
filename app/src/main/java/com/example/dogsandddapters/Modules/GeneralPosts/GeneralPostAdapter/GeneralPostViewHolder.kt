@@ -36,14 +36,12 @@ class GeneralPostViewHolder(val itemView: View,
         }
     }
 
-    fun bind(generalgost: GeneralPost?) {
+    fun bind(generalpost: GeneralPost?) {
         this.generalpost = generalpost
         requestTextView?.text = generalpost?.request
         offerTextView?.text = generalpost?.offer
         contactTextView?.text = generalpost?.contact
         idTextView?.text = generalpost?.id
        //imageImageView?.text= generalpost?.image
-
-
     }
 }

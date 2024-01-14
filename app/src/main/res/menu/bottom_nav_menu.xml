@@ -7,9 +7,9 @@
         android:icon="@android:drawable/ic_dialog_dialer"
         android:title="Discover" />
     <item
-        android:id="@+id/likesFragment"
+        android:id="@+id/PersonPostsFragment"
         android:icon="@android:drawable/btn_star_big_on"
-        android:title="Likes" />
+        android:title="My Posts" />
     <item
         android:id="@+id/profileFragment"
         android:icon="@android:drawable/sym_def_app_icon"
