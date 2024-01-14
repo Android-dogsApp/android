@@ -1,39 +1,35 @@
 package com.example.dogsandddapters.Modules.GeneralPosts
 
-import androidx.appcompat.app.AppCompatActivity
+//import com.example.dogsandddapters.Models.GeneralPostModel
 import android.os.Bundle
 import android.util.Log
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
-import android.widget.CheckBox
-import android.widget.TextView
+import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
-import com.example.dogsandddapters.R
-import com.example.dogsandddapters.databinding.ActivitySGeneralPostRcyclerViewBinding
+import com.example.dogsandddapters.databinding.ActivityGeneralPostRcyclerViewBinding
+
 class GeneralPostsRcyclerViewActivity : AppCompatActivity() {
 
     var generalPostsRcyclerView: RecyclerView? = null
     var generalposts: List<GeneralPost>? = null
     var adapter: GeneralPostsRecyclerAdapter? = null
 
-    private lateinit var binding: ActivityGeneralPostsRcyclerViewBinding
+
+    private lateinit var binding: ActivityGeneralPostRcyclerViewBinding
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 
-        binding = ActivityGeneralPostsRcyclerViewBinding.inflate(layoutInflater)
+        binding = ActivityGeneralPostRcyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-            this.generalposts = generalposts
-            adapter?.generalposts = generalposts
-            adapter?.notifyDataSetChanged()
-        }
+//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
+//            this.generalposts = generalposts
+//            adapter?.generalposts = generalposts
+//            adapter?.notifyDataSetChanged()
+//        }
 
         generalPostsRcyclerView = binding.rvGeneralPostRecyclerList
         generalPostsRcyclerView?.setHasFixedSize(true)
@@ -61,11 +57,11 @@ class GeneralPostsRcyclerViewActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-
-        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-            this.generalposts = generalposts
-            adapter?.generalposts = generalposts
-            adapter?.notifyDataSetChanged()
-        }
+//
+//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
+//            this.generalposts = generalposts
+//            adapter?.generalposts = generalposts
+//            adapter?.notifyDataSetChanged()
+//        }
     }
 }

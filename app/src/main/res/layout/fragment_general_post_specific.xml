@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="utf-8"?>
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".GeneralPostSpecificFragment">
+
+    <!-- res/layout/layout_general_post.xml -->
+
+    <LinearLayout
+        xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:app="http://schemas.android.com/apk/res-auto"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:padding="16dp">
+
+        <!-- Post ID -->
+        <TextView
+            android:id="@+id/textViewPostId"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Post ID: "
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Request -->
+        <TextView
+            android:id="@+id/textViewRequest"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Request: "
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Offer -->
+        <TextView
+            android:id="@+id/textViewOffer"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="Offer: "
+            android:textStyle="bold"
+            android:layout_marginBottom="8dp"/>
+
+        <!-- Contact Information -->
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <!-- Phone Number -->
+            <TextView
+                android:id="@+id/textViewPhoneNumber"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Phone: "
+                android:textStyle="bold"/>
+
+            <!-- Email -->
+            <TextView
+                android:id="@+id/textViewEmail"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Email: "
+                android:textStyle="bold"/>
+        </LinearLayout>
+
+        <!-- Image -->
+        <ImageView
+            android:id="@+id/imageViewPost"
+            android:layout_width="match_parent"
+            android:layout_height="200dp"
+            android:scaleType="centerCrop"
+            android:layout_marginTop="16dp"/>
+
+    </LinearLayout>
+
+
+</FrameLayout>
