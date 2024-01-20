@@ -7,8 +7,7 @@ object AppLocalDatabase {
     }
 
     object AppLocalDatabase {
-
-//        val db: AppLocalDbRepository by lazy {
+        // val db: AppLocalDbRepository by lazy {
 //
 //            val context = MyApplication.Globals.appContext
 //                ?: throw IllegalStateException("Application context not available")
