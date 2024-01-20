@@ -11,7 +11,7 @@ class FirebasePersonModelModel {
     private val db = Firebase.firestore
 
     companion object {
-        const val STUDENTS_COLLECTION_PATH = "students"
+        const val PERSONS_COLLECTION_PATH = "persons"
     }
 
     init {
@@ -23,24 +23,24 @@ class FirebasePersonModelModel {
     }
 
 
-    fun getAllStudents(callback: (List<Student>) -> Unit) {
-        db.collection(STUDENTS_COLLECTION_PATH).get().addOnCompleteListener {
+    fun getAllPersons(callback: (List<Person>) -> Unit) {
+        db.collection(PERSONS_COLLECTION_PATH).get().addOnCompleteListener {
             when (it.isSuccessful) {
                 true -> {
-                    val students: MutableList<Student> = mutableListOf()
+                    val persons: MutableList<Person> = mutableListOf()
                     for (json in it.result) {
-                        val student = Student.fromJSON(json.data)
-                        students.add(student)
+                        val person = Person.fromJSON(json.data)
+                        persons.add(person)
                     }
-                    callback(students)
+                    callback(persons)
                 }
                 false -> callback(listOf())
             }
         }
     }
 
-    fun addStudent(student: Student, callback: () -> Unit) {
-        db.collection(STUDENTS_COLLECTION_PATH).document(student.id).set(student.json).addOnSuccessListener {
+    fun addPerson(person: Person, callback: () -> Unit) {
+        db.collection(PERSONS_COLLECTION_PATH).document(person.id).set(person.json).addOnSuccessListener {
             callback()
         }
     }

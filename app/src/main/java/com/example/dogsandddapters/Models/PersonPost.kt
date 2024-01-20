@@ -14,7 +14,7 @@ data class PersonPost(
     val comments:List<String>){
 
         companion object{
-            const val POSTTITLE_KEY="postTitle"
+            @PrimaryKey const val POSTTITLE_KEY="postTitle"
             const val PUBLISHER_KEY="publisher"
             const val DATE_KEY="date"
             const val CONTENT_KEY="content"

@@ -27,7 +27,7 @@ class PersonPostModel private constructor() {
 //
 //            Thread.sleep(5000)
 //
-//            val students = database.studentDao().getAll()
+//            val personposts = database.personpostDao().getAll()
 //            mainHandler.post {
 //                // Main Thread
 //                callback(students)
@@ -35,10 +35,10 @@ class PersonPostModel private constructor() {
 //        }
     }
 
-    fun addStudent(student: PersonPost, callback: () -> Unit) {
+    fun addStudent(personpost: PersonPost, callback: () -> Unit) {
       //  firebaseModel.addPersonPost(PersonPost, callback)
 //        executor.execute {
-//            database.studentDao().insert(student)
+//            database.personpostDao().insert(personpost)
 //            mainHandler.post {
 //                callback()
 //            }
