@@ -1,17 +1,16 @@
 package com.example.dogsandddapters.Models
-
 import com.google.firebase.firestore.firestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.memoryCacheSettings
+import com.google.firebase.firestore.persistentCacheSettings
 import com.google.firebase.ktx.Firebase
 
-
-class FirebasePersonPostModelModel {
+class FirebaseModel {
 
     private val db = Firebase.firestore
 
     companion object {
-        const val PERSONPOSTS_COLLECTION_PATH = "personPosts"
+        const val PERSONPOST_COLLECTION_PATH = "personposts"
     }
 
     init {
@@ -24,23 +23,25 @@ class FirebasePersonPostModelModel {
 
 
     fun getAllStudents(callback: (List<PersonPost>) -> Unit) {
-        db.collection(PERSONPOSTS_COLLECTION_PATH).get().addOnCompleteListener {
+        db.collection(PERSONPOST_COLLECTION_PATH).get().addOnCompleteListener {
             when (it.isSuccessful) {
                 true -> {
-                    val students: MutableList<PersonPost> = mutableListOf()
+                    val personPosts: MutableList<PersonPost> = mutableListOf()
                     for (json in it.result) {
                         val personPost = PersonPost.fromJSON(json.data)
-                       // persnPosts.add(personPost)
+                        if (personPost != null) {
+                            personPosts.add(personPost)
+                        }
                     }
-                    callback(students)
+                    callback(personPosts)
                 }
                 false -> callback(listOf())
             }
         }
     }
 
-    fun addPersonPost(personpost: PersonPost, callback: () -> Unit) {
-        db.collection(PERSONPOSTS_COLLECTION_PATH).document(addPersonPost().id).set(personpost.json).addOnSuccessListener {
+    fun addStudent(personPost: PersonPost, callback: () -> Unit) {
+        db.collection(PERSONPOST_COLLECTION_PATH).document(personPost.postTitle).set(personPost.json).addOnSuccessListener {
             callback()
         }
     }

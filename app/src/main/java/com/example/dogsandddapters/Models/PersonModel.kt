@@ -16,12 +16,12 @@ class Model private constructor() {
         val instance: Model = Model()
     }
 
-    interface GetAllStudentsListener {
+    interface GetAllPersonsListener {
         fun onComplete(students: List<Person>)
     }
 
-    fun getAllStudents(callback: (List<Person>) -> Unit) {
-        firebaseModel.getAllStudents(callback)
+    fun getAllPersons(callback: (List<Person>) -> Unit) {
+        firebaseModel.getAllPersons(callback)
 //        executor.execute {
 //
 //            Thread.sleep(5000)
