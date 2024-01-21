@@ -12,14 +12,14 @@
         android:label="fragment_entry"
         tools:layout="@layout/fragment_entry" >
         <action
-            android:id="@+id/action_entryFragment_to_registerFragment"
-            app:destination="@id/registerFragment" />
-        <action
             android:id="@+id/action_entryFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
         <action
             android:id="@+id/action_entryFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_registerFragment"
+            app:destination="@id/registerFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -29,18 +29,6 @@
         <action
             android:id="@+id/action_logInFragment_to_generalPostsFragment"
             app:destination="@id/generalPostsFragment" />
-    </fragment>
-    <fragment
-        android:id="@+id/registerFragment"
-        android:name="com.example.dogsandddapters.Modules.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
-        <action
-            android:id="@+id/action_registerFragment_to_generalPostsFragment"
-            app:destination="@id/generalPostsFragment" />
-        <action
-            android:id="@+id/action_registerFragment_to_entryFragment"
-            app:destination="@id/entryFragment" />
     </fragment>
     <fragment
         android:id="@+id/generalPostsFragment"
@@ -69,4 +57,16 @@
         android:name="com.example.dogsandddapters.GeneralPostSpecificFragment"
         android:label="fragment_general_post_specific"
         tools:layout="@layout/fragment_general_post_specific" />
+    <fragment
+        android:id="@+id/registerFragment"
+        android:name="com.example.dogsandddapters.Modules.RegisterFragment"
+        android:label="fragment_register"
+        tools:layout="@layout/fragment_register" >
+        <action
+            android:id="@+id/action_registerFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_generalPostsFragment"
+            app:destination="@id/generalPostsFragment" />
+    </fragment>
 </navigation>
