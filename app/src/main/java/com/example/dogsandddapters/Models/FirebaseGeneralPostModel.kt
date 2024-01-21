@@ -3,15 +3,13 @@ package com.example.dogsandddapters.Models
 import com.google.firebase.firestore.firestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.memoryCacheSettings
-import com.google.firebase.firestore.persistentCacheSettings
 import com.google.firebase.ktx.Firebase
 
-class FirebasePersonModel {
-
+class FirebaseGeneralPostModel {
     private val db = Firebase.firestore
 
     companion object {
-        const val PERSONS_COLLECTION_PATH = "persons"
+        const val GENERALPOST_COLLECTION_PATH = "generalPosts"
     }
 
     init {
@@ -23,24 +21,26 @@ class FirebasePersonModel {
     }
 
 
-    fun getAllPersons(callback: (List<Person>) -> Unit) {
-        db.collection(PERSONS_COLLECTION_PATH).get().addOnCompleteListener {
+    fun getAllGeneralPosts(callback: (List<GeneralPost>) -> Unit) {
+        db.collection(GENERALPOST_COLLECTION_PATH).get().addOnCompleteListener {
             when (it.isSuccessful) {
                 true -> {
-                    val persons: MutableList<Person> = mutableListOf()
+                    val generalPosts: MutableList<GeneralPost> = mutableListOf()
                     for (json in it.result) {
-                        val person = Person.fromJSON(json.data)
-                        persons.add(person)
+                        val generalPost = GeneralPost.fromJSON(json.data)
+                        if (generalPost != null) {
+                            generalPosts.add(generalPost)
+                        }
                     }
-                    callback(persons)
+                    callback(generalPosts)
                 }
                 false -> callback(listOf())
             }
         }
     }
 
-    fun addPerson(person: Person, callback: () -> Unit) {
-        db.collection(PERSONS_COLLECTION_PATH).document(person.id).set(person.json).addOnSuccessListener {
+    fun addGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
+        db.collection(GENERALPOST_COLLECTION_PATH).document(generalPost.postid).set(generalPost.toJson).addOnSuccessListener {
             callback()
         }
     }

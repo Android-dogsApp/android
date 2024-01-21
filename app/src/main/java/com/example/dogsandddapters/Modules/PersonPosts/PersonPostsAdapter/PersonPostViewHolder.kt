@@ -1,24 +1,24 @@
-package com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter
+package com.example.dogsandddapters.Modules.GeneralPosts.PersonPostAdapter
 
 import android.util.Log
 import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
-import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostsRcyclerViewActivity
+import com.example.dogsandddapters.Models.PersonPost
+import com.example.dogsandddapters.Modules.PersonPosts.PersonPostsRcyclerViewActivity
 import com.example.dogsandddapters.R
 
-class GeneralPostViewHolder(val itemView: View,
-                            val listener: GeneralPostsRcyclerViewActivity.OnItemClickListener?,
-                            var generalposts: List<GeneralPost>?): RecyclerView.ViewHolder(itemView) {
+class PersonPostViewHolder(val itemView: View,
+                           val listener: PersonPostsRcyclerViewActivity.OnItemClickListener?,
+                           var generalposts: List<PersonPost>?): RecyclerView.ViewHolder(itemView) {
 
     var requestTextView: TextView? = null
     var offerTextView: TextView? = null
     var contactTextView: TextView? = null
     var idTextView: TextView? = null
     var imageImageView: ImageView? = null
-    var generalpost: GeneralPost? = null
+    var personpost: PersonPost? = null
 
     init {
         requestTextView = itemView.findViewById(R.id.requestTextView)
@@ -32,17 +32,17 @@ class GeneralPostViewHolder(val itemView: View,
             Log.i("TAG", "GeneralPostViewHolder: Position clicked $adapterPosition")
 
             listener?.onItemClick(adapterPosition)
-            listener?.onGeneralPostClicked(generalpost)
+            listener?.onPersonPostClicked(personpost)
         }
     }
 
-    fun bind(generalpost: GeneralPost?) {
-        this.generalpost = generalpost
-        requestTextView?.text = generalpost?.request
-        offerTextView?.text = generalpost?.offer
-        contactTextView?.text = generalpost?.contact
-        idTextView?.text = generalpost?.postid
+    fun bind(personpost: PersonPost?) {
+        this.personpost = personpost
+        requestTextView?.text = personpost?.request
+        offerTextView?.text = personpost?.offer
+        contactTextView?.text = personpost?.contact
+        idTextView?.text = personpost?.postid
         //TODO: ADD PUBLISHER - THROUGH THE FIREBASE ♥
-        //imageImageView?.text= generalpost?.image
+       //imageImageView?.text= generalpost?.image
     }
 }

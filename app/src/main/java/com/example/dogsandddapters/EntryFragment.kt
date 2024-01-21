@@ -27,7 +27,7 @@ class EntryFragment : Fragment() {
 
         val loginButton: Button = view.findViewById(R.id.btnLogin)
         loginButton.setOnClickListener {
-            val action = EntryFragmentDirections.actionEntryFragmentToLoginFragment()
+            val action = EntryFragmentDirections.actionEntryFragmentToLogInFragment()
             Navigation.findNavController(view).navigate(action)
         }
         // Hide BottomNavigationView
