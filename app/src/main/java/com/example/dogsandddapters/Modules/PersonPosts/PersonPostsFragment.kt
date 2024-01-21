@@ -1,6 +1,5 @@
-package com.example.dogsandddapters.Modules.GeneralPosts
+package com.example.dogsandddapters.Modules.PersonPosts
 
-//import com.example.dogsandddapters.Models.GeneralPostModel
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -12,15 +11,15 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
-import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
+import com.example.dogsandddapters.Models.PersonPost
+import com.example.dogsandddapters.Modules.PersonPosts.PersonPostAdapter.PersonPostsRecyclerAdapter
 import com.example.dogsandddapters.R
 import com.example.dogsandddapters.databinding.FragmentGeneralPostsBinding
 
-class GeneralPostsFragment : Fragment() {
-    var GeneralPostsRcyclerView: RecyclerView? = null
-    var generalposts: List<GeneralPost>? = null
-    var adapter: GeneralPostsRecyclerAdapter? = null
+class PersonPostsFragment : Fragment() {
+    var PersonPostsRcyclerView: RecyclerView? = null
+    var personPosts: List<PersonPost>? = null
+    var adapter: PersonPostsRecyclerAdapter? = null
     var progressBar: ProgressBar? = null
 
     private var _binding: FragmentGeneralPostsBinding? = null
@@ -46,29 +45,29 @@ class GeneralPostsFragment : Fragment() {
 //            progressBar?.visibility = View.GONE
 //        }
 
-        GeneralPostsRcyclerView = binding.rvGeneralPostFragmentList
-        GeneralPostsRcyclerView?.setHasFixedSize(true)
-        GeneralPostsRcyclerView?.layoutManager = LinearLayoutManager(context)
-        adapter = GeneralPostsRecyclerAdapter(generalposts)
-        adapter?.listener = object : GeneralPostsRcyclerViewActivity.OnItemClickListener {
+       PersonPostsRcyclerView = binding.rvGeneralPostFragmentList
+        PersonPostsRcyclerView?.setHasFixedSize(true)
+        PersonPostsRcyclerView?.layoutManager = LinearLayoutManager(context)
+        adapter = PersonPostsRecyclerAdapter(personPosts)
+        adapter?.listener = object : PersonPostsRcyclerViewActivity.OnItemClickListener {
 
             override fun onItemClick(position: Int) {
                 Log.i("TAG", "GeneralPostsRecyclerAdapter: Position clicked $position")
             }
 
-            override fun onGeneralPostClicked(generalposts: GeneralPost?) {
-                Log.i("TAG", "General Post $generalposts")
+            override fun onPersonPostClicked(personposts: PersonPost?) {
+                Log.i("TAG", "Person Post $personposts")
             }
         }
 
-        GeneralPostsRcyclerView?.adapter = adapter
+      PersonPostsRcyclerView?.adapter = adapter
 
 //        val addGeneralPostButton: ImageButton = view.findViewById(R.id.ibtnGeneralPostFragmentAddGeneralPost)
 //        addGeneralPostButton.setOnClickListener {
-//            val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToAddPersonPostFragment()
+//            val action = PersonPostsFragmentDirections.actionGeneralPostsFragmentToAddPersonPostFragment()
 //            Navigation.findNavController(view).navigate(action)
 //        }
-
+//
         return view
     }
 

@@ -44,7 +44,7 @@
     </fragment>
     <fragment
         android:id="@+id/generalPostsFragment"
-        android:name="com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostsFragment"
+        android:name="com.example.dogsandddapters.Modules.GeneralPosts.PersonPostsFragment"
         android:label="fragment_general_posts"
         tools:layout="@layout/fragment_general_posts" >
         <action

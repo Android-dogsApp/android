@@ -5,15 +5,16 @@ import androidx.core.os.HandlerCompat
 import com.example.dogsandddapters.dao.AppLocalDatabase
 import java.util.concurrent.Executors
 
-class Model private constructor() {
 
-    private val database = AppLocalDatabase.db
+class PersonModel private constructor() {
+
+ //   private val database = AppLocalDatabase.db
     private var executor = Executors.newSingleThreadExecutor()
     private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
-    private val firebaseModel = FirebaseModel()
+    private val firebasePersonModel = FirebasePersonModel()
 
     companion object {
-        val instance: Model = Model()
+        val instance: PersonModel = PersonModel()
     }
 
     interface GetAllPersonsListener {
@@ -21,7 +22,7 @@ class Model private constructor() {
     }
 
     fun getAllPersons(callback: (List<Person>) -> Unit) {
-        firebaseModel.getAllPersons(callback)
+        firebasePersonModel.getAllPersons(callback)
 //        executor.execute {
 //
 //            Thread.sleep(5000)
@@ -35,7 +36,7 @@ class Model private constructor() {
     }
 
     fun addStudent(person: Person, callback: () -> Unit) {
-        firebaseModel.addStudent(person, callback)
+        firebasePersonModel.addPerson(person, callback)
 //        executor.execute {
 //            database.studentDao().insert(student)
 //            mainHandler.post {

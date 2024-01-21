@@ -5,7 +5,7 @@ import com.google.firebase.firestore.memoryCacheSettings
 import com.google.firebase.firestore.persistentCacheSettings
 import com.google.firebase.ktx.Firebase
 
-class FirebaseModel {
+class FirebasePersonPostModel {
 
     private val db = Firebase.firestore
 
@@ -22,7 +22,7 @@ class FirebaseModel {
     }
 
 
-    fun getAllStudents(callback: (List<PersonPost>) -> Unit) {
+    fun getAllPersonPosts(callback: (List<PersonPost>) -> Unit) {
         db.collection(PERSONPOST_COLLECTION_PATH).get().addOnCompleteListener {
             when (it.isSuccessful) {
                 true -> {
@@ -40,8 +40,8 @@ class FirebaseModel {
         }
     }
 
-    fun addStudent(personPost: PersonPost, callback: () -> Unit) {
-        db.collection(PERSONPOST_COLLECTION_PATH).document(personPost.postTitle).set(personPost.json).addOnSuccessListener {
+    fun addPersonPost(personPost: PersonPost, callback: () -> Unit) {
+        db.collection(PERSONPOST_COLLECTION_PATH).document(personPost.postid).set(personPost.toJson).addOnSuccessListener {
             callback()
         }
     }
