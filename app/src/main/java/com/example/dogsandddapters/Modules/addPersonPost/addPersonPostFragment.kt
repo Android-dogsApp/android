@@ -75,8 +75,8 @@ class addPersonPostFragment : Fragment() {
             val offer = editTextOffer.text.toString()
             val contact = editTextContact.text.toString()
 
-//            val personPost = PersonPosts(request, offer, contact)
-//            PersonPostsModel.instance.addPersonPost(personPost) {
+//            val personPost = PersonPost(request, offer, contact)
+//            PersonPostModel.instance.addPersonPost(personPost) {
 //                Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
 //            }
         }
