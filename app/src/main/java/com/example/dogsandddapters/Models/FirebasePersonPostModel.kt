@@ -22,22 +22,23 @@ class FirebasePersonPostModel {
     }
 
 
-    fun getAllPersonPosts(callback: (List<PersonPost>) -> Unit) {
-        db.collection(PERSONPOST_COLLECTION_PATH).get().addOnCompleteListener {
-            when (it.isSuccessful) {
-                true -> {
-                    val personPosts: MutableList<PersonPost> = mutableListOf()
-                    for (json in it.result) {
-                        val personPost = PersonPost.fromJSON(json.data)
-                        if (personPost != null) {
+    fun getAllPersonPosts(since: Long, callback: (List<PersonPost>) -> Unit) {
+
+        db.collection(PERSONPOST_COLLECTION_PATH)
+            .whereGreaterThanOrEqualTo(PersonPost.LAST_UPDATED, Timestamp(since, 0))
+            .get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> {
+                        val personPosts: MutableList<PersonPost> = mutableListOf()
+                        for (json in it.result) {
+                            val personPost = PersonPost.fromJSON(json.data)
                             personPosts.add(personPost)
                         }
+                        callback(personPosts)
                     }
-                    callback(personPosts)
+                    false -> callback(listOf())
                 }
-                false -> callback(listOf())
             }
-        }
     }
 
     fun addPersonPost(personPost: PersonPost, callback: () -> Unit) {

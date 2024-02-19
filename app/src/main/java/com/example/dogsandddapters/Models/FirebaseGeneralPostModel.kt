@@ -1,11 +1,14 @@
 package com.example.dogsandddapters.Models
 
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.firestoreSettings
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.memoryCacheSettings
+import com.google.firebase.firestore.persistentCacheSettings
 import com.google.firebase.ktx.Firebase
 
 class FirebaseGeneralPostModel {
+
     private val db = Firebase.firestore
 
     companion object {
@@ -15,28 +18,28 @@ class FirebaseGeneralPostModel {
     init {
         val settings = firestoreSettings {
             setLocalCacheSettings(memoryCacheSettings {  })
-//            setLocalCacheSettings(persistentCacheSettings {  })
         }
         db.firestoreSettings = settings
     }
 
 
-    fun getAllGeneralPosts(callback: (List<GeneralPost>) -> Unit) {
-        db.collection(GENERALPOST_COLLECTION_PATH).get().addOnCompleteListener {
-            when (it.isSuccessful) {
-                true -> {
-                    val generalPosts: MutableList<GeneralPost> = mutableListOf()
-                    for (json in it.result) {
-                        val generalPost = GeneralPost.fromJSON(json.data)
-                        if (generalPost != null) {
+    fun getAllGeneralPosts(since: Long, callback: (List<GeneralPost>) -> Unit) {
+
+        db.collection(GENERALPOST_COLLECTION_PATH)
+            .whereGreaterThanOrEqualTo(GeneralPost.LAST_UPDATED, Timestamp(since, 0))
+            .get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> {
+                        val generalPosts: MutableList<GeneralPost> = mutableListOf()
+                        for (json in it.result) {
+                            val generalPost = GeneralPost.fromJSON(json.data)
                             generalPosts.add(generalPost)
                         }
+                        callback(generalPosts)
                     }
-                    callback(generalPosts)
+                    false -> callback(listOf())
                 }
-                false -> callback(listOf())
             }
-        }
     }
 
     fun addGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
