@@ -8,6 +8,8 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.ktx.Firebase
 
 
 class EntryFragment : Fragment() {
@@ -34,6 +36,21 @@ class EntryFragment : Fragment() {
 //        if (activity is MainActivity) {
 //            (activity as MainActivity).hideBottomNavigationView()
 //        }
+
+        val preson= hashMapOf(
+            "name" to "John",
+            "id" to "123",
+            "phoneNumber" to "123-456-7890",
+            "email" to "jhon@jhon",
+        )
+         val db = Firebase.firestore
+        db.collection("persons").add(preson)
+            .addOnSuccessListener { documentReference ->
+               //Log.d("DocumentSnapshot added with ID: ${documentReference.id}")
+            }
+            .addOnFailureListener { e ->
+               // Log.d("Error adding document $e")
+            }
 
 
 

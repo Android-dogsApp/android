@@ -8,14 +8,14 @@ import com.example.dogsandddapters.Models.Person
 interface PersonDao {
 
     @Query("SELECT * FROM Person")
-    fun getAll(): List<Person>
+    //fun getAll(): List<Person>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg personpost: Person)
+    fun insert(vararg person: Person)
 
     @Delete
-    fun delete(personpost: Person)
+    fun delete(person: Person)
 
     @Query("SELECT * FROM PersonPost WHERE id =:id")
-    fun getPersonPostById(id: String): Person
+    fun getPersonById(id: String): Person
 }
