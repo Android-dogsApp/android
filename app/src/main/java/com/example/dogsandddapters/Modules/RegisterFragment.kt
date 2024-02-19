@@ -18,6 +18,11 @@ class RegisterFragment : Fragment() {
     private lateinit var dogTypeEditText: EditText
     private lateinit var registerButton: Button
     private lateinit var cancelButton: Button
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+    }
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -38,7 +43,7 @@ class RegisterFragment : Fragment() {
             val dogType = dogTypeEditText.text.toString()
 
 //            val person = Person(name, phoneNumber, email,dogType)
-//            Person.instance.addPerson(person) {
+//            PersonModel.instance.addPerson(person) {
 //                //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
 //                val action = RegisterFragmentDirections.actionRegisterFragmentToGeneralPostsFragment()
 //                Navigation.findNavController(view).navigate(action)

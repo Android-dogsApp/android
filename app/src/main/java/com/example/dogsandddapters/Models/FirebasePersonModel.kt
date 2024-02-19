@@ -17,26 +17,28 @@ class FirebasePersonModel {
     init {
         val settings = firestoreSettings {
             setLocalCacheSettings(memoryCacheSettings {  })
-//            setLocalCacheSettings(persistentCacheSettings {  })
         }
         db.firestoreSettings = settings
     }
 
 
-    fun getAllPersons(callback: (List<Person>) -> Unit) {
-        db.collection(PERSONS_COLLECTION_PATH).get().addOnCompleteListener {
-            when (it.isSuccessful) {
-                true -> {
-                    val persons: MutableList<Person> = mutableListOf()
-                    for (json in it.result) {
-                        val person = Person.fromJSON(json.data)
-                        persons.add(person)
+    fun getAllPersons(since: Long, callback: (List<Person>) -> Unit) {
+
+        db.collection(PERSONS_COLLECTION_PATH)
+            .whereGreaterThanOrEqualTo(Person.LAST_UPDATED, Timestamp(since, 0))
+            .get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> {
+                        val persons: MutableList<Person> = mutableListOf()
+                        for (json in it.result) {
+                            val person = Person.fromJSON(json.data)
+                            persons.add(person)
+                        }
+                        callback(persons)
                     }
-                    callback(persons)
+                    false -> callback(listOf())
                 }
-                false -> callback(listOf())
             }
-        }
     }
 
     fun addPerson(person: Person, callback: () -> Unit) {

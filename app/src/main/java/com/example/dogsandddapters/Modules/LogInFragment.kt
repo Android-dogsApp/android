@@ -40,7 +40,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import com.example.dogsandddapters.R
 
 class LogInFragment : Fragment() {
@@ -72,6 +71,7 @@ class LogInFragment : Fragment() {
 //            val action = LogInFragmentDirections.actionLogInFragmentToEntryFragment()
 //            Navigation.findNavController(view).navigate(action)
 //        }
+
 
         return view
     }
