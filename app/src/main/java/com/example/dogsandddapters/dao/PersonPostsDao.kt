@@ -1,5 +1,6 @@
 package com.example.dogsandddapters.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -10,7 +11,7 @@ import com.example.dogsandddapters.Models.PersonPost
 interface PersonPostsDao {
 
         @Query("SELECT * FROM PersonPost")
-        fun getAll(): List<PersonPost>
+        fun getAll(): LiveData<MutableList<PersonPost>>
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         fun insert(vararg personpost: PersonPost)

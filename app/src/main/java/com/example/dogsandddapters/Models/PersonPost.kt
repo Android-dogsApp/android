@@ -1,8 +1,11 @@
 package com.example.dogsandddapters.Models
 
+import android.content.Context
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
+import com.example.dogsandddapters.base.MyApplication
 @Entity
 data class PersonPost(
     @PrimaryKey val postid: String,
@@ -13,6 +16,23 @@ data class PersonPost(
     val image: String
 ) {
     companion object {
+
+        var lastUpdated: Long
+            get()
+            {
+                return MyApplication.Globals
+                    .appContext?.getSharedPreferences("TAG", Context.MODE_PRIVATE)
+                    ?.getLong(GET_LAST_UPDATED, 0) ?: 0
+            }
+        set(value)
+            {
+                MyApplication.Globals
+                    .appContext?.getSharedPreferences("TAG", Context.MODE_PRIVATE)
+                    ?.edit()
+                    ?.putLong(GET_LAST_UPDATED, value)
+                    ?.apply()
+            }
+
         @PrimaryKey
         const val id_KEY = "postid"
         const val PUBLISHER_KEY = "postpublisher"
@@ -20,6 +40,8 @@ data class PersonPost(
         const val OFFER_KEY = "postoffer"
         const val CONTACT_KEY = "postcontact"
         const val IMAGE_KEY = "postimage"
+        const val LAST_UPDATED = "lastUpdated"
+        const val GET_LAST_UPDATED = "get_last_updated"
 
         fun fromJSON(json: Map<String, Any>): PersonPost? {
             val postid = json[id_KEY] as? String ?: ""
@@ -28,7 +50,17 @@ data class PersonPost(
             val offer = json[OFFER_KEY] as? String ?: ""
             val contact = json[CONTACT_KEY] as? String ?: ""
             val image = json[IMAGE_KEY] as? String ?: ""
-            return PersonPost(postid, publisher, request, offer, contact, image)
+            val personPost= PersonPost(postid, publisher, request, offer, contact, image)
+
+//            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
+//            timestamp?.let {
+//                personPost.lastUpdated= it.seconds
+            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
+            timestamp?.let {
+                PersonPost.lastUpdated = it.seconds
+            }
+
+            return personPost
         }
     }
 
@@ -40,6 +72,7 @@ data class PersonPost(
                 OFFER_KEY to offer,
                 CONTACT_KEY to contact,
                 IMAGE_KEY to image
+
             )
             publisher?.let {
                 map[PUBLISHER_KEY] = it.name
