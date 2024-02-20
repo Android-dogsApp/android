@@ -6,7 +6,7 @@ import com.google.firebase.ktx.Firebase
 
 class FirebasePersonPostModel {
 
-    private val db = Firebase.firestore
+    private val db2 = Firebase.firestore
 
     companion object {
         const val PERSONPOST_COLLECTION_PATH = "personposts"
@@ -17,7 +17,7 @@ class FirebasePersonPostModel {
             setLocalCacheSettings(memoryCacheSettings {  })
 //            setLocalCacheSettings(persistentCacheSettings {  })
         }
-        db.firestoreSettings = settings
+        db2.firestoreSettings = settings
     }
 
 //
@@ -41,7 +41,7 @@ class FirebasePersonPostModel {
 //    }
 
     fun addPersonPost(personPost: PersonPost, callback: () -> Unit) {
-        db.collection(PERSONPOST_COLLECTION_PATH).document(personPost.postid).set(personPost.toJson).addOnSuccessListener {
+        db2.collection(PERSONPOST_COLLECTION_PATH).document(personPost.postid).set(personPost.toJson).addOnSuccessListener {
             callback()
         }
     }
