@@ -5,10 +5,11 @@ import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import com.example.dogsandddapters.Models.Person
+@Dao
 interface PersonDao {
 
-    @Query("SELECT * FROM Person")
-    //fun getAll(): List<Person>
+//    @Query("SELECT * FROM Person")
+//    //fun getAll(): List<Person>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg person: Person)
@@ -16,6 +17,6 @@ interface PersonDao {
     @Delete
     fun delete(person: Person)
 
-    @Query("SELECT * FROM PersonPost WHERE id =:id")
+    @Query("SELECT * FROM Person WHERE id =:id")
     fun getPersonById(id: String): Person
 }
