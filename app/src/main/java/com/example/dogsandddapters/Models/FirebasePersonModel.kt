@@ -48,17 +48,32 @@ class FirebasePersonModel {
 //            }
 //    }
 
-    fun getPerson(id: String, callback: () -> Unit) {
+//    fun getPerson(id: String, callback: () -> Unit) {
+//        db.collection(PERSONS_COLLECTION_PATH).document(id).get().addOnCompleteListener {
+//            when (it.isSuccessful) {
+//                true -> {
+//                    val person = it.result.toObject(Person::class.java)
+//                    callback()
+//                }
+//                false -> callback()
+//            }
+//        }
+//    }
+
+    fun getPerson(id: String, callback: (Person?) -> Unit) {
         db.collection(PERSONS_COLLECTION_PATH).document(id).get().addOnCompleteListener {
             when (it.isSuccessful) {
                 true -> {
                     val person = it.result.toObject(Person::class.java)
-                    callback()
+                    callback(person)
                 }
-                false -> callback()
+                false -> callback(null)
             }
         }
     }
+
+
+
 
 
     fun addPerson(person: Person, callback: () -> Unit) {

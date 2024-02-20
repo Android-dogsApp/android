@@ -12,6 +12,8 @@ data class Person(
     val dogType: String){
     //val avatarUrl: String) {
 
+    constructor() : this("", "", "", "", "")
+
     companion object {
 //        var lastUpdated: Long
 //            get() {
