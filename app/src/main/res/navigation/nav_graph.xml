@@ -68,5 +68,12 @@
         <action
             android:id="@+id/action_registerFragment_to_generalPostsFragment"
             app:destination="@id/generalPostsFragment" />
+        <action
+            android:id="@+id/action_registerFragment_to_personPostsFragment"
+            app:destination="@id/personPostsFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/personPostsFragment"
+        android:name="com.example.dogsandddapters.Modules.PersonPosts.PersonPostsFragment"
+        android:label="PersonPostsFragment" />
 </navigation>

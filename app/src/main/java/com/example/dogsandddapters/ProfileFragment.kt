@@ -4,7 +4,10 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
+import android.widget.TextView
 import androidx.fragment.app.Fragment
+import com.example.dogsandddapters.Models.PersonModel
 
 class ProfileFragment : Fragment() {
 
@@ -27,24 +30,30 @@ class ProfileFragment : Fragment() {
 //        val myPostsButton: Button = view.findViewById(R.id.myPostsButton)
 //        val editButton: Button = view.findViewById(R.id.editButton)
 
-//
-//        val nameTextView: TextView = view.findViewById(R.id.nameTextView)
-//        val dogsCountTextView : TextView= view.findViewById(R.id.dogsCountTextView)
-//        val dogTypesTextView: TextView = view.findViewById(R.id.dogTypesTextView)
-//        val phoneTextView : TextView= view.findViewById(R.id.phoneTextView)
-//        val emailTextView: TextView = view.findViewById(R.id.emailTextView)
-//
-//        val myPostsButton: Button = view.findViewById(R.id.myPostsButton)
-//        val editButton: Button = view.findViewById(R.id.editButton)
 
-//        myPostsButton.setOnClickListener {
+        val nameTextView: TextView = view.findViewById(R.id.nameTextView)
+        val dogTypesTextView: TextView = view.findViewById(R.id.dogTypesTextView)
+        val phoneTextView : TextView= view.findViewById(R.id.phoneTextView)
+        val emailTextView: TextView = view.findViewById(R.id.emailTextView)
+
+      PersonModel.instance.getPerson("1"){
+          nameTextView.text = it?.name
+          dogTypesTextView.text = it?.dogType
+          phoneTextView.text = it?.phoneNumber
+          emailTextView.text = it?.email
+      }
+
+        val myPostsButton: Button = view.findViewById(R.id.myPostsButton)
+        val editButton: Button = view.findViewById(R.id.editButton)
+
+        myPostsButton.setOnClickListener {
 //            val action = ProfileFragmentDirections.actionProfileFragmentToPersonPostsFragment()
 //            Navigation.findNavController(view).navigate(action)
-//
-//        }
-        //editButton.setOnClickListener {
 
-        //}
+        }
+        editButton.setOnClickListener {
+
+        }
     }
 }
 

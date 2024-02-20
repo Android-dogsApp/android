@@ -1,24 +1,32 @@
 package com.example.dogsandddapters.Models
 
-import com.google.firebase.firestore.firestoreSettings
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.firestore.memoryCacheSettings
-import com.google.firebase.ktx.Firebase
+import com.google.firebase.firestore.FirebaseFirestore
+import com.google.firebase.firestore.FirebaseFirestoreSettings
 
 class FirebasePersonModel {
 
-    private val db = Firebase.firestore
+//    private val db = Firebase.firestore
 
     companion object {
         const val PERSONS_COLLECTION_PATH = "persons"
     }
 
+//    init {
+//        val settings = firestoreSettings {
+//            setLocalCacheSettings(memoryCacheSettings {  })
+//        }
+//        db.firestoreSettings = settings
+//    }
+
+    val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     init {
-        val settings = firestoreSettings {
-            setLocalCacheSettings(memoryCacheSettings {  })
-        }
+        val settings: FirebaseFirestoreSettings = FirebaseFirestoreSettings.Builder()
+            .setPersistenceEnabled(true)
+            .build()
+
         db.firestoreSettings = settings
     }
+
 
 
 //    fun getAllPersons(since: Long, callback: (List<Person>) -> Unit) {
@@ -40,17 +48,32 @@ class FirebasePersonModel {
 //            }
 //    }
 
-    fun getPerson(id: String, callback: () -> Unit) {
+//    fun getPerson(id: String, callback: () -> Unit) {
+//        db.collection(PERSONS_COLLECTION_PATH).document(id).get().addOnCompleteListener {
+//            when (it.isSuccessful) {
+//                true -> {
+//                    val person = it.result.toObject(Person::class.java)
+//                    callback()
+//                }
+//                false -> callback()
+//            }
+//        }
+//    }
+
+    fun getPerson(id: String, callback: (Person?) -> Unit) {
         db.collection(PERSONS_COLLECTION_PATH).document(id).get().addOnCompleteListener {
             when (it.isSuccessful) {
                 true -> {
                     val person = it.result.toObject(Person::class.java)
-                    callback()
+                    callback(person)
                 }
-                false -> callback()
+                false -> callback(null)
             }
         }
     }
+
+
+
 
 
     fun addPerson(person: Person, callback: () -> Unit) {

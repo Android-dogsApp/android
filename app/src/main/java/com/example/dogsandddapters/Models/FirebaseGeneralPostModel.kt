@@ -7,7 +7,7 @@ import com.google.firebase.ktx.Firebase
 
 class FirebaseGeneralPostModel {
 
-    private val db = Firebase.firestore
+    private val db1 = Firebase.firestore
 
     companion object {
         const val GENERALPOST_COLLECTION_PATH = "generalPosts"
@@ -17,7 +17,7 @@ class FirebaseGeneralPostModel {
         val settings = firestoreSettings {
             setLocalCacheSettings(memoryCacheSettings {  })
         }
-        db.firestoreSettings = settings
+        db1.firestoreSettings = settings
     }
 
 
@@ -41,7 +41,7 @@ class FirebaseGeneralPostModel {
 //    }
 
     fun addGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
-        db.collection(GENERALPOST_COLLECTION_PATH).document(generalPost.postid).set(generalPost.toJson).addOnSuccessListener {
+        db1.collection(GENERALPOST_COLLECTION_PATH).document(generalPost.postid).set(generalPost.toJson).addOnSuccessListener {
             callback()
         }
     }

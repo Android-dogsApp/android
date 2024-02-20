@@ -1,4 +1,5 @@
 package com.example.dogsandddapters.Models
+
 import com.example.dogsandddapters.dao.AppLocalDatabasePerson
 import java.util.concurrent.Executors
 
@@ -13,13 +14,18 @@ class PersonModel private constructor() {
         val instance: PersonModel = PersonModel()
     }
 
-    fun getPerson(id: String, callback: () -> Unit) {
-        executor.execute {
-            val person = firebasePersonModel.getPerson(id){
-                callback()
-            }
-        }
+//    fun getPerson(id: String, callback: () -> Unit) {
+//        val person = firebasePersonModel.getPerson(id){
+//            callback()
+//        }
+//        return person;
+//    }
+fun getPerson(id: String, callback: (Person?) -> Unit) {
+    firebasePersonModel.getPerson(id) { person ->
+        callback(person)
     }
+}
+
 
     fun addPerson(person: Person, callback: () -> Unit) {
         firebasePersonModel.addPerson(person) {
