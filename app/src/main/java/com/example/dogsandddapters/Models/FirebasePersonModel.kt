@@ -1,5 +1,7 @@
 package com.example.dogsandddapters.Models
 
+import android.util.Log
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 
@@ -60,19 +62,22 @@ class FirebasePersonModel {
 //        }
 //    }
 
-    fun getPerson(id: String, callback: (Person?) -> Unit) {
-        db.collection(PERSONS_COLLECTION_PATH).document(id).get().addOnCompleteListener {
-            when (it.isSuccessful) {
-                true -> {
-                    val person = it.result.toObject(Person::class.java)
-                    callback(person)
+    fun getPerson(since: Long,id: String, callback: (Person?) -> Unit) {
+        db.collection(PERSONS_COLLECTION_PATH)
+            .whereEqualTo("id", id)
+            .whereGreaterThanOrEqualTo(Person.LAST_UPDATED, Timestamp(since, 0))
+            .get().addOnCompleteListener {
+                when (it.isSuccessful) {
+                    true -> {
+                        val person = it.result.documents[0].toObject(Person::class.java)
+                        Log.i("TAG", "Person id:  $person.id")
+                        callback(person)
+                    }
+                    false -> callback(null)
                 }
-                false -> callback(null)
             }
-        }
+
     }
-
-
 
 
 

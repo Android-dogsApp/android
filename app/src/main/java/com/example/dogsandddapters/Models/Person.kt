@@ -1,7 +1,11 @@
 package com.example.dogsandddapters.Models
 
+import android.content.Context
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.dogsandddapters.base.MyApplication
+import com.google.firebase.Timestamp
+import com.google.firebase.firestore.FieldValue
 
 @Entity
 data class Person(
@@ -9,24 +13,25 @@ data class Person(
     val id: String,
     val phoneNumber: String,
     val email: String,
-    val dogType: String){
+    val dogType: String,
+    var lastUpdated: Long?=null){
     //val avatarUrl: String) {
 
     constructor() : this("", "", "", "", "")
 
     companion object {
-//        var lastUpdated: Long
-//            get() {
-//                return MyApplication.Globals
-//                    .appContext?.getSharedPreferences("TAG", Context.MODE_PRIVATE)
-//                    ?.getLong(GET_LAST_UPDATED, 0) ?: 0
-//            }
-//            set(value) {
-//                MyApplication.Globals
-//                    ?.appContext
-//                    ?.getSharedPreferences("TAG", Context.MODE_PRIVATE)?.edit()
-//                    ?.putLong(GET_LAST_UPDATED, value)?.apply()
-//            }
+        var lastUpdated: Long
+            get() {
+                return MyApplication.Globals
+                    .appContext?.getSharedPreferences("TAG", Context.MODE_PRIVATE)
+                    ?.getLong(GET_LAST_UPDATED, 0) ?: 0
+            }
+            set(value) {
+                MyApplication.Globals
+                    ?.appContext
+                    ?.getSharedPreferences("TAG", Context.MODE_PRIVATE)?.edit()
+                    ?.putLong(GET_LAST_UPDATED, value)?.apply()
+            }
 
         const val NAME_KEY = "name"
         const val ID_KEY = "id"
@@ -34,6 +39,8 @@ data class Person(
         const val EMAIL_KEY = "email"
         const val DOG_TYPE_KEY = "dogType"
        // const val AVATAR_URL_KEY = "avatarUrl"
+       const val LAST_UPDATED = "lastUpdated"
+       const val GET_LAST_UPDATED = "get_last_updated"
 
 
         fun fromJSON(json: Map<String, Any>): Person {
@@ -43,7 +50,12 @@ data class Person(
             val email = json[EMAIL_KEY] as? String ?: ""
             val dogType = json[DOG_TYPE_KEY] as? String ?: ""
            // val avatarUrl = json[AVATAR_URL_KEY] as? String ?: ""
-            return Person(name, id, phoneNumber, email, dogType)
+            val person= Person(name, id, phoneNumber, email, dogType)
+            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
+            timestamp?.let {
+                person.lastUpdated = it.seconds
+            }
+            return person
         }
     }
 
@@ -56,6 +68,7 @@ data class Person(
                 EMAIL_KEY to email,
                 DOG_TYPE_KEY to dogType,
                 //AVATAR_URL_KEY to avatarUrl,
+                LAST_UPDATED to FieldValue.serverTimestamp()
             )
         }
 }

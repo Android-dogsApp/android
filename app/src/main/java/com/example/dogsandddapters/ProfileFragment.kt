@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.PersonModel
 
 class ProfileFragment : Fragment() {
@@ -52,6 +53,8 @@ class ProfileFragment : Fragment() {
 
         }
         editButton.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            Navigation.findNavController(view).navigate(action)
 
         }
     }
