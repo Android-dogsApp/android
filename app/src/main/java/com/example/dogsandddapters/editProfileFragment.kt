@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.Person
 import com.example.dogsandddapters.Models.PersonModel
 
@@ -43,8 +44,8 @@ class editProfileFragment : Fragment() {
         }
 
         buttonCancel?.setOnClickListener {
-//            val action = editProfileFragmentDirections.actioneditProfileFragmentToEntryFragment()
-//            Navigation.findNavController(view).navigate(action)
+            val action = editProfileFragmentDirections.actionEditProfileFragmentToEntryFragment()
+            Navigation.findNavController(view).navigate(action)
         }
 
     }

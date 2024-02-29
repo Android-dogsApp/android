@@ -3,17 +3,19 @@ package com.example.dogsandddapters.Models
 import android.content.Context
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import com.example.dogsandddapters.base.MyApplication
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FieldValue
-import com.example.dogsandddapters.base.MyApplication
+
 @Entity
 data class PersonPost(
     @PrimaryKey val postid: String,
-    val publisher: Person? = null,
+    val publisher: String, //id of the person who posted
     val request: String,
     val offer: String,
     val contact: String,
-    val image: String
+    val image: String,
+    var lastUpdated: Long? = null
 ) {
     companion object {
 
@@ -45,7 +47,7 @@ data class PersonPost(
 
         fun fromJSON(json: Map<String, Any>): PersonPost? {
             val postid = json[id_KEY] as? String ?: ""
-            val publisher = json[PUBLISHER_KEY] as? Person ?: null
+            val publisher = json[PUBLISHER_KEY] as? String ?: ""
             val request = json[REQUEST_KEY] as? String ?: ""
             val offer = json[OFFER_KEY] as? String ?: ""
             val contact = json[CONTACT_KEY] as? String ?: ""
@@ -64,19 +66,22 @@ data class PersonPost(
         }
     }
 
-    val toJson: Map<String, Any>
+
+    val json: Map<String, Any>
         get() {
-            val map = hashMapOf(
+            return hashMapOf(
                 id_KEY to postid,
                 REQUEST_KEY to request,
                 OFFER_KEY to offer,
                 CONTACT_KEY to contact,
-                IMAGE_KEY to image
+                IMAGE_KEY to image ,
+                LAST_UPDATED to FieldValue.serverTimestamp(),
+                PUBLISHER_KEY to publisher
 
             )
-            publisher?.let {
-                map[PUBLISHER_KEY] = it.name
-            } // Change 'name' to the actual property you want to include
-            return map
+//            publisher?.let {
+//                map[PUBLISHER_KEY] = it.name
+//            } // Change 'name' to the actual property you want to include
+//            return map
         }
 }

@@ -1,10 +1,12 @@
 package com.example.dogsandddapters.dao
 
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.base.MyApplication
 
- //@Database(entities = [Student::class], version = 3)
+ @Database(entities = [PersonPost::class], version = 3)
     abstract class AppLocalDbPPRepository : RoomDatabase() {
         abstract fun PersonPostsDao(): PersonPostsDao
     }

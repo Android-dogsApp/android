@@ -19,7 +19,7 @@ interface PersonPostsDao {
         @Delete
         fun delete(personpost: PersonPost)
 
-        @Query("SELECT * FROM PersonPost WHERE id =:id")
+        @Query("SELECT * FROM PersonPost WHERE postid =:id")
         fun getPersonPostById(id: String): PersonPost
 
 }

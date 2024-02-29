@@ -18,26 +18,26 @@ class GeneralPostModel private constructor() {
     interface GetAllGeneralPostsListener {
         fun onComplete(generalposts: List<GeneralPost>)
     }
-//
-//    fun getAllGeneralPosts(callback: (List<GeneralPost>) -> Unit) {
-//        executor.execute {
-//
-//            Thread.sleep(5000)
-//
-//     //       val generalposts = database.GeneralPostDao().getAll()
-//            mainHandler.post {
-//                // Main Thread
-//       //         callback(generalposts)
-//            }
-//        }
-//    }
-//
-//    fun addGeneralPost(generalpost: GeneralPost, callback: () -> Unit) {
-//        executor.execute {
-//         //   database.GeneralPostDao().insert(generalpost)
-//            mainHandler.post {
-//                callback()
-//            }
-//        }
-//    }
+
+    fun getAllGeneralPosts(callback: (List<GeneralPost>) -> Unit) {
+        executor.execute {
+
+            Thread.sleep(5000)
+
+     //       val generalposts = database.GeneralPostDao().getAll()
+            mainHandler.post {
+                // Main Thread
+       //         callback(generalposts)
+            }
+        }
+    }
+
+    fun addGeneralPost(generalpost: GeneralPost, callback: () -> Unit) {
+        executor.execute {
+         //   database.GeneralPostDao().insert(generalpost)
+            mainHandler.post {
+                callback()
+            }
+        }
+    }
 }
