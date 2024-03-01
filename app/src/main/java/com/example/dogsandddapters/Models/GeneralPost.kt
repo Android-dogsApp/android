@@ -14,7 +14,7 @@ data class GeneralPost(
     val request: String,
     val offer: String,
     val contact: String,
-    val image: String,
+    //val image: String,
     var lastUpdated: Long? = null
 ) {
 
@@ -47,8 +47,8 @@ data class GeneralPost(
             val request = json[REQUEST_KEY] as? String ?: ""
             val offer = json[OFFER_KEY] as? String ?: ""
             val contact = json[CONTACT_KEY] as? String ?: ""
-            val image = json[IMAGE_KEY] as? String ?: ""
-            val generalpost = GeneralPost(postid, publisher, request, offer, contact, image)
+           // val image = json[IMAGE_KEY] as? String ?: ""
+            val generalpost = GeneralPost(postid, publisher, request, offer, contact)
             val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
             timestamp?.let {
                 generalpost.lastUpdated = it.seconds
@@ -65,7 +65,7 @@ data class GeneralPost(
                 REQUEST_KEY to request,
                 OFFER_KEY to offer,
                 CONTACT_KEY to contact,
-                IMAGE_KEY to image,
+               // IMAGE_KEY to image,
                 LAST_UPDATED to FieldValue.serverTimestamp(),
                 PUBLISHER_KEY to publisher
             )

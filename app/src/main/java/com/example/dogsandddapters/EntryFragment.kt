@@ -54,7 +54,7 @@ class EntryFragment : Fragment() {
 
         val generalpost= hashMapOf(
             "request" to "request",
-            "postid" to "123",
+            "postid" to "444",
             "offer" to "offer",
             "contact" to "jhon@jhon",
             "publisher" to "jhon@jhon",
