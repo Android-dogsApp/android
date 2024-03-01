@@ -6,25 +6,25 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.ImageButton
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
+import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
-import com.example.dogsandddapters.R
 import com.example.dogsandddapters.databinding.FragmentGeneralPostsBinding
 
 class GeneralPostsFragment : Fragment() {
     var GeneralPostsRcyclerView: RecyclerView? = null
-    var generalposts: List<GeneralPost>? = null
     var adapter: GeneralPostsRecyclerAdapter? = null
     var progressBar: ProgressBar? = null
 
     private var _binding: FragmentGeneralPostsBinding? = null
     private val binding get() = _binding!!
+
+    private lateinit var viewModel: GeneralPostViewModel
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -34,9 +34,13 @@ class GeneralPostsFragment : Fragment() {
         _binding = FragmentGeneralPostsBinding.inflate(inflater, container, false)
         val view = binding.root
 
+        viewModel = ViewModelProvider(this)[GeneralPostViewModel::class.java]
+
         progressBar = binding.progressBar
 
         progressBar?.visibility = View.VISIBLE
+
+        viewModel.generalposts = GeneralPostModel.instance.getAllgeneralPosts()
 
 //        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
 //            this.generalposts = generalposts
@@ -49,11 +53,16 @@ class GeneralPostsFragment : Fragment() {
         GeneralPostsRcyclerView = binding.rvGeneralPostFragmentList
         GeneralPostsRcyclerView?.setHasFixedSize(true)
         GeneralPostsRcyclerView?.layoutManager = LinearLayoutManager(context)
-        adapter = GeneralPostsRecyclerAdapter(generalposts)
+        adapter = GeneralPostsRecyclerAdapter((viewModel.generalposts?.value))
         adapter?.listener = object : GeneralPostsRcyclerViewActivity.OnItemClickListener {
 
             override fun onItemClick(position: Int) {
                 Log.i("TAG", "GeneralPostsRecyclerAdapter: Position clicked $position")
+                val generalPost = viewModel.generalposts?.value?.get(position)
+                generalPost?.let {
+//                    val action = GeneralPostFragmentDirections.actionGeneralPostFragmentToBlueFragment(it.name)
+//                    Navigation.findNavController(view).navigate(action)
+                }
             }
 
             override fun onGeneralPostClicked(generalposts: GeneralPost?) {
@@ -63,32 +72,41 @@ class GeneralPostsFragment : Fragment() {
 
         GeneralPostsRcyclerView?.adapter = adapter
 
+        viewModel.generalposts?.observe(viewLifecycleOwner) {
+            adapter?.generalposts = it
+            adapter?.notifyDataSetChanged()
+            progressBar?.visibility = View.GONE
+        }
+
+        binding.pullToRefresh.setOnRefreshListener {
+            reloadData()
+        }
+        GeneralPostModel.instance.generalPostsListLoadingState.observe(viewLifecycleOwner) { state ->
+            binding.pullToRefresh.isRefreshing = state == GeneralPostModel.LoadingState.LOADING
+        }
+        return view
+
 //        val addGeneralPostButton: ImageButton = view.findViewById(R.id.ibtnGeneralPostFragmentAddGeneralPost)
 //        addGeneralPostButton.setOnClickListener {
 //            val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToAddPersonPostFragment()
 //            Navigation.findNavController(view).navigate(action)
 //        }
 
-        return view
     }
 
     override fun onResume() {
         super.onResume()
+        reloadData()
+    }
 
+    private fun reloadData() {
         progressBar?.visibility = View.VISIBLE
-
-//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-//            this.generalposts = generalposts
-//            adapter?.generalposts = generalposts
-//            adapter?.notifyDataSetChanged()
-//
-//            progressBar?.visibility = View.GONE
-//        }
+        GeneralPostModel.instance.refreshAllgeneralPosts()
+        progressBar?.visibility = View.GONE
     }
 
     override fun onDestroy() {
         super.onDestroy()
-
         _binding = null
     }
 

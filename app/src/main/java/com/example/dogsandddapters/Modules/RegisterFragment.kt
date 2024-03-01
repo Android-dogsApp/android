@@ -49,7 +49,7 @@ class RegisterFragment : Fragment() {
 
             val person = Person(name,id, phoneNumber, email,dogType)
             PersonModel.instance.addPerson(person) {
-                Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
 //                val action = RegisterFragmentDirections.actionRegisterFragmentToGeneralPostsFragment()
 //                Navigation.findNavController(view).navigate(action)
             }

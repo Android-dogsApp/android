@@ -1,5 +1,6 @@
 package com.example.dogsandddapters.dao
 
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -11,7 +12,7 @@ import com.example.dogsandddapters.Models.GeneralPost
 interface GeneralPostDao {
 
     @Query("SELECT * FROM GeneralPost")
-    fun getAll(): List<GeneralPost>
+    fun getAll(): LiveData<MutableList<GeneralPost>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg feeds: GeneralPost)
@@ -20,5 +21,6 @@ interface GeneralPostDao {
     fun delete(generalpost: GeneralPost)
 
     @Query("SELECT * FROM GeneralPost WHERE postid =:id")
-    fun getGeneralPostById(id: String): GeneralPost
+    fun getGeneralPostById(id: String):  LiveData<GeneralPost>
+
 }

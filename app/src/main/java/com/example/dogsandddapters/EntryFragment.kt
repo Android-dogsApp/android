@@ -37,19 +37,35 @@ class EntryFragment : Fragment() {
 //            (activity as MainActivity).hideBottomNavigationView()
 //        }
 
-        val preson= hashMapOf(
-            "name" to "John",
-            "id" to "123",
-            "phoneNumber" to "123-456-7890",
-            "email" to "jhon@jhon",
+//        val preson= hashMapOf(
+//            "name" to "John",
+//            "id" to "123",
+//            "phoneNumber" to "123-456-7890",
+//            "email" to "jhon@jhon",
+//        )
+//         val db = Firebase.firestore
+//        db.collection("persons").add(preson)
+//            .addOnSuccessListener { documentReference ->
+//               //Log.d("DocumentSnapshot added with ID: ${documentReference.id}")
+//            }
+//            .addOnFailureListener { e ->
+//               // Log.d("Error adding document $e")
+//            }
+
+        val generalpost= hashMapOf(
+            "request" to "request",
+            "postid" to "123",
+            "offer" to "offer",
+            "contact" to "jhon@jhon",
+            "publisher" to "jhon@jhon",
         )
-         val db = Firebase.firestore
-        db.collection("persons").add(preson)
-            .addOnSuccessListener { documentReference ->
-               //Log.d("DocumentSnapshot added with ID: ${documentReference.id}")
+        val db = Firebase.firestore
+        db.collection("generalPosts").add(  generalpost )
+        .addOnSuccessListener { documentReference ->
+                //Log.d("DocumentSnapshot added with ID: ${documentReference.id}")
             }
             .addOnFailureListener { e ->
-               // Log.d("Error adding document $e")
+                // Log.d("Error adding document $e")
             }
 
 

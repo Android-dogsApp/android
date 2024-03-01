@@ -63,7 +63,7 @@ class PersonPostModel private constructor() {
         }
     }
 
-    fun addStudent(personPost: PersonPost, callback: () -> Unit) {
+    fun addPersonPost(personPost: PersonPost, callback: () -> Unit) {
         FirebasePersonPostModel.addPersonPost(personPost) {
             refreshAllpersonPosts()
             callback()

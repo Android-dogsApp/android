@@ -1,5 +1,6 @@
 package com.example.dogsandddapters.Models
 
+import android.util.Log
 import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
@@ -33,6 +34,7 @@ class FirebaseGeneralPostModel {
                             val generalPost = GeneralPost.fromJSON(json.data)
                             generalPosts.add(generalPost)
                         }
+                        Log.i("TAG", "generalPosts size: ${generalPosts. size}")
                         callback(generalPosts)
                     }
                     false -> callback(listOf())

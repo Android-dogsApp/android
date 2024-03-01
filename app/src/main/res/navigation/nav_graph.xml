@@ -20,6 +20,12 @@
         <action
             android:id="@+id/action_entryFragment_to_registerFragment"
             app:destination="@id/registerFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_personPostsFragment"
+            app:destination="@id/personPostsFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_generalPostsFragment"
+            app:destination="@id/generalPostsFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -32,7 +38,7 @@
     </fragment>
     <fragment
         android:id="@+id/generalPostsFragment"
-        android:name="com.example.dogsandddapters.Modules.GeneralPosts.PersonPostsFragment"
+        android:name="com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostsFragment"
         android:label="fragment_general_posts"
         tools:layout="@layout/fragment_general_posts" >
         <action
@@ -79,7 +85,11 @@
     <fragment
         android:id="@+id/personPostsFragment"
         android:name="com.example.dogsandddapters.Modules.PersonPosts.PersonPostsFragment"
-        android:label="PersonPostsFragment" />
+        android:label="PersonPostsFragment" >
+        <action
+            android:id="@+id/action_personPostsFragment_to_addPersonPostFragment"
+            app:destination="@id/addPersonPostFragment" />
+    </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.dogsandddapters.editProfileFragment"
