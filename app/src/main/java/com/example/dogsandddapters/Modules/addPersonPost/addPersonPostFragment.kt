@@ -11,6 +11,8 @@ import android.widget.EditText
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.dogsandddapters.Models.GeneralPost
+import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.R
@@ -75,10 +77,13 @@ class addPersonPostFragment : Fragment() {
             val offer = editTextOffer.text.toString()
             val contact = editTextContact.text.toString()
 
-            val personPost = PersonPost("1234","publisher",request, offer, contact)
+            val personPost = PersonPost("15","publisher",request, offer, contact)
             PersonPostModel.instance.addPersonPost(personPost) {
                 //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
             }
+            val generalPost = GeneralPost("15","publisher",request, offer, contact)
+            GeneralPostModel.instance.addGeneralPost(generalPost) {}
+
         }
 
         btnCancel.setOnClickListener {

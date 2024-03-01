@@ -43,7 +43,7 @@ class PersonPostModel private constructor() {
 
         // 2. Get all updated records from firestore since last update locally
         FirebasePersonPostModel.getAllPersonPosts(lastUpdated) { list ->
-            Log.i("TAG", "Firebase returned ${list.size}, lastUpdated: $lastUpdated")
+            Log.i("TAG", "Firebase PersonPost returned ${list.size}, lastUpdated: $lastUpdated")
             // 3. Insert new record to ROOM
             executor.execute {
                 var time = lastUpdated

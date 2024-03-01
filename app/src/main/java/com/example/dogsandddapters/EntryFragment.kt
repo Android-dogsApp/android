@@ -8,8 +8,6 @@ import android.view.ViewGroup
 import android.widget.Button
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import com.google.firebase.firestore.ktx.firestore
-import com.google.firebase.ktx.Firebase
 
 
 class EntryFragment : Fragment() {
@@ -52,21 +50,21 @@ class EntryFragment : Fragment() {
 //               // Log.d("Error adding document $e")
 //            }
 
-        val generalpost= hashMapOf(
-            "request" to "request",
-            "postid" to "444",
-            "offer" to "offer",
-            "contact" to "jhon@jhon",
-            "publisher" to "jhon@jhon",
-        )
-        val db = Firebase.firestore
-        db.collection("generalPosts").add(  generalpost )
-        .addOnSuccessListener { documentReference ->
-                //Log.d("DocumentSnapshot added with ID: ${documentReference.id}")
-            }
-            .addOnFailureListener { e ->
-                // Log.d("Error adding document $e")
-            }
+//        val generalpost= hashMapOf(
+//            "request" to "request",
+//            "postid" to "456",
+//            "offer" to "offer",
+//            "contact" to "jhon@jhon",
+//            "publisher" to "jhon@jhon",
+//        )
+//        val db = Firebase.firestore
+//        db.collection("generalPosts").add(  generalpost )
+//        .addOnSuccessListener { documentReference ->
+//                //Log.d("DocumentSnapshot added with ID: ${documentReference.id}")
+//            }
+//            .addOnFailureListener { e ->
+//                // Log.d("Error adding document $e")
+//            }
 
 
 

@@ -7,6 +7,7 @@ import com.google.firebase.firestore.FirebaseFirestoreSettings
 class FirebasePersonPostModel {
     companion object {
         const val PERSONPOST_COLLECTION_PATH = "personPosts"
+        const val GENERALPOST_COLLECTION_PATH = "generalPosts"
     }
     val db: FirebaseFirestore = FirebaseFirestore.getInstance()
     init {
@@ -41,6 +42,7 @@ class FirebasePersonPostModel {
         db.collection(PERSONPOST_COLLECTION_PATH).document(personpost.postid).set(personpost.json).addOnSuccessListener {
             callback()
         }
+        //db.collection(GENERALPOST_COLLECTION_PATH).document(personpost.postid).set(personpost.json)
     }
 
 

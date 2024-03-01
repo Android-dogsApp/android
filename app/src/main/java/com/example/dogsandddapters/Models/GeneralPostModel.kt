@@ -40,7 +40,7 @@ class GeneralPostModel private constructor() {
         generalPostsListLoadingState.value = LoadingState.LOADING
 
         // 1. Get last local update
-        val lastUpdated: Long = PersonPost.lastUpdated
+        val lastUpdated: Long = GeneralPost.lastUpdated
 
         // 2. Get all updated records from firestore since last update locally
         FirebasePersonPostModel.getAllGeneralPosts(lastUpdated) { list ->
@@ -48,17 +48,17 @@ class GeneralPostModel private constructor() {
             // 3. Insert new record to ROOM
             executor.execute {
                 var time = lastUpdated
-                for (personPost in list) {
-                    database.GeneralPostDao().insert(personPost)
+                for (generalPost in list) {
+                    database.GeneralPostDao().insert(generalPost)
 
-                    personPost.lastUpdated?.let {
+                    generalPost.lastUpdated?.let {
                         if (time < it)
-                            time = personPost.lastUpdated ?: System.currentTimeMillis()
+                            time = generalPost.lastUpdated ?: System.currentTimeMillis()
                     }
                 }
 
                 // 4. Update local data
-                PersonPost.lastUpdated = time
+                GeneralPost.lastUpdated = time
                 generalPostsListLoadingState.postValue(LoadingState.LOADED)
             }
         }

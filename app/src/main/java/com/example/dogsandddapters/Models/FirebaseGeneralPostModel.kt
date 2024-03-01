@@ -1,6 +1,7 @@
 package com.example.dogsandddapters.Models
 
 import android.util.Log
+import com.google.firebase.Timestamp
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 
@@ -24,7 +25,7 @@ class FirebaseGeneralPostModel {
     fun getAllGeneralPosts(since: Long, callback: (List<GeneralPost>) -> Unit) {
 
         db.collection(GENERALPOST_COLLECTION_PATH)
-            //.whereGreaterThanOrEqualTo(GeneralPost.LAST_UPDATED, Timestamp(since, 0))
+            .whereGreaterThanOrEqualTo(GeneralPost.LAST_UPDATED, Timestamp(since, 0))
             .get().addOnCompleteListener {
                 when (it.isSuccessful) {
                     true -> {
