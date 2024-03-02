@@ -1,13 +1,15 @@
 package com.example.dogsandddapters.dao
 
 
+import androidx.room.Database
 import androidx.room.Room
 import androidx.room.RoomDatabase
+import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.base.MyApplication
 
-//@Database(entities = [Student::class], version = 3)
+@Database(entities = [GeneralPost::class], version = 5)
 abstract class AppLocalDbGPRepository : RoomDatabase() {
-    abstract fun PersonPostsDao(): PersonPostsDao
+    abstract fun GeneralPostDao(): GeneralPostDao
 }
 
 object AppLocalDatabaseGeneralPost {

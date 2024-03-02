@@ -1,9 +1,11 @@
 package com.example.dogsandddapters.dao
+import androidx.lifecycle.LiveData
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.dogsandddapters.Models.Person
 @Dao
 interface PersonDao {
@@ -18,5 +20,8 @@ interface PersonDao {
     fun delete(person: Person)
 
     @Query("SELECT * FROM Person WHERE id =:id")
-    fun getPersonById(id: String): Person
+    fun getPersonById(id: String): LiveData<Person>
+
+    @Update
+    fun update(person: Person)
 }

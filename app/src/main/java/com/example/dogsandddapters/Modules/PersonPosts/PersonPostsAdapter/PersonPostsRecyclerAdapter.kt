@@ -15,7 +15,7 @@ class PersonPostsRecyclerAdapter(var personposts: List<PersonPost>?): RecyclerVi
     override fun getItemCount(): Int = personposts?.size ?: 0
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): PersonPostViewHolder {
-        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.general_post_layout_row, parent, false)
+        val itemView = LayoutInflater.from(parent.context).inflate(R.layout.person_post_layout_row, parent, false)
         return PersonPostViewHolder(itemView, listener, personposts)
     }
 

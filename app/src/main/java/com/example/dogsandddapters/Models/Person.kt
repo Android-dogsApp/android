@@ -9,7 +9,9 @@ data class Person(
     val id: String,
     val phoneNumber: String,
     val email: String,
-    val dogType: String){
+    val dogType: String,
+    //var lastUpdated: Long?=null
+){
     //val avatarUrl: String) {
 
     constructor() : this("", "", "", "", "")
@@ -34,6 +36,8 @@ data class Person(
         const val EMAIL_KEY = "email"
         const val DOG_TYPE_KEY = "dogType"
        // const val AVATAR_URL_KEY = "avatarUrl"
+       //const val LAST_UPDATED = "lastUpdated"
+       const val GET_LAST_UPDATED = "get_last_updated"
 
 
         fun fromJSON(json: Map<String, Any>): Person {
@@ -43,7 +47,12 @@ data class Person(
             val email = json[EMAIL_KEY] as? String ?: ""
             val dogType = json[DOG_TYPE_KEY] as? String ?: ""
            // val avatarUrl = json[AVATAR_URL_KEY] as? String ?: ""
-            return Person(name, id, phoneNumber, email, dogType)
+            val person= Person(name, id, phoneNumber, email, dogType)
+//            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
+//            timestamp?.let {
+//                person.lastUpdated = it.seconds
+//            }
+            return person
         }
     }
 
@@ -56,6 +65,7 @@ data class Person(
                 EMAIL_KEY to email,
                 DOG_TYPE_KEY to dogType,
                 //AVATAR_URL_KEY to avatarUrl,
+                //LAST_UPDATED to FieldValue.serverTimestamp()
             )
         }
 }

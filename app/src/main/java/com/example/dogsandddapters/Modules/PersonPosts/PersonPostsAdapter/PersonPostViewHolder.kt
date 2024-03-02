@@ -11,7 +11,7 @@ import com.example.dogsandddapters.R
 
 class PersonPostViewHolder(val itemView: View,
                            val listener: PersonPostsRcyclerViewActivity.OnItemClickListener?,
-                           var generalposts: List<PersonPost>?): RecyclerView.ViewHolder(itemView) {
+                           var personposts: List<PersonPost>?): RecyclerView.ViewHolder(itemView) {
 
     var requestTextView: TextView? = null
     var offerTextView: TextView? = null
@@ -21,15 +21,15 @@ class PersonPostViewHolder(val itemView: View,
     var personpost: PersonPost? = null
 
     init {
-        requestTextView = itemView.findViewById(R.id.requestTextView)
-        offerTextView = itemView.findViewById(R.id.offerTextView)
-        contactTextView = itemView.findViewById(R.id.contactTextView)
-        imageImageView = itemView.findViewById(R.id.postImageView)
-        idTextView = itemView.findViewById(R.id.generalPostIdTextView)
+        requestTextView = itemView.findViewById(R.id.requestTextViewperson)
+        offerTextView = itemView.findViewById(R.id.offerTextViewperson)
+        contactTextView = itemView.findViewById(R.id.contactTextViewperson)
+        imageImageView = itemView.findViewById(R.id.postImageViewperson)
+        idTextView = itemView.findViewById(R.id.personPostIdTextViewperson)
 
 
         itemView.setOnClickListener {
-            Log.i("TAG", "GeneralPostViewHolder: Position clicked $adapterPosition")
+            Log.i("TAG", "PersonPostViewHolder: Position clicked $adapterPosition")
 
             listener?.onItemClick(adapterPosition)
             listener?.onPersonPostClicked(personpost)

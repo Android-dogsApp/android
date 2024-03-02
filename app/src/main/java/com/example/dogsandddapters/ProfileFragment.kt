@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.PersonModel
 
 class ProfileFragment : Fragment() {
@@ -36,7 +37,8 @@ class ProfileFragment : Fragment() {
         val phoneTextView : TextView= view.findViewById(R.id.phoneTextView)
         val emailTextView: TextView = view.findViewById(R.id.emailTextView)
 
-      PersonModel.instance.getPerson("1"){
+        //NEED TO GET THE USER ID...:
+      PersonModel.instance.getPerson("5"){
           nameTextView.text = it?.name
           dogTypesTextView.text = it?.dogType
           phoneTextView.text = it?.phoneNumber
@@ -52,6 +54,8 @@ class ProfileFragment : Fragment() {
 
         }
         editButton.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment("5")
+            Navigation.findNavController(view).navigate(action)
 
         }
     }

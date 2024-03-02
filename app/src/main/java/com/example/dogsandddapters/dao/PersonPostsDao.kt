@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.dogsandddapters.Models.PersonPost
 @Dao
 interface PersonPostsDao {
@@ -19,7 +20,13 @@ interface PersonPostsDao {
         @Delete
         fun delete(personpost: PersonPost)
 
-        @Query("SELECT * FROM PersonPost WHERE id =:id")
-        fun getPersonPostById(id: String): PersonPost
+        @Query("SELECT * FROM PersonPost WHERE postid =:id")
+        fun getPersonPostById(id: String): LiveData<PersonPost>
+
+        //@Query("SELECT * FROM PersonPost WHERE postid =:id")
+        @Update
+        fun updatePersonPost(personpost: PersonPost)
+
+
 
 }
