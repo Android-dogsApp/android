@@ -70,11 +70,11 @@ class PersonModel private constructor() {
 
     fun updatePerson( person: Person, callback: () -> Unit) {
         firebasePersonModel.updatePerson(person) {
+            database.PersonDao().update(person)
             refreshPerson(person.id) {
                 callback()
             }
-            callback()
-
         }
     }
+
 }

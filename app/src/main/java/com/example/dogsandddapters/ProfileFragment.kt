@@ -37,6 +37,7 @@ class ProfileFragment : Fragment() {
         val phoneTextView : TextView= view.findViewById(R.id.phoneTextView)
         val emailTextView: TextView = view.findViewById(R.id.emailTextView)
 
+        //NEED TO GET THE USER ID:
       PersonModel.instance.getPerson("1"){
           nameTextView.text = it?.name
           dogTypesTextView.text = it?.dogType
@@ -53,7 +54,7 @@ class ProfileFragment : Fragment() {
 
         }
         editButton.setOnClickListener {
-            val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment()
+            val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment("1")
             Navigation.findNavController(view).navigate(action)
 
         }

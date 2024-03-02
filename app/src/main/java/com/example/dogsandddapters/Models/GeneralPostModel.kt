@@ -19,8 +19,8 @@ class GeneralPostModel private constructor() {
     private val database = AppLocalDatabaseGeneralPost.db
     private var executor = Executors.newSingleThreadExecutor()
     private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
-    private val FirebasePersonPostModel = FirebaseGeneralPostModel()
-    private val generalPosts: LiveData<MutableList<GeneralPost>>? = null
+    private val FirebaseGeneralPostModel = FirebaseGeneralPostModel()
+    private val generalPosts: LiveData<MutableList<GeneralPost>> =database.GeneralPostDao().getAll()
     val generalPostsListLoadingState: MutableLiveData<LoadingState> = MutableLiveData(LoadingState.LOADED)
     companion object {
         val instance: GeneralPostModel = GeneralPostModel()
@@ -32,7 +32,7 @@ class GeneralPostModel private constructor() {
 
     fun getAllgeneralPosts(): LiveData<MutableList<GeneralPost>> {
         refreshAllgeneralPosts()
-        return generalPosts ?: database.GeneralPostDao().getAll()
+        return generalPosts
     }
 
     fun refreshAllgeneralPosts() {
@@ -43,7 +43,7 @@ class GeneralPostModel private constructor() {
         val lastUpdated: Long = GeneralPost.lastUpdated
 
         // 2. Get all updated records from firestore since last update locally
-        FirebasePersonPostModel.getAllGeneralPosts(lastUpdated) { list ->
+        FirebaseGeneralPostModel.getAllGeneralPosts(lastUpdated) { list ->
             Log.i("TAG", "Firebase returned ${list.size}, lastUpdated: $lastUpdated")
             // 3. Insert new record to ROOM
             executor.execute {
@@ -65,9 +65,25 @@ class GeneralPostModel private constructor() {
     }
 
     fun addGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
-        FirebasePersonPostModel.addGeneralPost(generalPost) {
+        FirebaseGeneralPostModel.addGeneralPost(generalPost) {
             FirebasePersonPostModel()
             callback()
+        }
+    }
+    fun getGeneralPostById(id: String, callback: (GeneralPost?) -> Unit) : LiveData<GeneralPost>{
+        FirebaseGeneralPostModel.getGeneralPostById(id) {
+            callback(it)
+        }
+        return database.GeneralPostDao().getGeneralPostById(id)
+    }
+
+    fun updateGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
+        executor.execute {
+            FirebaseGeneralPostModel.updateGeneralPost(generalPost) {
+                database.GeneralPostDao().updateGeneralPost(generalPost)
+                refreshAllgeneralPosts()
+                callback()
+            }
         }
     }
 }

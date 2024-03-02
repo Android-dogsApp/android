@@ -42,7 +42,34 @@ class FirebasePersonPostModel {
         db.collection(PERSONPOST_COLLECTION_PATH).document(personpost.postid).set(personpost.json).addOnSuccessListener {
             callback()
         }
-        //db.collection(GENERALPOST_COLLECTION_PATH).document(personpost.postid).set(personpost.json)
+    }
+
+//
+
+    fun getPersonPostById(postid: String, callback: (PersonPost?) -> Unit) {
+        db.collection(PERSONPOST_COLLECTION_PATH).document(postid).get().addOnSuccessListener { documentSnapshot ->
+            val data = documentSnapshot.data
+            if (data != null) {
+                val personPost = PersonPost.fromJSON(data as Map<String, Any>)
+                callback(personPost)
+            } else {
+                callback(null)
+            }
+        }
+    }
+
+    fun updatePersonPost(personpost: PersonPost, callback: () -> Unit) {
+        db.collection(PERSONPOST_COLLECTION_PATH).document(personpost.postid).update(personpost.json).addOnSuccessListener {
+            callback()
+        }
+    }
+
+
+
+    fun deletePersonPost(personpost: PersonPost, callback: () -> Unit) {
+        db.collection(PERSONPOST_COLLECTION_PATH).document(personpost.postid).delete().addOnSuccessListener {
+            callback()
+        }
     }
 
 

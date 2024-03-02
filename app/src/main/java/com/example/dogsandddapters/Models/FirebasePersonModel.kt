@@ -92,4 +92,16 @@ class FirebasePersonModel {
             callback()
         }
     }
+
+    fun getPersonById(id: String, callback: (Person?) -> Unit) {
+        db.collection(PERSONS_COLLECTION_PATH).document(id).get().addOnCompleteListener {
+            when (it.isSuccessful) {
+                true -> {
+                    val person = it.result.toObject(Person::class.java)
+                    callback(person)
+                }
+                false -> callback(null)
+            }
+        }
+    }
 }

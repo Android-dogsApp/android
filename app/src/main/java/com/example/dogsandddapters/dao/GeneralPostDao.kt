@@ -6,6 +6,7 @@ import androidx.room.Delete
 import androidx.room.Insert
 import androidx.room.OnConflictStrategy
 import androidx.room.Query
+import androidx.room.Update
 import com.example.dogsandddapters.Models.GeneralPost
 
 @Dao
@@ -22,5 +23,10 @@ interface GeneralPostDao {
 
     @Query("SELECT * FROM GeneralPost WHERE postid =:id")
     fun getGeneralPostById(id: String):  LiveData<GeneralPost>
+
+    //@Query("SELECT * FROM GeneralPost WHERE postid =:id")
+    @Update
+    fun updateGeneralPost(generalpost: GeneralPost)
+
 
 }

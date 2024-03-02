@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
@@ -60,8 +61,8 @@ class GeneralPostsFragment : Fragment() {
                 Log.i("TAG", "GeneralPostsRecyclerAdapter: Position clicked $position")
                 val generalPost = viewModel.generalposts?.value?.get(position)
                 generalPost?.let {
-//                    val action = GeneralPostFragmentDirections.actionGeneralPostFragmentToBlueFragment(it.name)
-//                    Navigation.findNavController(view).navigate(action)
+                    val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToPersonSpecificPostFragment(it.postid)
+                    Navigation.findNavController(view).navigate(action)
                 }
             }
 

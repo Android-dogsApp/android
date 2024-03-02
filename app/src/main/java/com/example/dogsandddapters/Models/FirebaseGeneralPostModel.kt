@@ -48,4 +48,35 @@ class FirebaseGeneralPostModel {
             callback()
         }
     }
+
+//    fun getGeneralPostById(postid: String, callback: (GeneralPost?) -> Unit) {
+//        db.collection(GENERALPOST_COLLECTION_PATH).document(postid).get().addOnSuccessListener {
+//            val generalPost = GeneralPost.fromJSON(it.data)
+//            callback(generalPost)
+//        }
+//    }
+
+    fun getGeneralPostById(postid: String, callback: (GeneralPost?) -> Unit) {
+        db.collection(GENERALPOST_COLLECTION_PATH).document(postid).get().addOnSuccessListener { documentSnapshot ->
+            val data = documentSnapshot.data
+            if (data != null) {
+                val generalPost = GeneralPost.fromJSON(data as Map<String, Any>)
+                callback(generalPost)
+            } else {
+                callback(null)
+            }
+        }
+    }
+
+
+    fun updateGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
+        db.collection(GENERALPOST_COLLECTION_PATH).document(generalPost.postid).update(generalPost.Json).addOnSuccessListener {
+            callback()
+        }
+
+    }
+
+
 }
+
+

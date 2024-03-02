@@ -16,7 +16,8 @@ data class PersonPost(
     val contact: String,
    // val image: String,
     var lastUpdated: Long? = null
-) {
+)
+{
     companion object {
 
         var lastUpdated: Long

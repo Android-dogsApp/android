@@ -19,11 +19,12 @@ class PersonPostModel private constructor() {
     private var executor = Executors.newSingleThreadExecutor()
     private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
     private val FirebasePersonPostModel = FirebasePersonPostModel()
-    private val personPosts: LiveData<MutableList<PersonPost>>? = null
+    private val personPosts: LiveData<MutableList<PersonPost>> = database.PersonPostsDao().getAll()
     val personPostsListLoadingState: MutableLiveData<LoadingState> = MutableLiveData(LoadingState.LOADED)
     companion object {
         val instance: PersonPostModel = PersonPostModel()
     }
+
 
     interface GetAllPersonsListener {
         fun onComplete(personPosts: List<PersonPost>)
@@ -31,7 +32,7 @@ class PersonPostModel private constructor() {
 
     fun getAllpersonPosts(): LiveData<MutableList<PersonPost>> {
         refreshAllpersonPosts()
-        return personPosts ?: database.PersonPostsDao().getAll()
+        return personPosts
     }
 
     fun refreshAllpersonPosts() {
@@ -65,6 +66,35 @@ class PersonPostModel private constructor() {
 
     fun addPersonPost(personPost: PersonPost, callback: () -> Unit) {
         FirebasePersonPostModel.addPersonPost(personPost) {
+                refreshAllpersonPosts()
+                callback()
+
+        }
+    }
+
+    fun getPersonPostById(id: String, callback: (PersonPost?) -> Unit) : LiveData<PersonPost>{
+        FirebasePersonPostModel.getPersonPostById(id) {
+            callback(it)
+        }
+        return database.PersonPostsDao().getPersonPostById(id)
+
+    }
+
+    fun updatePersonPost(personPost: PersonPost, callback: () -> Unit) {
+        executor.execute {
+            FirebasePersonPostModel.updatePersonPost(personPost) {
+                database.PersonPostsDao().updatePersonPost(personPost)
+                refreshAllpersonPosts()
+                callback()
+            }
+
+        }
+
+    }
+
+    fun deletePersonPost(personPost: PersonPost, callback: () -> Unit) {
+        FirebasePersonPostModel.deletePersonPost(personPost) {
+            database.PersonPostsDao().delete(personPost)
             refreshAllpersonPosts()
             callback()
         }

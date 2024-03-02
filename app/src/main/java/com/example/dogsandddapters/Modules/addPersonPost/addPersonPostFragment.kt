@@ -77,11 +77,11 @@ class addPersonPostFragment : Fragment() {
             val offer = editTextOffer.text.toString()
             val contact = editTextContact.text.toString()
 
-            val personPost = PersonPost("15","publisher",request, offer, contact)
+            val personPost = PersonPost("3","publisher",request, offer, contact)
             PersonPostModel.instance.addPersonPost(personPost) {
                 //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
             }
-            val generalPost = GeneralPost("15","publisher",request, offer, contact)
+            val generalPost = GeneralPost("3","publisher",request, offer, contact)
             GeneralPostModel.instance.addGeneralPost(generalPost) {}
 
         }

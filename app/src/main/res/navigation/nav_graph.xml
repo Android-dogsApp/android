@@ -47,6 +47,9 @@
         <action
             android:id="@+id/action_generalPostsFragment_to_addPersonPostFragment"
             app:destination="@id/addPersonPostFragment" />
+        <action
+            android:id="@+id/action_generalPostsFragment_to_personSpecificPostFragment"
+            app:destination="@id/personSpecificPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/profileFragment"
@@ -89,13 +92,43 @@
         <action
             android:id="@+id/action_personPostsFragment_to_addPersonPostFragment"
             app:destination="@id/addPersonPostFragment" />
+        <action
+            android:id="@+id/action_personPostsFragment_to_personSpecificPostFragment"
+            app:destination="@id/personSpecificPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
         android:name="com.example.dogsandddapters.editProfileFragment"
         android:label="editProfileFragment" >
+        <argument
+            android:name="postId"
+            app:argType="string" />
         <action
             android:id="@+id/action_editProfileFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editPostFragment"
+        android:name="com.example.dogsandddapters.Modules.EditPostFragment"
+        android:label="fragment_edit_post"
+        tools:layout="@layout/fragment_edit_post" >
+        <argument
+            android:name="postId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_editPostFragment_to_personSpecificPostFragment"
+            app:destination="@id/personSpecificPostFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/personSpecificPostFragment"
+        android:name="com.example.dogsandddapters.PersonSpecificPostFragment"
+        android:label="PersonSpecificPostFragment" >
+        <argument
+            android:name="postId"
+            app:argType="string" />
+        <action
+            android:id="@+id/action_personSpecificPostFragment_to_editPostFragment"
+            app:destination="@id/editPostFragment" />
     </fragment>
 </navigation>

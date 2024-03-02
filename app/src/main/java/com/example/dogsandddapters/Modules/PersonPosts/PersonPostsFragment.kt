@@ -8,6 +8,7 @@ import android.view.ViewGroup
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.PersonPost
@@ -39,8 +40,10 @@ class PersonPostsFragment : Fragment() {
 
         progressBar?.visibility = View.VISIBLE
 
+        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts()
 
-       PersonPostsRcyclerView = binding.rvPersonPostFragmentList
+
+        PersonPostsRcyclerView = binding.rvPersonPostFragmentList
         PersonPostsRcyclerView?.setHasFixedSize(true)
         PersonPostsRcyclerView?.layoutManager = LinearLayoutManager(context)
         adapter = PersonPostsRecyclerAdapter((viewModel.personposts?.value))
@@ -50,8 +53,8 @@ class PersonPostsFragment : Fragment() {
                 Log.i("TAG", "personPostsRecyclerAdapter: Position clicked $position")
                 val personPost = viewModel.personposts?.value?.get(position)
                 personPost?.let {
-//                    val action = PersonPostFragmentDirections.actionPersonPostFragmentToBlueFragment(it.name)
-//                    Navigation.findNavController(view).navigate(action)
+                    val action = PersonPostsFragmentDirections.actionPersonPostsFragmentToPersonSpecificPostFragment(it.postid)
+                    Navigation.findNavController(view).navigate(action)
                 }
             }
 
