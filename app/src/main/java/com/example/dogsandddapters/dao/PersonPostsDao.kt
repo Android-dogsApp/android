@@ -17,6 +17,7 @@ interface PersonPostsDao {
         @Insert(onConflict = OnConflictStrategy.REPLACE)
         fun insert(vararg personpost: PersonPost)
 
+
         @Delete
         fun delete(personpost: PersonPost)
 
