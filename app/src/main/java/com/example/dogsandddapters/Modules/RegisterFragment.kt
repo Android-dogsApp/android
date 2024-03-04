@@ -1,6 +1,7 @@
 package com.example.dogsandddapters.Modules
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,6 +12,7 @@ import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.Person
 import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.R
+
 
 class RegisterFragment : Fragment() {
 
@@ -62,6 +64,21 @@ class RegisterFragment : Fragment() {
 
     }
 
+
+
+
+    fun registerUser(email: String, password: String) {
+        auth.createUserWithEmailAndPassword(email, password)
+            .addOnCompleteListener { task ->
+                if (task.isSuccessful) {
+                    // Registration successful
+                    val user = auth.currentUser
+                } else {
+                    // Registration failed
+                    Log.i("Registration", "createUserWithEmail:failure", task.exception)
+                }
+            }
+    }
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
 //        super.onCreate(savedInstanceState)

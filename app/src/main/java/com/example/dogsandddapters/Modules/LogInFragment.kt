@@ -41,6 +41,7 @@ import android.widget.Button
 import android.widget.EditText
 import androidx.fragment.app.Fragment
 import com.example.dogsandddapters.R
+import com.google.android.gms.auth.api.identity.BeginSignInRequest
 
 class LogInFragment : Fragment() {
 
