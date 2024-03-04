@@ -50,6 +50,14 @@
             android:layout_marginBottom="16dp"/>
 
         <EditText
+            android:id="@+id/editTextPassword"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:hint="Password"
+            android:inputType="textPassword"
+            android:layout_marginBottom="16dp"/>
+
+        <EditText
             android:id="@+id/editTextDogType"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -74,6 +82,8 @@
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="Cancel"/>
+
+
         </LinearLayout>
 
     </LinearLayout>

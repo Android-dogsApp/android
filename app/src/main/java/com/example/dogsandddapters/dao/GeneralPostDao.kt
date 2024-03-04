@@ -14,20 +14,20 @@ interface GeneralPostDao {
 
 
     @Query("SELECT * FROM GeneralPost")
-    suspend fun getAll(): LiveData<MutableList<GeneralPost>>
+     fun getAll(): LiveData<MutableList<GeneralPost>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    suspend fun insert(vararg feeds: GeneralPost)
+     fun insert(vararg feeds: GeneralPost)
 
     @Delete
-    suspend fun delete(generalpost: GeneralPost)
+     fun delete(generalpost: GeneralPost)
 
     @Query("SELECT * FROM GeneralPost WHERE postid =:id")
-    suspend fun getGeneralPostById(id: String):  LiveData<GeneralPost>
+     fun getGeneralPostById(id: String):  LiveData<GeneralPost>
 
     //@Query("SELECT * FROM GeneralPost WHERE postid =:id")
     @Update
-    suspend fun updateGeneralPost(generalpost: GeneralPost)
+     fun updateGeneralPost(generalpost: GeneralPost)
 
 
 }
