@@ -38,6 +38,9 @@
         <action
             android:id="@+id/action_logInFragment_to_generalPostsFragment"
             app:destination="@id/generalPostsFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/generalPostsFragment"
