@@ -17,6 +17,8 @@ class PersonPostModel private constructor() {
 
    private val database = AppLocalDatabasePersonPost.db
     private var executor = Executors.newSingleThreadExecutor()
+    private var executor2 = Executors.newSingleThreadExecutor()
+    private var executor3 = Executors.newSingleThreadExecutor()
     private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
     private val FirebasePersonPostModel = FirebasePersonPostModel()
     private val personPosts: LiveData<MutableList<PersonPost>> = database.PersonPostsDao().getAll()
@@ -94,19 +96,20 @@ class PersonPostModel private constructor() {
 
     fun updatePersonPost(personPost: PersonPost, callback: () -> Unit) {
             FirebasePersonPostModel.updatePersonPost(personPost) {
-                database.PersonPostsDao().updatePersonPost(personPost)
-                refreshAllpersonPosts()
+                executor2.execute {
+                    database.PersonPostsDao().updatePersonPost(personPost)
+                }
+                //refreshAllpersonPosts()
                 callback()
-
-
         }
 
     }
 
     fun deletePersonPost(personpost: PersonPost, callback: () -> Unit) {
         FirebasePersonPostModel.deletePersonPost(personpost.postid) {
-            database.PersonPostsDao().delete(personpost)
-            refreshAllpersonPosts()
+            executor3.execute {
+                database.PersonPostsDao().delete(personpost)
+            }
             callback()
         }
     }

@@ -43,21 +43,13 @@
 
         <!-- Phone Number -->
         <EditText
-            android:id="@+id/editTextPhoneNumber"
+            android:id="@+id/editTextcontact"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_weight="1"
-            android:hint="Enter Phone"
+            android:hint="Enter Contact Info"
             android:textStyle="bold"/>
 
-        <!-- Email -->
-        <EditText
-            android:id="@+id/editTextEmail1"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter Email"
-            android:textStyle="bold"/>
     </LinearLayout>
 
     <!-- Image -->

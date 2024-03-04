@@ -38,7 +38,7 @@ class ProfileFragment : Fragment() {
         val emailTextView: TextView = view.findViewById(R.id.emailTextView)
 
         //NEED TO GET THE USER ID...:
-      PersonModel.instance.getPerson("5"){
+      PersonModel.instance.getPerson("4"){
           nameTextView.text = it?.name
           dogTypesTextView.text = it?.dogType
           phoneTextView.text = it?.phoneNumber
