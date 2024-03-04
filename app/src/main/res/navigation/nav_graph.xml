@@ -26,6 +26,9 @@
         <action
             android:id="@+id/action_entryFragment_to_generalPostsFragment"
             app:destination="@id/generalPostsFragment" />
+        <action
+            android:id="@+id/action_entryFragment_to_restApiFragment"
+            app:destination="@id/restApiFragment" />
     </fragment>
     <fragment
         android:id="@+id/logInFragment"
@@ -131,4 +134,8 @@
             android:id="@+id/action_personSpecificPostFragment_to_editPostFragment"
             app:destination="@id/editPostFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/restApiFragment"
+        android:name="com.example.dogsandddapters.RestApiFragment"
+        android:label="RestApiFragment" />
 </navigation>
