@@ -1,5 +1,6 @@
 package com.example.dogsandddapters.Models
 
+import android.util.Log
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.FirebaseFirestoreSettings
 
@@ -7,6 +8,8 @@ class FirebasePersonModel {
 
 //    private val db = Firebase.firestore
 
+    private val firestore = FirebaseFirestore.getInstance()
+    private val collection = firestore.collection("users") // Adjust "users" to your Firestore collection name
     companion object {
         const val PERSONS_COLLECTION_PATH = "persons"
     }
@@ -58,6 +61,38 @@ class FirebasePersonModel {
                 false -> callback(null)
             }
         }
+    }
+
+    fun getPersonById(Id: String, callback: (Person?) -> Unit) {
+        db.collection(PERSONS_COLLECTION_PATH).document(Id).get().addOnCompleteListener {
+            when (it.isSuccessful) {
+                true -> {
+                    val person = it.result.toObject(Person::class.java)
+                    callback(person)
+                }
+                false -> callback(null)
+            }
+        }
+    }
+
+    fun getPersonByEmail(email: String, callback: (Person?) -> Unit) {
+        collection.whereEqualTo("email", email)
+            .get()
+            .addOnSuccessListener { documents ->
+                if (!documents.isEmpty) {
+                    val document = documents.documents[0]
+                    val person = document.toObject(Person::class.java)
+                    Log.i("TAG", "Person id:  ${person?.id}")
+                    callback(person)
+                } else {
+                    callback(null)
+                    Log.i("TAG", "Person id:  null")
+                }
+            }
+            .addOnFailureListener { exception ->
+                // Handle failure
+                callback(null)
+            }
     }
 
 //    fun getPerson(since: Long,id: String, callback: (Person?) -> Unit) {
