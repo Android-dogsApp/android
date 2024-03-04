@@ -14,6 +14,10 @@
         android:id="@+id/profileFragment"
         android:icon="@android:drawable/sym_def_app_icon"
         android:title="Profile" />
+    <item
+        android:id="@+id/restApiFragment"
+        android:icon="@android:drawable/sym_def_app_icon"
+        android:title="RestAPI" />
 
 
 </menu>

@@ -60,7 +60,7 @@ data class PersonPost(
 //                personPost.lastUpdated= it.seconds
             val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
             timestamp?.let {
-                PersonPost.lastUpdated = it.seconds
+                personPost.lastUpdated = it.seconds
             }
 
             return personPost

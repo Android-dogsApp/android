@@ -10,6 +10,7 @@ import androidx.navigation.ui.NavigationUI
 import com.google.android.material.bottomnavigation.BottomNavigationView
 
 
+
 class MainActivity : AppCompatActivity() {
 
     private var navController: NavController? = null
