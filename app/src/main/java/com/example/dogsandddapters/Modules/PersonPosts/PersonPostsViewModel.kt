@@ -7,5 +7,9 @@ import com.example.dogsandddapters.Models.PersonPost
 
 class PersonPostsViewModel: ViewModel() {
     var personposts: LiveData<MutableList<PersonPost>>? = null
+
+    fun addAllPersonPosts(newPosts: List<PersonPost>){
+        personposts?.value?.addAll(newPosts)
+    }
 }
 

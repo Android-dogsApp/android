@@ -76,6 +76,12 @@ class FirebaseGeneralPostModel {
 
     }
 
+    fun deleteGeneralPost(id: String, callback: () -> Unit) {
+        db.collection(GENERALPOST_COLLECTION_PATH).document(id).delete().addOnSuccessListener {
+            callback()
+        }
+    }
+
 
 }
 

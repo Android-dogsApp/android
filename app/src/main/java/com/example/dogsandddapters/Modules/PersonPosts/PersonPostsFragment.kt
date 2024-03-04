@@ -41,6 +41,13 @@ class PersonPostsFragment : Fragment() {
         progressBar?.visibility = View.VISIBLE
 
         viewModel.personposts = PersonPostModel.instance.getAllpersonPosts()
+             //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+
+
+//        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts { newPosts ->
+//            //viewModel.addAllPersonPosts(newPosts ?: emptyList())
+//            //Navigation.findNavController(view).popBackStack(R.id.personPostsFragment, false)
+//        }
 
 
         PersonPostsRcyclerView = binding.rvPersonPostFragmentList

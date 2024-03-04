@@ -10,7 +10,6 @@ import java.util.concurrent.Executors
 
 class GeneralPostModel private constructor() {
 
-
     enum class LoadingState {
         LOADING,
         LOADED
@@ -78,12 +77,18 @@ class GeneralPostModel private constructor() {
     }
 
     fun updateGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
-        executor.execute {
             FirebaseGeneralPostModel.updateGeneralPost(generalPost) {
                 database.GeneralPostDao().updateGeneralPost(generalPost)
                 refreshAllgeneralPosts()
                 callback()
             }
+    }
+
+    fun deleteGeneralPost(generalpost: GeneralPost, callback: () -> Unit) {
+        FirebaseGeneralPostModel.deleteGeneralPost(generalpost.postid) {
+            database.GeneralPostDao().delete(generalpost)
+            refreshAllgeneralPosts()
+            callback()
         }
     }
 }

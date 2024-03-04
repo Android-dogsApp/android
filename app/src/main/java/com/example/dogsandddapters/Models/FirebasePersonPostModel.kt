@@ -66,8 +66,8 @@ class FirebasePersonPostModel {
 
 
 
-    fun deletePersonPost(personpost: PersonPost, callback: () -> Unit) {
-        db.collection(PERSONPOST_COLLECTION_PATH).document(personpost.postid).delete().addOnSuccessListener {
+    fun deletePersonPost(id: String, callback: () -> Unit) {
+        db.collection(PERSONPOST_COLLECTION_PATH).document(id).delete().addOnSuccessListener {
             callback()
         }
     }

@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
@@ -37,7 +38,8 @@ class EditPostFragment : Fragment() {
         val editTextOffer: TextView = view.findViewById(R.id.editTextOffer)
         val editTextEmail: TextView = view.findViewById(R.id.editTextEmail1)
         val buttonUpdate: Button = view.findViewById(R.id.buttonSave)
-        //val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
+        val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
+        val buttonDeletePost: Button = view.findViewById(R.id.buttonDeletePost)
 
         GeneralPostModel.instance.getGeneralPostById(postId){
             editTextPostId.text = it?.postid
@@ -56,7 +58,6 @@ class EditPostFragment : Fragment() {
             val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
             val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
 
-            executor.execute {
                 GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
                     //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
                 }
@@ -64,15 +65,42 @@ class EditPostFragment : Fragment() {
                 PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
                     //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
                 }
-            }
+
+            //Navigation.findNavController(it).popBackStack(R.id.PersonSpecificPostFragment, false)
+            val action = EditPostFragmentDirections.actionEditPostFragmentToPersonSpecificPostFragment(postId)
+            Navigation.findNavController(view).navigate(action)
+
+
         }
 
 
 
-//        buttonCancel?.setOnClickListener {
-//            val action = editProfileFragmentDirections.actionEditProfileFragmentToEntryFragment()
-//            Navigation.findNavController(view).navigate(action)
-//        }
+        buttonCancel?.setOnClickListener {
+           // Navigation.findNavController(it).popBackStack(R.id.PersonSpecificPostFragment, false)
+            Navigation.findNavController(it).navigateUp();
+        }
+
+        buttonDeletePost.setOnClickListener {
+          GeneralPostModel.instance.getGeneralPostById(postId){
+              if (it != null) {
+                  GeneralPostModel.instance.deleteGeneralPost(it) {
+                      //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+                  }
+              }
+
+          }
+            PersonPostModel.instance.getPersonPostById(postId){
+                if (it != null) {
+                    PersonPostModel.instance.deletePersonPost(it) {
+                        //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+                    }
+                }
+
+            }
+
+
+        }
+
 
     }
 

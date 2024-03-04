@@ -35,6 +35,17 @@ class PersonPostModel private constructor() {
         return personPosts
     }
 
+//    fun getAllpersonPosts(callback: (List<PersonPost>) -> Unit): LiveData<MutableList<PersonPost>> {
+//        // Assuming refreshAllpersonPosts updates personPosts internally
+//        refreshAllpersonPosts()
+//
+//        // Pass the current value of personPosts to the callback
+//        callback(personPosts.value.orEmpty())
+//
+//        return personPosts
+//    }
+
+
     fun refreshAllpersonPosts() {
 
         personPostsListLoadingState.value = LoadingState.LOADING
@@ -59,6 +70,7 @@ class PersonPostModel private constructor() {
 
                 // 4. Update local data
                 PersonPost.lastUpdated = time
+
                 personPostsListLoadingState.postValue(LoadingState.LOADED)
             }
         }
@@ -81,20 +93,19 @@ class PersonPostModel private constructor() {
     }
 
     fun updatePersonPost(personPost: PersonPost, callback: () -> Unit) {
-        executor.execute {
             FirebasePersonPostModel.updatePersonPost(personPost) {
                 database.PersonPostsDao().updatePersonPost(personPost)
                 refreshAllpersonPosts()
                 callback()
-            }
+
 
         }
 
     }
 
-    fun deletePersonPost(personPost: PersonPost, callback: () -> Unit) {
-        FirebasePersonPostModel.deletePersonPost(personPost) {
-            database.PersonPostsDao().delete(personPost)
+    fun deletePersonPost(personpost: PersonPost, callback: () -> Unit) {
+        FirebasePersonPostModel.deletePersonPost(personpost.postid) {
+            database.PersonPostsDao().delete(personpost)
             refreshAllpersonPosts()
             callback()
         }
