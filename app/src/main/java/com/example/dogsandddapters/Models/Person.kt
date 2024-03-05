@@ -6,12 +6,11 @@ import androidx.room.PrimaryKey
 @Entity
 data class Person(
     val name: String,
-     @PrimaryKey val id: String,
+    val id: String,
     val phoneNumber: String,
-    val email: String,
+    @PrimaryKey val email: String,
     val dogType: String,
-   // val numberOfDogs: Int = 0
-    //var lastUpdated: Long?=null
+
 ){
     //val avatarUrl: String) {
 
