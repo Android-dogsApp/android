@@ -16,7 +16,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.PersonModel
 
 class ProfileFragment : Fragment() {
-   // private lateinit var personModel: PersonModel
+    // private lateinit var personModel: PersonModel
     private val args: ProfileFragmentArgs by navArgs()
 
 //    override fun onCreate(savedInstanceState: Bundle?) {
@@ -68,6 +68,6 @@ class ProfileFragment : Fragment() {
             // Handle navigating to edit profile fragment
             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment("5")
             Navigation.findNavController(view).navigate(action)
-        }
-    }
+            }
+       }
 }

@@ -57,6 +57,7 @@
             android:id="@+id/action_generalPostsFragment_to_personSpecificPostFragment"
             app:destination="@id/personSpecificPostFragment" />
     </fragment>
+    <!-- Adjusted action to accept userId argument -->
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.dogsandddapters.ProfileFragment"
@@ -65,10 +66,18 @@
         <argument
             android:name="email"
             app:argType="string" />
+        <argument
+            android:name="userId"
+            app:argType="string" />
         <action
             android:id="@+id/action_profileFragment_to_editProfileFragment"
             app:destination="@id/editProfileFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_entryFragment"
+            app:destination="@id/entryFragment" />
     </fragment>
+
+
     <fragment
         android:id="@+id/addPersonPostFragment"
         android:name="com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment"
