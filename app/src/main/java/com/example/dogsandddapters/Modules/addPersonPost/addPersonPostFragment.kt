@@ -1,6 +1,7 @@
 package com.example.dogsandddapters.Modules.addPersonPost
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -13,12 +14,17 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
+import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.R
+import com.google.firebase.auth.FirebaseAuth
+import java.util.UUID
 
 
 class addPersonPostFragment : Fragment() {
+
+
 
     private lateinit var editTextRequest: EditText
     private lateinit var textViewWordCount: TextView
@@ -72,17 +78,23 @@ class addPersonPostFragment : Fragment() {
 //            }
 //        })
 
-        btnPost.setOnClickListener {
-            val request = editTextRequest.text.toString()
-            val offer = editTextOffer.text.toString()
-            val contact = editTextContact.text.toString()
 
-            val personPost = PersonPost("11","publisher",request, offer, contact)
-            PersonPostModel.instance.addPersonPost(personPost) {
-                //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+        btnPost.setOnClickListener {
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+                Log.i("TAG", " AddPersonPostFragment: Person ID ${it?.id}")
+                //val ID = it?.id.toString()
+                val ID: String = UUID.randomUUID().toString()
+                val publisher = it?.id.toString()
+                Log.i("TAG", " AddPersonPostFragment: Publisher after tostring ${publisher}")
+                val request = editTextRequest.text.toString()
+                val offer = editTextOffer.text.toString()
+                val contact = editTextContact.text.toString()
+
+                val personPost = PersonPost(ID, publisher, request, offer, contact)
+                PersonPostModel.instance.addPersonPost(personPost) {}
+                val generalPost = GeneralPost(ID, publisher, request, offer, contact)
+                GeneralPostModel.instance.addGeneralPost(generalPost) {}
             }
-            val generalPost = GeneralPost("11","publisher",request, offer, contact)
-            GeneralPostModel.instance.addGeneralPost(generalPost) {}
 
         }
 
