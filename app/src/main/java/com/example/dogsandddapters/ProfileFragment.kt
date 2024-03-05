@@ -10,6 +10,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.PersonModel
+import com.google.firebase.auth.FirebaseAuth
 
 class ProfileFragment : Fragment() {
 
@@ -38,6 +39,7 @@ class ProfileFragment : Fragment() {
         }
 
         view.findViewById<Button>(R.id.logoutButton).setOnClickListener {
+            FirebaseAuth.getInstance().signOut()
             // Perform logout functionality here
             logoutUser()
         }

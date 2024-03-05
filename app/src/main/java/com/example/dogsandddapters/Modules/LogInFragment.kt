@@ -59,26 +59,35 @@ class LogInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+//        sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+//        auth = FirebaseAuth.getInstance()
+//
+//        if (isLoggedIn()) {
+//            // Check if the saved credentials are valid
+//            val email = sharedPreferences.getString("email", "")
+//            val password = sharedPreferences.getString("password", "")
+//
+//            if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
+//                loginUser(email, password)
+//            } else {
+//                // If credentials are missing or invalid, show the login screen
+//                showLoginScreen()
+//            }
+//        } else {
+//            // If user is not logged in, show the login screen
+//            showLoginScreen()
+//        }
+    }
+    private fun showLoginScreen() {
+        // Show the login screen
+        // Implement your login logic here
+        loginButton.setOnClickListener {
+            val email = EmailEditText.text.toString()
+            val password = passwordEditText.text.toString()
 
-        if (isLoggedIn()) {
-            navigateToGeneralPosts()
-        } else {
-            // Show the login screen
-            // Implement your login logic here
-            loginButton.setOnClickListener {
-                val email = EmailEditText.text.toString()
-                val password = passwordEditText.text.toString()
-
-                // Perform login authentication here
-                // For demonstration, let's assume login is successful
-                saveLoginCredentials(email, password)
-                navigateToGeneralPosts()
-            }
+            // Perform login authentication here
+            loginUser(email, password)
         }
-
-        // Initialize Firebase Auth
-        auth = FirebaseAuth.getInstance()
     }
 
     private fun loginUser(email: String, password: String) {
@@ -86,19 +95,20 @@ class LogInFragment : Fragment() {
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Login successful
-                    Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
-                    // Navigate to ProfileFragment
-                    val action = LogInFragmentDirections.actionLogInFragmentToProfileFragment(email,"")
-                    Navigation.findNavController(requireView()).navigate(action)
+                    saveLoginCredentials(email, password)
+                    navigateToGeneralPosts()
                 } else {
                     // Login failed
                     Toast.makeText(context, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
                 }
             }
     }
-
     private fun isLoggedIn(): Boolean {
-        return sharedPreferences.contains("email") && sharedPreferences.contains("password")
+       // return sharedPreferences.contains("email") && sharedPreferences.contains("password")
+        FirebaseAuth.getInstance().currentUser?.let {
+            return true
+        }
+        return false
     }
 
 
