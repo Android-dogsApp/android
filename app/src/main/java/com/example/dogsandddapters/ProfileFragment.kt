@@ -1,28 +1,19 @@
 package com.example.dogsandddapters
 
 import android.os.Bundle
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.ProgressBar
 import android.widget.TextView
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.PersonModel
 
 class ProfileFragment : Fragment() {
-   // private lateinit var personModel: PersonModel
-    private val args: ProfileFragmentArgs by navArgs()
 
-//    override fun onCreate(savedInstanceState: Bundle?) {
-//        super.onCreate(savedInstanceState)
-//        personModel = ViewModelProvider(this).get(PersonModel::class.java)
-//    }
+    private val args: ProfileFragmentArgs by navArgs()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -36,38 +27,39 @@ class ProfileFragment : Fragment() {
         super.onViewCreated(view, savedInstanceState)
 
         val email = args.email
-        val nameTextView: TextView = view.findViewById(R.id.nameTextView)
-        val dogTypesTextView: TextView = view.findViewById(R.id.dogTypesTextView)
-        val phoneTextView: TextView = view.findViewById(R.id.phoneTextView)
-        val emailTextView: TextView = view.findViewById(R.id.emailTextView)
-        val numberOfDogsTextView: TextView = view.findViewById(R.id.numberOfDogsTextView)
-
-
 
         // Fetch user details using the email
-        PersonModel.instance.getPersonByEmail(email) {
-
+        PersonModel.instance.getPersonByEmail(email) { person ->
             // Update UI with person data
-            nameTextView.text = "Name: ${it?.name}"
-            Log.i("ProfileFragment", "name: $nameTextView.text")
-            dogTypesTextView.text = "Dog Types: ${it?.dogType}"
-            phoneTextView.text = "Phone: ${it?.phoneNumber}"
-            emailTextView.text = "Email: ${it?.email}"
-            //numberOfDogsTextView.text = "Number of Dogs: ${it?.numberOfDogs}"
+            view.findViewById<TextView>(R.id.nameTextView).text = "Name: ${person?.name}"
+            view.findViewById<TextView>(R.id.dogTypesTextView).text = "Dog Types: ${person?.dogType}"
+            view.findViewById<TextView>(R.id.phoneTextView).text = "Phone: ${person?.phoneNumber}"
+            view.findViewById<TextView>(R.id.emailTextView).text = "Email: ${person?.email}"
         }
 
+        view.findViewById<Button>(R.id.logoutButton).setOnClickListener {
+            // Perform logout functionality here
+            logoutUser()
+        }
 
-        val myPostsButton: Button = view.findViewById(R.id.myPostsButton)
-        val editButton: Button = view.findViewById(R.id.editButton)
-
-        myPostsButton.setOnClickListener {
+        view.findViewById<Button>(R.id.myPostsButton).setOnClickListener {
             // Handle navigating to user's posts fragment
         }
 
-        editButton.setOnClickListener {
+        view.findViewById<Button>(R.id.editButton).setOnClickListener {
             // Handle navigating to edit profile fragment
             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment("5")
             Navigation.findNavController(view).navigate(action)
         }
+    }
+
+    private fun logoutUser() {
+        // Code to log out the user
+        // For example, if you are using Firebase Authentication, you would call FirebaseAuth.getInstance().signOut();
+        // If you are using any other authentication mechanism, you should log the user out according to that mechanism.
+
+        // After logging out the user, navigate to the EntryFragment
+        // Replace "EntryFragment" with the actual name of your EntryFragment class
+        Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_entryFragment)
     }
 }

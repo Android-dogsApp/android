@@ -66,7 +66,7 @@ class LogInFragment : Fragment() {
                     // Login successful
                     Toast.makeText(context, "Login successful", Toast.LENGTH_SHORT).show()
                     // Navigate to ProfileFragment
-                    val action = LogInFragmentDirections.actionLogInFragmentToProfileFragment(email)
+                    val action = LogInFragmentDirections.actionLogInFragmentToProfileFragment(email,"")
                     Navigation.findNavController(requireView()).navigate(action)
                 } else {
                     // Login failed
