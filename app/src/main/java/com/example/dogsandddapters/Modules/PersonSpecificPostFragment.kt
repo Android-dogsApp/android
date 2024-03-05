@@ -33,13 +33,35 @@ class PersonSpecificPostFragment : Fragment() {
         val textViewOffer: TextView = view.findViewById(R.id.textViewOffer)
        // val textViewPhoneNumber : TextView = view.findViewById(R.id.textViewPhoneNumber)
         val textViewContact: TextView = view.findViewById(R.id.textViewcontact)
-        var publisher: String? = null
+        var publisher: String?
 
         GeneralPostModel.instance.getGeneralPostById(postId){
             textViewRequest.text = it?.request
             textViewOffer.text = it?.offer
            textViewContact.text = it?.contact
            publisher = it?.publisher
+
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
+                Log.i("TAG", " PersonSpecificPostFragment: Person ID ${it?.id}")
+                Log.i("TAG", " PersonSpecificPostFragment: Person publisher ${publisher}")
+                if (it?.id == publisher) {
+                    Log.i("TAG", " PersonSpecificPostFragment: Person ID ${it?.id}")
+                    Log.i("TAG", " PersonSpecificPostFragment: Person publisher ${publisher}")
+                    val editButton: Button = view.findViewById(R.id.buttonEdit)
+                    editButton.visibility = View.VISIBLE  // Set the visibility to visible
+
+                    editButton.setOnClickListener {
+                        val action =
+                            PersonSpecificPostFragmentDirections.actionPersonSpecificPostFragmentToEditPostFragment(
+                                postId
+                            )
+                        Navigation.findNavController(view).navigate(action)
+                    }
+                } else {
+                    val editButton: Button = view.findViewById(R.id.buttonEdit)
+                    editButton.visibility = View.GONE  // Set the visibility to gone
+                }
+            }
        }
 //
 //        PersonModel.instance.getPersonByEmail(email) {
@@ -57,30 +79,9 @@ class PersonSpecificPostFragment : Fragment() {
 //            }
 //
 //        }
-    fun getCurrentUserId(): String? {
-        return FirebaseAuth.getInstance().currentUser?.uid
-    }
 
-        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
-            Log.i("TAG", " PersonSpecificPostFragment: Person ID ${it?.id}")
-            if (it?.id == publisher) {
-                Log.i("TAG", " PersonSpecificPostFragment: Person ID ${it?.id}")
-                Log.i("TAG", " PersonSpecificPostFragment: Person publisher ${publisher}")
-                val editButton: Button = view.findViewById(R.id.buttonEdit)
-                editButton.visibility = View.VISIBLE  // Set the visibility to visible
 
-                editButton.setOnClickListener {
-                    val action =
-                        PersonSpecificPostFragmentDirections.actionPersonSpecificPostFragmentToEditPostFragment(
-                            postId
-                        )
-                    Navigation.findNavController(view).navigate(action)
-                }
-            } else {
-                val editButton: Button = view.findViewById(R.id.buttonEdit)
-                editButton.visibility = View.GONE  // Set the visibility to gone
-            }
-        }
+
 
 
 

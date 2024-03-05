@@ -10,7 +10,7 @@ import com.google.firebase.firestore.FieldValue
 @Entity
 data class PersonPost(
     @PrimaryKey val postid: String,
-    val publisher: String, //id of the person who posted
+    val publisher: String?, //id of the person who posted
     val request: String,
     val offer: String,
     val contact: String,
@@ -77,7 +77,7 @@ data class PersonPost(
                 CONTACT_KEY to contact,
                 //IMAGE_KEY to image ,
                 LAST_UPDATED to FieldValue.serverTimestamp(),
-                PUBLISHER_KEY to publisher
+                PUBLISHER_KEY to publisher!!
 
             )
 //            publisher?.let {

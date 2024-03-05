@@ -69,11 +69,6 @@ class LogInFragment : Fragment() {
                     val action = LogInFragmentDirections.actionLogInFragmentToProfileFragment(email,"")
                     Navigation.findNavController(requireView()).navigate(action)
 
-//                    val action1 = LogInFragmentDirections.actionLogInFragmentToPersonSpecificPostFragment("",email)
-//                    Navigation.findNavController(requireView()).navigate(action1)
-//                    val action2=LogInFragmentDirections.actionLogInFragmentToAddPersonPostFragment(email)
-//                    Navigation.findNavController(requireView()).navigate(action2)
-
                 } else {
                     // Login failed
                     Toast.makeText(context, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()
