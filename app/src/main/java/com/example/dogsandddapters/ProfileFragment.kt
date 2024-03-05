@@ -54,12 +54,6 @@ class ProfileFragment : Fragment() {
     }
 
     private fun logoutUser() {
-        // Code to log out the user
-        // For example, if you are using Firebase Authentication, you would call FirebaseAuth.getInstance().signOut();
-        // If you are using any other authentication mechanism, you should log the user out according to that mechanism.
-
-        // After logging out the user, navigate to the EntryFragment
-        // Replace "EntryFragment" with the actual name of your EntryFragment class
         Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_entryFragment)
     }
 }
