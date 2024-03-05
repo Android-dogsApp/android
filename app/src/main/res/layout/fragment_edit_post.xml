@@ -1,78 +1,96 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
-xmlns:android="http://schemas.android.com/apk/res/android"
-xmlns:app="http://schemas.android.com/apk/res-auto"
-xmlns:tools="http://schemas.android.com/tools"
-android:layout_width="match_parent"
-android:layout_height="match_parent"
-android:orientation="vertical"
-android:padding="16dp">
-
-<!-- Post ID -->
-<EditText
-    android:id="@+id/editTextPostId"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Enter Post ID"
-    android:textStyle="bold"
-    android:layout_marginBottom="8dp"/>
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="16dp">
 
-<!-- Request -->
-<EditText
-    android:id="@+id/editTextRequest"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Enter Request"
-    android:textStyle="bold"
-    android:layout_marginBottom="8dp"/>
-
-<!-- Offer -->
-<EditText
-    android:id="@+id/editTextOffer"
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:hint="Enter Offer"
-    android:textStyle="bold"
-    android:layout_marginBottom="8dp"/>
-
-<!-- Contact Information -->
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:orientation="horizontal">
-
-    <!-- Phone Number -->
+    <!-- Post ID -->
     <EditText
-        android:id="@+id/editTextPhoneNumber"
-        android:layout_width="0dp"
+        android:id="@+id/editTextPostId"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Enter Phone"
-        android:textStyle="bold"/>
+        android:hint="Enter Post ID"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
 
-    <!-- Email -->
+    <!-- Request -->
     <EditText
-        android:id="@+id/editTextEmail1"
-        android:layout_width="0dp"
+        android:id="@+id/editTextRequest"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:hint="Enter Email"
-        android:textStyle="bold"/>
+        android:hint="Enter Request"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Offer -->
+    <EditText
+        android:id="@+id/editTextOffer"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Offer"
+        android:textStyle="bold"
+        android:layout_marginBottom="8dp"/>
+
+    <!-- Contact Information -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+
+        <!-- Phone Number -->
+        <EditText
+            android:id="@+id/editTextcontact"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:hint="Enter Contact Info"
+            android:textStyle="bold"/>
+
+    </LinearLayout>
+
+    <!-- Image -->
+    <ImageView
+        android:id="@+id/imageViewPost"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        android:scaleType="centerCrop"
+        android:layout_marginTop="16dp"/>
+
+    <!-- Button Layout -->
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_marginTop="16dp">
+
+        <!-- Save Button -->
+        <Button
+            android:id="@+id/buttonSave"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Save"/>
+
+        <!-- Cancel Button -->
+        <Button
+            android:id="@+id/buttonCancel"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Cancel"/>
+
+        <!-- Delete Post Button -->
+        <Button
+            android:id="@+id/buttonDeletePost"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="Delete Post"/>
+    </LinearLayout>
+
 </LinearLayout>
 
-<!-- Image -->
-<ImageView
-    android:id="@+id/imageViewPost"
-    android:layout_width="match_parent"
-    android:layout_height="200dp"
-    android:scaleType="centerCrop"
-    android:layout_marginTop="16dp"/>
-
-<!-- Save Button -->
-<Button
-    android:id="@+id/buttonSave"
-    android:layout_width="wrap_content"
-    android:layout_height="wrap_content"
-    android:text="Save"/>
-
-</LinearLayout>

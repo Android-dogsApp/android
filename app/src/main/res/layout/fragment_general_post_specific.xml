@@ -51,21 +51,13 @@
 
             <!-- Phone Number -->
             <TextView
-                android:id="@+id/textViewPhoneNumber"
+                android:id="@+id/textViewcontact"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Phone: "
+                android:text="Contact Info: "
                 android:textStyle="bold"/>
 
-            <!-- Email -->
-            <TextView
-                android:id="@+id/textViewEmail"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Email: "
-                android:textStyle="bold"/>
         </LinearLayout>
 
         <!-- Image -->
@@ -76,12 +68,23 @@
             android:scaleType="centerCrop"
             android:layout_marginTop="16dp"/>
 
-        <!-- Edit Button -->
-        <Button
-            android:id="@+id/buttonEdit"
-            android:layout_width="wrap_content"
+        <!-- Edit and Delete Buttons -->
+        <LinearLayout
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Edit"/>
+            android:orientation="horizontal"
+            android:layout_marginTop="16dp">
+
+            <!-- Edit Button -->
+            <Button
+                android:id="@+id/buttonEdit"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="Edit"/>
+
+
+        </LinearLayout>
 
     </LinearLayout>
 

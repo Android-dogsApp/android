@@ -10,7 +10,6 @@ import java.util.concurrent.Executors
 
 class GeneralPostModel private constructor() {
 
-
     enum class LoadingState {
         LOADING,
         LOADED
@@ -18,6 +17,8 @@ class GeneralPostModel private constructor() {
 
     private val database = AppLocalDatabaseGeneralPost.db
     private var executor = Executors.newSingleThreadExecutor()
+    private var executor2 = Executors.newSingleThreadExecutor()
+    private var executor3 = Executors.newSingleThreadExecutor()
     private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
     private val FirebaseGeneralPostModel = FirebaseGeneralPostModel()
     private val generalPosts: LiveData<MutableList<GeneralPost>> =database.GeneralPostDao().getAll()
@@ -78,12 +79,21 @@ class GeneralPostModel private constructor() {
     }
 
     fun updateGeneralPost(generalPost: GeneralPost, callback: () -> Unit) {
-        executor.execute {
             FirebaseGeneralPostModel.updateGeneralPost(generalPost) {
-                database.GeneralPostDao().updateGeneralPost(generalPost)
-                refreshAllgeneralPosts()
+                executor2.execute {
+                    database.GeneralPostDao().updateGeneralPost(generalPost)
+                }
+                //refreshAllgeneralPosts()
                 callback()
             }
+    }
+
+    fun deleteGeneralPost(generalpost: GeneralPost, callback: () -> Unit) {
+        FirebaseGeneralPostModel.deleteGeneralPost(generalpost.postid) {
+            executor3.execute {
+                database.GeneralPostDao().delete(generalpost)
+            }
+            callback()
         }
     }
 }
