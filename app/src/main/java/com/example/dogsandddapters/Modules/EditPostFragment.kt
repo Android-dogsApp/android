@@ -7,6 +7,7 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
+import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
@@ -35,22 +36,23 @@ class EditPostFragment : Fragment() {
         val editTextPostId: TextView = view.findViewById(R.id.editTextPostId)
         val editTextRequest: TextView = view.findViewById(R.id.editTextRequest)
         val editTextOffer: TextView = view.findViewById(R.id.editTextOffer)
-        val editTextEmail: TextView = view.findViewById(R.id.editTextEmail1)
+        val editTextcontact: TextView = view.findViewById(R.id.editTextcontact)
         val buttonUpdate: Button = view.findViewById(R.id.buttonSave)
-        //val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
+        val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
+        val buttonDeletePost: Button = view.findViewById(R.id.buttonDeletePost)
 
         GeneralPostModel.instance.getGeneralPostById(postId) {
             editTextPostId.text = it?.postid
             editTextRequest.text = it?.request
             editTextOffer.text = it?.offer
-            editTextEmail.text = it?.contact
+            editTextcontact.text = it?.contact
         }
 
         //NEED UPDATE POST ONLY IF IT BELONGS TO THE USER!
         buttonUpdate?.setOnClickListener {
             val postid = postId
             val offer = editTextOffer.text.toString()
-            val contact = editTextEmail.text.toString()
+            val contact = editTextcontact.text.toString()
             val request = editTextRequest.text.toString()
             val publisher = postId
             val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
@@ -65,15 +67,33 @@ class EditPostFragment : Fragment() {
                     //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
                 }
             }
+
+            val action = EditPostFragmentDirections.actionEditPostFragmentToPersonSpecificPostFragment(postId)
+            Navigation.findNavController(view).navigate(action)
         }
 
+        buttonCancel?.setOnClickListener {
+            Navigation.findNavController(it).navigateUp();
+        }
 
-//        buttonCancel?.setOnClickListener {
-//            val action = editProfileFragmentDirections.actionEditProfileFragmentToEntryFragment()
-//            Navigation.findNavController(view).navigate(action)
-//        }
+        buttonDeletePost.setOnClickListener {
+            GeneralPostModel.instance.getGeneralPostById(postId) {
+                if (it != null) {
+                    GeneralPostModel.instance.deleteGeneralPost(it) {
+                    }
+                }
 
+            }
+            PersonPostModel.instance.getPersonPostById(postId) {
+                if (it != null) {
+                    PersonPostModel.instance.deletePersonPost(it) {
+                    }
+                }
+
+            }
+            val action = EditPostFragmentDirections.actionEditPostFragmentToPersonPostsFragment()
+            Navigation.findNavController(view).navigate(action)
+
+        }
     }
-
-
 }
