@@ -27,15 +27,16 @@
             android:layout_marginBottom="8dp"/>
 
         <!-- Number of Dogs TextView -->
-        <TextView
-            android:id="@+id/dogsCountTextView"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Number of Dogs: "
-            android:textSize="16sp"
-            android:layout_marginBottom="8dp"/>
+    <TextView
+        android:id="@+id/numberOfDogsTextView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text=""
+        android:textSize="16sp"
+        android:layout_marginBottom="8dp"/>
 
-        <!-- Types of Dogs TextView -->
+
+    <!-- Types of Dogs TextView -->
         <TextView
             android:id="@+id/dogTypesTextView"
             android:layout_width="wrap_content"

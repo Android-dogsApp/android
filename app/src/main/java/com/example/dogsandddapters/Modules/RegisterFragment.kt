@@ -79,32 +79,83 @@ class RegisterFragment : Fragment() {
         }
     }
 
+//    private fun registerUser(email: String, password: String) {
+//        auth.createUserWithEmailAndPassword(email, password)
+//            .addOnCompleteListener(requireActivity()) { task ->
+//                if (task.isSuccessful) {
+//                    // Registration successful
+//                    val name = nameEditText?.text.toString()
+//                    val id = idEditText?.text.toString()
+//                    val phoneNumber = phoneNumberEditText?.text.toString()
+//                    val email = emailEditText?.text.toString()
+//                    val dogType = dogTypeEditText?.text.toString()
+//
+//                    val person = Person(name, id, phoneNumber, email, dogType)
+//
+//                    // Save user data to Firestore
+//                    val db = FirebaseFirestore.getInstance()
+//                    db.collection("persons")
+//                        .add(person)
+//                        .addOnSuccessListener { documentReference ->
+//                            Log.i(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
+//                        }
+//                        .addOnFailureListener { e ->
+//                            Log.i(TAG, "Error adding document", e)
+//                        }
+//
+//                    Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+//                    // Navigate to next screen or perform other actions
+//                } else {
+//                    // Registration failed
+//                    val exception = task.exception
+//                    if (exception is FirebaseAuthUserCollisionException) {
+//                        // Email is already in use
+//                        Toast.makeText(context, "Email is already in use", Toast.LENGTH_SHORT).show()
+//                    } else {
+//                        // Other registration errors
+//                        Toast.makeText(
+//                            context,
+//                            "Registration failed: ${exception?.message}",
+//                            Toast.LENGTH_SHORT
+//                        ).show()
+//                    }
+//                }
+//            }
+//    }
+
     private fun registerUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
                 if (task.isSuccessful) {
                     // Registration successful
-                    val name = nameEditText?.text.toString()
-                    val id = idEditText?.text.toString()
-                    val phoneNumber = phoneNumberEditText?.text.toString()
-                    val email = emailEditText?.text.toString()
-                    val dogType = dogTypeEditText?.text.toString()
+                    val user = auth.currentUser
+                    if (user != null) {
+                        val userId = user.uid
+                        val name = nameEditText?.text.toString()
+                        val id = idEditText?.text.toString()
+                        val phoneNumber = phoneNumberEditText?.text.toString()
+                        val dogType = dogTypeEditText?.text.toString()
 
-                    val person = Person(name, id, phoneNumber, email, dogType)
+                        val person = Person(name, id, phoneNumber, email, dogType)
 
-                    // Save user data to Firestore
-                    val db = FirebaseFirestore.getInstance()
-                    db.collection("persons")
-                        .add(person)
-                        .addOnSuccessListener { documentReference ->
-                            Log.i(TAG, "DocumentSnapshot added with ID: ${documentReference.id}")
-                        }
-                        .addOnFailureListener { e ->
-                            Log.i(TAG, "Error adding document", e)
-                        }
+                        // Save user data to Firestore with the user's ID as the document ID
+                        val db = FirebaseFirestore.getInstance()
+                        db.collection("persons")
+                            .document(userId)
+                            .set(person)
+                            .addOnSuccessListener {
+                                Log.i(TAG, "DocumentSnapshot added with ID: $userId")
+                            }
+                            .addOnFailureListener { e ->
+                                Log.i(TAG, "Error adding document", e)
+                            }
 
-                    Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
-                    // Navigate to next screen or perform other actions
+                        Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                        // Navigate to next screen or perform other actions
+                    } else {
+                        // Handle the case when user is null
+                        Toast.makeText(context, "User is null", Toast.LENGTH_SHORT).show()
+                    }
                 } else {
                     // Registration failed
                     val exception = task.exception
@@ -122,5 +173,7 @@ class RegisterFragment : Fragment() {
                 }
             }
     }
+
+
 
 }

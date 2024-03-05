@@ -5,12 +5,12 @@ import androidx.room.PrimaryKey
 
 @Entity
 data class Person(
-    @PrimaryKey val name: String,
+    val name: String,
     val id: String,
     val phoneNumber: String,
-    val email: String,
+    @PrimaryKey val email: String,
     val dogType: String,
-    //var lastUpdated: Long?=null
+
 ){
     //val avatarUrl: String) {
 
@@ -55,6 +55,7 @@ data class Person(
             return person
         }
     }
+
 
     val json: Map<String, Any>
         get() {
