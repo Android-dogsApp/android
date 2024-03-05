@@ -1,6 +1,7 @@
 package com.example.dogsandddapters
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -52,6 +53,7 @@ class editProfileFragment : Fragment() {
             PersonModel.instance.updatePerson(updatedPerson){
                 //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
             }
+
 
         }
 

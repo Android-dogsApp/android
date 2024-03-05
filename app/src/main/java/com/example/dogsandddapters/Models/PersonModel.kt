@@ -18,18 +18,49 @@ class PersonModel private constructor() {
     private var executor = Executors.newSingleThreadExecutor()
     private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
     private val firebasePersonModel = FirebasePersonModel()
-    private var personLiveData: LiveData<Person>? =null
-    private val personLoadingState: MutableLiveData<LoadingState> = MutableLiveData(LoadingState.LOADED)
+    private var personLiveData: LiveData<Person>? = null
+    private val personLoadingState: MutableLiveData<LoadingState> =
+        MutableLiveData(LoadingState.LOADED)
 
     companion object {
         val instance: PersonModel = PersonModel()
     }
 
     fun getPerson(id: String, callback: (Person?) -> Unit) {
-        firebasePersonModel.getPerson(id){
+        firebasePersonModel.getPerson(id) {
             callback(it)
         }
     }
+
+//    fun getPersonByEmail(email: String, callback: (Person?) -> Unit) {
+//        database.PersonDao().getPersonByEmail(email).observeForever { person ->
+//            if (person != null) {
+//                // If person found in local database
+//                callback(person)
+//            } else {
+//                // If person not found in local database, check Firebase
+//                firebasePersonModel.getPersonByEmail(email) { user ->
+//                    if (user != null) {
+//                        // If user found in Firebase, insert into local database
+//                        database.PersonDao().insert(user)
+//                        callback(user)
+//                    } else {
+//                        // User not found in local database or Firebase
+//                        callback(null)
+//                    }
+//                }
+//            }
+//        }
+//    }
+
+
+    fun getPersonByEmail(email: String, callback: (Person?) -> Unit) {
+        firebasePersonModel.getPersonByEmail(email) {
+            callback(it)
+
+        }
+    }
+
 
 //    fun getPerson(id: String, callback: (Person?) -> Unit) : LiveData<Person>{
 //        personLiveData =database.PersonDao().getPersonById(id)
@@ -67,21 +98,21 @@ class PersonModel private constructor() {
 //    }
 
 
-    fun addPerson(person: Person, callback: () -> Unit) {
-        firebasePersonModel.addPerson(person) {
-            //refreshPerson(person.id) {
+        fun addPerson(person: Person, callback: () -> Unit) {
+            firebasePersonModel.addPerson(person) {
+                //refreshPerson(person.id) {
                 callback()
-            //}
+                //}
+            }
         }
-    }
 
-    fun updatePerson( person: Person, callback: () -> Unit) {
-        firebasePersonModel.updatePerson(person) {
-            database.PersonDao().update(person)
-            //refreshPerson(person.id) {
+        fun updatePerson(person: Person, callback: () -> Unit) {
+            firebasePersonModel.updatePerson(person) {
+                database.PersonDao().update(person)
+                //refreshPerson(person.id) {
                 callback()
-            //}
+                //}
+            }
         }
-    }
 
 }
