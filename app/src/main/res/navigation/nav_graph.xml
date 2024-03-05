@@ -76,8 +76,6 @@
             android:id="@+id/action_profileFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
     </fragment>
-
-
     <fragment
         android:id="@+id/addPersonPostFragment"
         android:name="com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment"
