@@ -1,6 +1,7 @@
 package com.example.dogsandddapters.Modules
 
 import android.os.Bundle
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -40,37 +41,39 @@ class EditPostFragment : Fragment() {
         val buttonUpdate: Button = view.findViewById(R.id.buttonSave)
         val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
         val buttonDeletePost: Button = view.findViewById(R.id.buttonDeletePost)
+        var publisher: String?
 
         GeneralPostModel.instance.getGeneralPostById(postId) {
             editTextPostId.text = it?.postid
             editTextRequest.text = it?.request
             editTextOffer.text = it?.offer
             editTextcontact.text = it?.contact
-        }
+            publisher = it?.publisher
+            //NEED UPDATE POST ONLY IF IT BELONGS TO THE USER!
+            buttonUpdate?.setOnClickListener {
+                Log.i("TAG", "EditPostFragment: publisher $publisher")
+                val postid = postId
+                val offer = editTextOffer.text.toString()
+                val contact = editTextcontact.text.toString()
+                val request = editTextRequest.text.toString()
+                val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
+                val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
 
-        //NEED UPDATE POST ONLY IF IT BELONGS TO THE USER!
-        buttonUpdate?.setOnClickListener {
-            val postid = postId
-            val offer = editTextOffer.text.toString()
-            val contact = editTextcontact.text.toString()
-            val request = editTextRequest.text.toString()
-            val publisher = postId
-            val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
-            val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
+                executor.execute {
+                    GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+                        //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+                    }
 
-            executor.execute {
-                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
-                    //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+                    PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
+                        //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+                    }
                 }
 
-                PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
-                    //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
-                }
+                val action = EditPostFragmentDirections.actionEditPostFragmentToPersonSpecificPostFragment(postId)
+                Navigation.findNavController(view).navigate(action)
             }
-
-            val action = EditPostFragmentDirections.actionEditPostFragmentToPersonSpecificPostFragment(postId)
-            Navigation.findNavController(view).navigate(action)
         }
+
 
         buttonCancel?.setOnClickListener {
             Navigation.findNavController(it).navigateUp();

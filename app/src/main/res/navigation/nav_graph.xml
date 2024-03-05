@@ -41,6 +41,12 @@
         <action
             android:id="@+id/action_logInFragment_to_profileFragment"
             app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_addPersonPostFragment"
+            app:destination="@id/addPersonPostFragment" />
+        <action
+            android:id="@+id/action_logInFragment_to_personSpecificPostFragment"
+            app:destination="@id/personSpecificPostFragment" />
     </fragment>
     <fragment
         android:id="@+id/generalPostsFragment"
@@ -80,7 +86,9 @@
         android:id="@+id/addPersonPostFragment"
         android:name="com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment"
         android:label="fragment_add_person_post"
-        tools:layout="@layout/fragment_add_person_post" />
+        tools:layout="@layout/fragment_add_person_post" >
+
+</fragment>
     <fragment
         android:id="@+id/generalPostSpecificFragment"
         android:name="com.example.dogsandddapters.GeneralPostSpecificFragment"
