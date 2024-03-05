@@ -12,21 +12,22 @@ import com.example.dogsandddapters.Models.GeneralPost
 @Dao
 interface GeneralPostDao {
 
+
     @Query("SELECT * FROM GeneralPost")
-    fun getAll(): LiveData<MutableList<GeneralPost>>
+     fun getAll(): LiveData<MutableList<GeneralPost>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-    fun insert(vararg feeds: GeneralPost)
+     fun insert(vararg feeds: GeneralPost)
 
     @Delete
-    fun delete(generalpost: GeneralPost)
+     fun delete(generalpost: GeneralPost)
 
     @Query("SELECT * FROM GeneralPost WHERE postid =:id")
-    fun getGeneralPostById(id: String):  LiveData<GeneralPost>
+     fun getGeneralPostById(id: String):  LiveData<GeneralPost>
 
     //@Query("SELECT * FROM GeneralPost WHERE postid =:id")
     @Update
-    fun updateGeneralPost(generalpost: GeneralPost)
+     fun updateGeneralPost(generalpost: GeneralPost)
 
 
 }

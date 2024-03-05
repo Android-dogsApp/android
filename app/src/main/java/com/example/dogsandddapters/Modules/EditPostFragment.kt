@@ -1,17 +1,12 @@
 package com.example.dogsandddapters.Modules
 
-import android.content.ContentValues.TAG
 import android.os.Bundle
-import android.os.Looper
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.TextView
-import androidx.core.os.HandlerCompat
 import androidx.fragment.app.Fragment
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
@@ -23,8 +18,6 @@ import java.util.concurrent.Executors
 
 class EditPostFragment : Fragment() {
     private val args: EditPostFragmentArgs by navArgs()
-    private val mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -42,70 +35,45 @@ class EditPostFragment : Fragment() {
         val editTextPostId: TextView = view.findViewById(R.id.editTextPostId)
         val editTextRequest: TextView = view.findViewById(R.id.editTextRequest)
         val editTextOffer: TextView = view.findViewById(R.id.editTextOffer)
-        val editTextcontact: TextView = view.findViewById(R.id.editTextcontact)
+        val editTextEmail: TextView = view.findViewById(R.id.editTextEmail1)
         val buttonUpdate: Button = view.findViewById(R.id.buttonSave)
-        val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
-        val buttonDeletePost: Button = view.findViewById(R.id.buttonDeletePost)
+        //val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
 
-        GeneralPostModel.instance.getGeneralPostById(postId){
+        GeneralPostModel.instance.getGeneralPostById(postId) {
             editTextPostId.text = it?.postid
             editTextRequest.text = it?.request
             editTextOffer.text = it?.offer
-            editTextcontact.text = it?.contact
+            editTextEmail.text = it?.contact
         }
 
         //NEED UPDATE POST ONLY IF IT BELONGS TO THE USER!
         buttonUpdate?.setOnClickListener {
             val postid = postId
             val offer = editTextOffer.text.toString()
-            val contact = editTextcontact.text.toString()
+            val contact = editTextEmail.text.toString()
             val request = editTextRequest.text.toString()
             val publisher = postId
             val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
             val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
-           try {
+
+            executor.execute {
                 GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+                    //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
                 }
 
                 PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
+                    //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
                 }
-           } catch (e: Exception) {
-               // Log the exception
-               Log.e(TAG, "Error performing database transaction", e)
-           }
-
-                val action =
-                    EditPostFragmentDirections.actionEditPostFragmentToPersonSpecificPostFragment(postId)
-                Navigation.findNavController(view).navigate(action)
-
-        }
-
-
-        buttonCancel?.setOnClickListener {
-            Navigation.findNavController(it).navigateUp();
-        }
-
-        buttonDeletePost.setOnClickListener {
-          GeneralPostModel.instance.getGeneralPostById(postId){
-              if (it != null) {
-                  GeneralPostModel.instance.deleteGeneralPost(it) {
-
-                  }
-              }
-          }
-            PersonPostModel.instance.getPersonPostById(postId){
-                if (it != null) {
-                    PersonPostModel.instance.deletePersonPost(it) {
-                    }
-                }
-
             }
-            val action = EditPostFragmentDirections.actionEditPostFragmentToPersonPostsFragment()
-            Navigation.findNavController(view).navigate(action)
-
         }
 
+
+//        buttonCancel?.setOnClickListener {
+//            val action = editProfileFragmentDirections.actionEditProfileFragmentToEntryFragment()
+//            Navigation.findNavController(view).navigate(action)
+//        }
 
     }
+
 
 }
