@@ -20,6 +20,7 @@ import java.util.concurrent.Executors
 
 class EditPostFragment : Fragment() {
     private val args: EditPostFragmentArgs by navArgs()
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

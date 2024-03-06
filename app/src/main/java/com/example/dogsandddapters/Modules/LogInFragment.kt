@@ -11,8 +11,6 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.findNavController
-import androidx.navigation.fragment.NavHostFragment
 import com.example.dogsandddapters.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -59,8 +57,8 @@ class LogInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-//        auth = FirebaseAuth.getInstance()
+        sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        auth = FirebaseAuth.getInstance()
 //
 //        if (isLoggedIn()) {
 //            // Check if the saved credentials are valid

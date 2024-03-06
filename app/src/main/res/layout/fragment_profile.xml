@@ -1,4 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<androidx.swiperefreshlayout.widget.SwipeRefreshLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/pullToRefresh3"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ProfileFragment">
+
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -6,6 +15,7 @@
     tools:context=".ProfileFragment"
     android:orientation="vertical"
     android:padding="16dp">
+
 
     <TextView
         android:id="@+id/profileTitle"
@@ -95,4 +105,11 @@
         android:layout_marginTop="16dp"
         android:gravity="center_horizontal"/>
 
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:indeterminate="true" />
+
 </LinearLayout>
+</androidx.swiperefreshlayout.widget.SwipeRefreshLayout>

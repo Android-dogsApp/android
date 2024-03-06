@@ -22,6 +22,11 @@ interface PersonDao {
     @Query("SELECT * FROM Person WHERE id =:id")
     fun getPersonById(id: String): LiveData<Person>
 
+    @Query("SELECT * FROM Person WHERE email =:email")
+    fun getPersonByemail(email: String): LiveData<Person>
+
+
+
     @Update
     fun update(person: Person)
 }
