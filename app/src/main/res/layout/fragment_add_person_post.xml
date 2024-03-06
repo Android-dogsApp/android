@@ -1,13 +1,10 @@
 <?xml version="1.0" encoding="utf-8"?>
-
-<!-- res/layout/fragment_create_post.xml -->
-
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Modules.addPersonPost.addPersonPostFragment"
-    android:padding="16dp">
+    android:padding="16dp"
+    tools:context=".Modules.addPersonPost.addPersonPostFragment">
 
     <TextView
         android:id="@+id/textViewRequest"
@@ -59,13 +56,20 @@
         android:layout_below="@id/textViewOffer"
         android:layout_marginBottom="16dp"/>
 
-    <!-- Image upload section (you may replace this with your image upload implementation) -->
+    <!-- Image upload section -->
     <Button
         android:id="@+id/btnUploadImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upload Image"
         android:layout_below="@id/editTextOffer"
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/btnUploadImage"
         android:layout_marginTop="16dp"/>
 
     <!-- Contact information section -->
