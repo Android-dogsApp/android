@@ -23,7 +23,10 @@ import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import android.Manifest
+import android.app.AlertDialog
 import android.graphics.drawable.Drawable
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonModel
@@ -72,11 +75,39 @@ class addPersonPostFragment : Fragment() {
         btnUploadImage = view.findViewById(R.id.btnUploadImage)
         imageView = view.findViewById(R.id.imageView)
 
-        btnUploadImage.setOnClickListener {
-            openImageChooser()
-            downloadAndSaveDogPhoto()
+//        btnUploadImage.setOnClickListener {
+//            openImageChooser()
+//            downloadAndSaveDogPhoto()
+//
+//        }
 
+        btnUploadImage.setOnClickListener {
+            val dialogView = layoutInflater.inflate(R.layout.dialog_image_selection, null)
+            val recyclerViewImages: RecyclerView = dialogView.findViewById(R.id.recyclerViewImages)
+
+            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(), 2)
+
+            val imageUrls = listOf(
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/1200px-Labrador_Retriever_portrait.jpg",
+                "https://www.southernliving.com/thmb/NnmgOEms-v3uG4T6SRgc8QDGlUA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/gettyimages-837898820-2000-667fc4cc028a43369037e229c9bd52fb.jpg",
+                "https://media.npr.org/assets/img/2022/05/25/gettyimages-917452888-edit_custom-c656c35e4e40bf22799195af846379af6538810c-s1100-c50.jpg",
+                "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2022/6/16/1/shutterstock_1862856634.jpg.rend.hgtvcom.1280.853.suffix/1655430860853.jpeg"
+            )
+
+            val adapter = ImageSelectionAdapter(imageUrls) { imageUrl ->
+                Picasso.get().load(imageUrl).into(imageView)
+            }
+            recyclerViewImages.adapter = adapter
+
+            AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .setTitle("Select Image")
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
+
 
         btnPost.setOnClickListener {
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { user ->
