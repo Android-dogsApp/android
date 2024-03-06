@@ -1,8 +1,12 @@
 package com.example.dogsandddapters.Modules.addPersonPost
 
 import android.app.Activity
+import android.content.ContentValues
 import android.content.Intent
+import android.content.pm.PackageManager
+import android.graphics.Bitmap
 import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
@@ -13,8 +17,13 @@ import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
+import android.widget.Toast
+import androidx.core.app.ActivityCompat
+import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import android.Manifest
+import android.graphics.drawable.Drawable
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonModel
@@ -26,6 +35,9 @@ import com.squareup.picasso.Picasso
 import java.util.UUID
 
 class addPersonPostFragment : Fragment() {
+
+    private val REQUEST_CODE_STORAGE_PERMISSION = 456 // You can use any unique integer value
+
 
     private lateinit var editTextRequest: EditText
     private lateinit var textViewWordCount: TextView
@@ -62,6 +74,8 @@ class addPersonPostFragment : Fragment() {
 
         btnUploadImage.setOnClickListener {
             openImageChooser()
+            downloadAndSaveDogPhoto()
+
         }
 
         btnPost.setOnClickListener {
@@ -101,6 +115,65 @@ class addPersonPostFragment : Fragment() {
             Picasso.get().load(selectedImageUri).into(imageView)
         }
     }
+    private fun checkStoragePermission(): Boolean {
+        val permission = ContextCompat.checkSelfPermission(
+            requireContext(),
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+        return permission == PackageManager.PERMISSION_GRANTED
+    }
+    private fun requestStoragePermission() {
+        ActivityCompat.requestPermissions(
+            requireActivity(),
+            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+            REQUEST_CODE_STORAGE_PERMISSION
+        )
+    }
+
+    // Inside your Fragment class
+    private fun downloadAndSaveDogPhoto() {
+        val imageUrl = "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2023/07/top-20-small-dog-breeds.jpeg.jpg"
+        Picasso.get().load(imageUrl).into(object : com.squareup.picasso.Target {
+            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
+                bitmap?.let { saveImageToGallery(it) }
+            }
+
+            override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
+                // Handle failure
+            }
+
+            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
+                // Prepare to load
+            }
+        })
+    }
+
+    private fun saveImageToGallery(bitmap: Bitmap) {
+        // Define the values to insert into the MediaStore
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "Image_${System.currentTimeMillis()}.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        }
+
+        // Insert the image into the MediaStore
+        val uri = requireContext().contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        )
+
+        // Write the bitmap data to the content resolver
+        uri?.let { imageUri ->
+            requireContext().contentResolver.openOutputStream(imageUri).use { outputStream ->
+                outputStream?.let {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+                }
+            }
+            Toast.makeText(requireContext(), "Image saved to gallery", Toast.LENGTH_SHORT).show()
+        } ?: run {
+            Toast.makeText(requireContext(), "Failed to save image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
