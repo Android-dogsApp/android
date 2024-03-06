@@ -59,8 +59,8 @@ class LogInFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
-//        auth = FirebaseAuth.getInstance()
+        sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
+        auth = FirebaseAuth.getInstance()
 //
 //        if (isLoggedIn()) {
 //            // Check if the saved credentials are valid

@@ -9,6 +9,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -19,6 +20,7 @@ import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.R
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 import java.util.UUID
 
 
@@ -32,7 +34,8 @@ class addPersonPostFragment : Fragment() {
     private lateinit var editTextContact: EditText
     private lateinit var btnPost: Button
     private lateinit var btnCancel: Button
-
+    private lateinit var btnUploadImage: Button
+    private lateinit var imageView: ImageView
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -57,6 +60,8 @@ class addPersonPostFragment : Fragment() {
         editTextContact = view.findViewById(R.id.editTextContact)
         btnPost = view.findViewById(R.id.btnPost)
         btnCancel = view.findViewById(R.id.btnCancel)
+        btnUploadImage = view.findViewById(R.id.btnUploadImage)
+        imageView = view.findViewById(R.id.imageView)
 
         // Add text change listener to the request EditText
 //        editTextRequest.addTextChangedListener(object : TextWatcher {
@@ -78,6 +83,12 @@ class addPersonPostFragment : Fragment() {
 //            }
 //        })
 
+
+        btnUploadImage.setOnClickListener {
+            // Load image using Picasso
+            val imageUrl = "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*" // Replace with your image URL
+            Picasso.get().load(imageUrl).into(imageView)
+        }
 
         btnPost.setOnClickListener {
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
