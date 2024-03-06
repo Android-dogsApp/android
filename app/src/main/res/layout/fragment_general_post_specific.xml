@@ -3,6 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C7E3C8"
     tools:context=".GeneralPostSpecificFragment">
 
     <!-- res/layout/layout_general_post.xml -->
@@ -17,31 +18,82 @@
         android:padding="16dp">
 
         <!-- Post ID -->
-        <TextView
-            android:id="@+id/textViewPostId"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Post ID: "
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:orientation="horizontal">
+
+            <!-- Post ID Label -->
+            <TextView
+                android:id="@+id/postIdLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Post ID: "
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <!-- Post ID Value -->
+            <TextView
+                android:id="@+id/textViewPostId"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+        </LinearLayout>
 
         <!-- Request -->
-        <TextView
-            android:id="@+id/textViewRequest"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Request: "
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:orientation="horizontal">
+
+            <!-- Request Label -->
+            <TextView
+                android:id="@+id/requestLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Request: "
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <!-- Request Value -->
+            <TextView
+                android:id="@+id/textViewRequest"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+        </LinearLayout>
 
         <!-- Offer -->
-        <TextView
-            android:id="@+id/textViewOffer"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Offer: "
-            android:textStyle="bold"
-            android:layout_marginBottom="8dp"/>
+            android:orientation="horizontal">
+
+            <!-- Offer Label -->
+            <TextView
+                android:id="@+id/offerLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Offer: "
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
+            <!-- Offer Value -->
+            <TextView
+                android:id="@+id/textViewOffer"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text=""
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+        </LinearLayout>
 
         <!-- Contact Information -->
         <LinearLayout
@@ -49,43 +101,43 @@
             android:layout_height="wrap_content"
             android:orientation="horizontal">
 
+            <!-- Contact Label -->
+            <TextView
+                android:id="@+id/contactLabelTextView"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Contact Info: "
+                android:textStyle="bold"
+                android:textSize="18sp"/>
+
             <!-- Phone Number -->
             <TextView
                 android:id="@+id/textViewcontact"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
-                android:text="Contact Info: "
-                android:textStyle="bold"/>
-
+                android:text=""
+                android:textStyle="bold"
+                android:textSize="18sp"/>
         </LinearLayout>
 
         <!-- Image -->
         <ImageView
             android:id="@+id/imageViewPost"
             android:layout_width="match_parent"
-            android:layout_height="200dp"
+            android:layout_height="300dp"
             android:scaleType="centerCrop"
             android:layout_marginTop="16dp"/>
 
-        <!-- Edit and Delete Buttons -->
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="horizontal"
-            android:layout_marginTop="16dp">
-
-            <!-- Edit Button -->
-            <Button
-                android:id="@+id/buttonEdit"
-                android:layout_width="0dp"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:text="Edit"/>
-
-
-        </LinearLayout>
-
+        <!-- Edit Button -->
+        <Button
+            android:id="@+id/buttonEdit"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:backgroundTint="#7ED381"
+            android:layout_gravity="center_horizontal"
+            android:text="Edit Post"
+            android:textSize="16sp"/>
     </LinearLayout>
 
 </FrameLayout>

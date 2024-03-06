@@ -19,8 +19,7 @@ class PersonModel private constructor() {
     private var mainHandler = HandlerCompat.createAsync(Looper.getMainLooper())
     private val firebasePersonModel = FirebasePersonModel()
     private var personLiveData: LiveData<Person>? = null
-    private val personLoadingState: MutableLiveData<LoadingState> =
-        MutableLiveData(LoadingState.LOADED)
+     val personLoadingState: MutableLiveData<LoadingState> = MutableLiveData(LoadingState.LOADED)
 
     companion object {
         val instance: PersonModel = PersonModel()
@@ -54,11 +53,13 @@ class PersonModel private constructor() {
 //    }
 
 
-    fun getPersonByEmail(email: String, callback: (Person?) -> Unit) {
+    fun getPersonByEmail(email: String, callback: (Person?) -> Unit): LiveData<Person> {
         firebasePersonModel.getPersonByEmail(email) {
             callback(it)
 
         }
+        personLiveData = database.PersonDao().getPersonByemail(email)
+        return personLiveData!!
     }
 
 

@@ -5,6 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="#C7E3C8"
     android:orientation="vertical"
     android:padding="16dp">
 
@@ -64,33 +65,40 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal"
+        android:orientation="vertical"
         android:layout_marginTop="16dp">
 
         <!-- Save Button -->
         <Button
             android:id="@+id/buttonSave"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#7ED381"
+            android:layout_gravity="center_horizontal"
             android:text="Save"/>
 
         <!-- Cancel Button -->
         <Button
             android:id="@+id/buttonCancel"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#7ED381"
+            android:layout_gravity="center_horizontal"
             android:text="Cancel"/>
 
         <!-- Delete Post Button -->
         <Button
             android:id="@+id/buttonDeletePost"
-            android:layout_width="0dp"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_weight="1"
+            android:backgroundTint="#7ED381"
+            android:layout_gravity="center_horizontal"
             android:text="Delete Post"/>
     </LinearLayout>
+
 
 </LinearLayout>
 

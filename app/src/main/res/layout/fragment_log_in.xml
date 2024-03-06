@@ -32,6 +32,7 @@
             android:layout_height="wrap_content"
             android:layout_below="@id/editTextPassword"
             android:layout_marginTop="20dp"
+            android:backgroundTint="#A9E3AB"
             android:text="Log In" />
     </RelativeLayout>
 </FrameLayout>

@@ -73,7 +73,6 @@ package com.example.dogsandddapters
 //
 //
 //}
-import android.annotation.SuppressLint
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
@@ -85,9 +84,6 @@ import android.widget.Button
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import androidx.navigation.fragment.findNavController
-import com.example.dogsandddapters.R
-import com.example.dogsandddapters.EntryFragmentDirections
 import com.example.dogsandddapters.Models.PersonModel
 import com.google.firebase.auth.FirebaseAuth
 
@@ -121,32 +117,34 @@ class EntryFragment : Fragment() {
         // Update UI based on login state
         var isLoggedIn= isLoggedIn()
         if (isLoggedIn) {
-            Log.i("EntryFragment", "isLoggedIn: $isLoggedIn")
+            Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
             textViewWelcomeBack.visibility = View.VISIBLE
             btnRegister.visibility = View.GONE
             btnLogin.visibility = View.GONE
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
                 val email= it?.email
                 val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
-                findNavController().navigate(action)
+                //findNavController().navigate(action)
+                Navigation.findNavController(view).navigate(action)
                 
             }
 
         } else {
-
-            Log.i("EntryFragment", "isLoggedIn: $isLoggedIn")
+            Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
             textViewWelcomeBack.visibility = View.GONE
             btnRegister.visibility = View.VISIBLE
             btnLogin.visibility = View.VISIBLE
 
             btnRegister.setOnClickListener {
                 val action = EntryFragmentDirections.actionEntryFragmentToRegisterFragment()
-                findNavController().navigate(action)
+                //findNavController().navigate(action)
+                Navigation.findNavController(view).navigate(action)
             }
 
             btnLogin.setOnClickListener {
                 val action = EntryFragmentDirections.actionEntryFragmentToLogInFragment()
-                findNavController().navigate(action)
+                //findNavController().navigate(action)
+                Navigation.findNavController(view).navigate(action)
             }
 
         }
