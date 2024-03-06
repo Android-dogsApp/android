@@ -38,7 +38,7 @@ class editProfileFragment : Fragment() {
 
         PersonModel.instance.getPersonByEmail(email){
             Log.i("EditProfileFragment", "email : ${email}")
-            editTextName.text = it?.name
+            editTextName.text =  it?.name
             Log.i("EditProfileFragment", " editTextName: ${editTextName.text} ")
             editTextDogTypes.text = it?.dogType
             editTextPhone.text = it?.phoneNumber

@@ -12,12 +12,16 @@
         android:id="@+id/textViewWelcomeBack"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Welcome back"
+        android:text="Welcome back!"
+        android:textSize="24sp"
+        android:textStyle="bold"
+        android:textColor="#000000"
         android:visibility="gone"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
+
 
     <!-- Button to navigate to RegisterFragment -->
     <Button
@@ -26,6 +30,7 @@
         android:layout_height="48dp"
         android:text="Register"
         android:visibility="gone"
+        android:backgroundTint="#A9E3AB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/btnLogin"
         app:layout_constraintHorizontal_bias="0.5"
@@ -39,6 +44,7 @@
         android:layout_height="48dp"
         android:text="LogIn"
         android:visibility="gone"
+        android:backgroundTint="#A9E3AB"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"

@@ -172,8 +172,8 @@ class RestApiFragment : Fragment() {
 
                     // Display the list of sub-breeds in the TextView
                     if (!subBreeds.isNullOrEmpty()) {
-                        val subBreedsText = subBreeds.joinToString(", ")
-                        subBreedsTextView.text = "Sub-Breeds: $subBreedsText"
+                        val subBreedsText = subBreeds.joinToString("\n")
+                        subBreedsTextView.text = "$subBreedsText"
                     } else {
                         subBreedsTextView.text = "No sub-breeds found"
                     }

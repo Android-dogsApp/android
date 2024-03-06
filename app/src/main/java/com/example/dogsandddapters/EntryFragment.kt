@@ -117,7 +117,7 @@ class EntryFragment : Fragment() {
         // Update UI based on login state
         var isLoggedIn= isLoggedIn()
         if (isLoggedIn) {
-            Log.i("EntryFragment", "isLoggedIn: $isLoggedIn")
+            Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
             textViewWelcomeBack.visibility = View.VISIBLE
             btnRegister.visibility = View.GONE
             btnLogin.visibility = View.GONE
@@ -130,8 +130,7 @@ class EntryFragment : Fragment() {
             }
 
         } else {
-
-            Log.i("EntryFragment", "isLoggedIn: $isLoggedIn")
+            Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
             textViewWelcomeBack.visibility = View.GONE
             btnRegister.visibility = View.VISIBLE
             btnLogin.visibility = View.VISIBLE

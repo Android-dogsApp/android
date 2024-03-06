@@ -48,7 +48,7 @@ class ProfileFragment : Fragment() {
             viewModel.person= PersonModel.instance.getPersonByEmail(email) { person ->
                 // Update UI with person data
                 view.findViewById<TextView>(R.id.nameTextView).text = "Name: ${person?.name}"
-                view.findViewById<TextView>(R.id.dogTypesTextView).text = "Dog Types: ${person?.dogType}"
+                view.findViewById<TextView>(R.id.dogTypesTextView).text = "Dog Type: ${person?.dogType}"
                 view.findViewById<TextView>(R.id.phoneTextView).text = "Phone: ${person?.phoneNumber}"
                 view.findViewById<TextView>(R.id.emailTextView).text = "Email: ${person?.email}"
                 if (person != null) {
