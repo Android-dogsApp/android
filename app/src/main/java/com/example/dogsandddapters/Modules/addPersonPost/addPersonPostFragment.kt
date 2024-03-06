@@ -1,5 +1,7 @@
 package com.example.dogsandddapters.Modules.addPersonPost
 
+import android.app.Activity
+import android.content.Intent
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -23,10 +25,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.squareup.picasso.Picasso
 import java.util.UUID
 
-
 class addPersonPostFragment : Fragment() {
-
-
 
     private lateinit var editTextRequest: EditText
     private lateinit var textViewWordCount: TextView
@@ -36,6 +35,7 @@ class addPersonPostFragment : Fragment() {
     private lateinit var btnCancel: Button
     private lateinit var btnUploadImage: Button
     private lateinit var imageView: ImageView
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setHasOptionsMenu(true)
@@ -45,15 +45,12 @@ class addPersonPostFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        // Inflate the layout for this fragment
         val view = inflater.inflate(R.layout.fragment_add_person_post, container, false)
         setupUI(view)
         return view
     }
 
-
     private fun setupUI(view: View) {
-
         editTextRequest = view.findViewById(R.id.editTextRequest)
         textViewWordCount = view.findViewById(R.id.textViewWordCount)
         editTextOffer = view.findViewById(R.id.editTextOffer)
@@ -63,56 +60,46 @@ class addPersonPostFragment : Fragment() {
         btnUploadImage = view.findViewById(R.id.btnUploadImage)
         imageView = view.findViewById(R.id.imageView)
 
-        // Add text change listener to the request EditText
-//        editTextRequest.addTextChangedListener(object : TextWatcher {
-//            override fun beforeTextChanged(s: CharSequence?, start: Int, count: Int, after: Int) {}
-//
-//            override fun onTextChanged(s: CharSequence?, start: Int, before: Int, count: Int) {}
-//
-//            override fun afterTextChanged(s: Editable?) {
-//                // Update word count
-//                val wordCount = s?.toString()?.trim()?.split("\\s+".toRegex())?.size ?: 0
-//                textViewWordCount.text = "$wordCount/10 words"
-//
-//                // Limit to 10 words
-//                if (wordCount > 10) {
-//                    val words = s?.toString()?.trim()?.split("\\s+".toRegex())?.take(10)
-//                    editTextRequest.setText(words?.joinToString(" "))
-//                    editTextRequest.setSelection(editTextRequest.text?.length ?: 0)
-//                }
-//            }
-//        })
-
-
         btnUploadImage.setOnClickListener {
-            // Load image using Picasso
-            val imageUrl = "https://hips.hearstapps.com/hmg-prod/images/dog-puppy-on-garden-royalty-free-image-1586966191.jpg?crop=0.752xw:1.00xh;0.175xw,0&resize=1200:*" // Replace with your image URL
-            Picasso.get().load(imageUrl).into(imageView)
+            openImageChooser()
         }
 
         btnPost.setOnClickListener {
-            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
-                Log.i("TAG", " AddPersonPostFragment: Person ID ${it?.id}")
-                //val ID = it?.id.toString()
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { user ->
                 val ID: String = UUID.randomUUID().toString()
-                val publisher = it?.id.toString()
-                Log.i("TAG", " AddPersonPostFragment: Publisher after tostring ${publisher}")
+                val publisher = user?.id.toString()
                 val request = editTextRequest.text.toString()
                 val offer = editTextOffer.text.toString()
                 val contact = editTextContact.text.toString()
 
                 val personPost = PersonPost(ID, publisher, request, offer, contact)
                 PersonPostModel.instance.addPersonPost(personPost) {}
+
                 val generalPost = GeneralPost(ID, publisher, request, offer, contact)
                 GeneralPostModel.instance.addGeneralPost(generalPost) {}
-            }
 
+                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+            }
         }
 
         btnCancel.setOnClickListener {
             Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
         }
+    }
 
+    private fun openImageChooser() {
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, IMAGE_PICK_REQUEST_CODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+
+        if (requestCode == IMAGE_PICK_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri = data.data
+            Picasso.get().load(selectedImageUri).into(imageView)
+        }
     }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
@@ -120,4 +107,7 @@ class addPersonPostFragment : Fragment() {
         super.onCreateOptionsMenu(menu, inflater)
     }
 
+    companion object {
+        const val IMAGE_PICK_REQUEST_CODE = 123
+    }
 }
