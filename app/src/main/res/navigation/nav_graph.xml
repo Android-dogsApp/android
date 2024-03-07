@@ -119,6 +119,9 @@
         <action
             android:id="@+id/action_personPostsFragment_to_personSpecificPostFragment"
             app:destination="@id/personSpecificPostFragment" />
+        <action
+            android:id="@+id/action_personPostsFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"

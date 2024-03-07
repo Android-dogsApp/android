@@ -28,8 +28,8 @@ class MainActivity : AppCompatActivity() {
 
         val bottomNavigationView: BottomNavigationView = findViewById(R.id.mainActivityBottomNavigationView)
         navController?.let { NavigationUI.setupWithNavController(bottomNavigationView, it) }
-    }
 
+    }
 
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
