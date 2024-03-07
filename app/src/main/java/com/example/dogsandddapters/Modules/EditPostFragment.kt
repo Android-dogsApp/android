@@ -1,12 +1,16 @@
 package com.example.dogsandddapters.Modules
 
+import android.app.Activity
+import android.content.Intent
+import android.graphics.BitmapFactory
 import android.os.Bundle
-import android.util.Log
+import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
-import android.widget.TextView
+import android.widget.EditText
+import android.widget.ImageView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
@@ -16,10 +20,16 @@ import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.R
+import java.io.IOException
 import java.util.concurrent.Executors
 
 class EditPostFragment : Fragment() {
     private val args: EditPostFragmentArgs by navArgs()
+
+    private val SELECT_IMAGE_REQUEST_CODE = 101
+    private var selectedImage: String? = null
+
+    private lateinit var imageViewPost: ImageView
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -32,27 +42,32 @@ class EditPostFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         val postId = args.postId
-        var executor = Executors.newSingleThreadExecutor()
+        val executor = Executors.newSingleThreadExecutor()
 
         val personModel = PersonModel.instance
-        val editTextPostId: TextView = view.findViewById(R.id.editTextPostId)
-        val editTextRequest: TextView = view.findViewById(R.id.editTextRequest)
-        val editTextOffer: TextView = view.findViewById(R.id.editTextOffer)
-        val editTextcontact: TextView = view.findViewById(R.id.editTextcontact)
+        val editTextPostId: EditText = view.findViewById(R.id.editTextPostId)
+        val editTextRequest: EditText = view.findViewById(R.id.editTextRequest)
+        val editTextOffer: EditText = view.findViewById(R.id.editTextOffer)
+        val editTextcontact: EditText = view.findViewById(R.id.editTextcontact)
         val buttonUpdate: Button = view.findViewById(R.id.buttonSave)
         val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
         val buttonDeletePost: Button = view.findViewById(R.id.buttonDeletePost)
-        var publisher: String?
+        imageViewPost = view.findViewById(R.id.imageViewPost)
+
+        // Button to select image
+        val buttonSelectImage: Button = view.findViewById(R.id.buttonSelectImage)
+        buttonSelectImage.setOnClickListener {
+            selectImageFromGallery()
+        }
 
         GeneralPostModel.instance.getGeneralPostById(postId) {
-            editTextPostId.text = it?.postid
-            editTextRequest.text = it?.request
-            editTextOffer.text = it?.offer
-            editTextcontact.text = it?.contact
-            publisher = it?.publisher
+            editTextPostId.setText(it?.postid)
+            editTextRequest.setText(it?.request)
+            editTextOffer.setText(it?.offer)
+            editTextcontact.setText(it?.contact)
+            val publisher = it?.publisher
             //NEED UPDATE POST ONLY IF IT BELONGS TO THE USER!
-            buttonUpdate?.setOnClickListener {
-                Log.i("TAG", "EditPostFragment: publisher $publisher")
+            buttonUpdate.setOnClickListener {
                 val postid = postId
                 val offer = editTextOffer.text.toString()
                 val contact = editTextcontact.text.toString()
@@ -75,29 +90,52 @@ class EditPostFragment : Fragment() {
             }
         }
 
-
-        buttonCancel?.setOnClickListener {
-            Navigation.findNavController(it).navigateUp();
+        buttonCancel.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
         }
 
         buttonDeletePost.setOnClickListener {
-            GeneralPostModel.instance.getGeneralPostById(postId) {
-                if (it != null) {
-                    GeneralPostModel.instance.deleteGeneralPost(it) {
+            GeneralPostModel.instance.getGeneralPostById(postId) { generalPost ->
+                if (generalPost != null) {
+                    GeneralPostModel.instance.deleteGeneralPost(generalPost) {
                     }
                 }
-
             }
-            PersonPostModel.instance.getPersonPostById(postId) {
-                if (it != null) {
-                    PersonPostModel.instance.deletePersonPost(it) {
+            PersonPostModel.instance.getPersonPostById(postId) { personPost ->
+                if (personPost != null) {
+                    PersonPostModel.instance.deletePersonPost(personPost) {
                     }
                 }
-
             }
             val action = EditPostFragmentDirections.actionEditPostFragmentToPersonPostsFragment()
             Navigation.findNavController(view).navigate(action)
+        }
+    }
 
+    // Method to open gallery for image selection
+    private fun selectImageFromGallery() {
+        val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+        startActivityForResult(galleryIntent, SELECT_IMAGE_REQUEST_CODE)
+    }
+
+    // Handle result from image selection
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == SELECT_IMAGE_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri = data.data
+            try {
+                selectedImageUri?.let {
+                    // Set the selected image URI to your ImageView
+                    val inputStream = requireActivity().contentResolver.openInputStream(selectedImageUri)
+                    val bitmap = BitmapFactory.decodeStream(inputStream)
+                    imageViewPost.setImageBitmap(bitmap)
+
+                    // Save the selected image URI
+                    selectedImage = selectedImageUri.toString()
+                }
+            } catch (e: IOException) {
+                e.printStackTrace()
+            }
         }
     }
 }
