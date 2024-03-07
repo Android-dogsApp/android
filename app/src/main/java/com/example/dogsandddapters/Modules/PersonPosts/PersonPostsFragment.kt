@@ -5,16 +5,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.Modules.PersonPosts.PersonPostAdapter.PersonPostsRecyclerAdapter
 import com.example.dogsandddapters.databinding.FragmentPersonPostsBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class PersonPostsFragment : Fragment() {
 
@@ -48,6 +51,16 @@ class PersonPostsFragment : Fragment() {
 //            //viewModel.addAllPersonPosts(newPosts ?: emptyList())
 //            //Navigation.findNavController(view).popBackStack(R.id.personPostsFragment, false)
 //        }
+
+        val btnMoveToProfile: Button = binding.btnMoveToProfile
+        btnMoveToProfile.setOnClickListener {
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
+                val email= it?.email
+                val action = PersonPostsFragmentDirections.actionPersonPostsFragmentToProfileFragment(email!!, "")
+                Navigation.findNavController(view).navigate(action)
+            }
+        }
+
 
 
         PersonPostsRcyclerView = binding.rvPersonPostFragmentList

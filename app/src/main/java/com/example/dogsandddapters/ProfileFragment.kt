@@ -55,7 +55,6 @@ class ProfileFragment : Fragment() {
                     userId= person.id
                 }
             }
-
         }
         getData()
 
@@ -63,10 +62,6 @@ class ProfileFragment : Fragment() {
             FirebaseAuth.getInstance().signOut()
             // Perform logout functionality here
             logoutUser()
-        }
-
-        view.findViewById<Button>(R.id.myPostsButton).setOnClickListener {
-            // Handle navigating to user's posts fragment
         }
 
         view.findViewById<Button>(R.id.editButton).setOnClickListener {
@@ -96,14 +91,11 @@ class ProfileFragment : Fragment() {
         PersonModel.instance.personLoadingState.observe(viewLifecycleOwner) { state ->
             binding.pullToRefresh3.isRefreshing = state == PersonModel.LoadingState.LOADING
         }
-
     }
 
     private fun logoutUser() {
         Navigation.findNavController(requireView()).navigate(R.id.action_profileFragment_to_entryFragment)
     }
-
-
 
     override fun onDestroy() {
         super.onDestroy()
