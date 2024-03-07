@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.dogsandddapters.MainActivity
 import com.example.dogsandddapters.Models.Person
 import com.example.dogsandddapters.R
 import com.google.firebase.auth.FirebaseAuth
@@ -76,6 +77,8 @@ class RegisterFragment : Fragment() {
 
             // Register user
             registerUser(email, password)
+            Navigation.findNavController(requireView()).navigate(R.id.action_registerFragment_to_generalPostsFragment)
+            (requireActivity() as MainActivity).setBottomBarVisibility(true)
         }
     }
 
