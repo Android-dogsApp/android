@@ -14,6 +14,7 @@ data class GeneralPost(
     val request: String,
     val offer: String,
     val contact: String,
+    val imageUrl : String? = null,
     //val image: String,
     var lastUpdated: Long? = null
 ) {
