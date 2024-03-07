@@ -76,6 +76,7 @@ package com.example.dogsandddapters
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
+import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -86,6 +87,7 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.PersonModel
 import com.google.firebase.auth.FirebaseAuth
+
 
 class EntryFragment : Fragment() {
 
@@ -118,16 +120,24 @@ class EntryFragment : Fragment() {
         var isLoggedIn= isLoggedIn()
         if (isLoggedIn) {
             Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
-            textViewWelcomeBack.visibility = View.VISIBLE
+            //textViewWelcomeBack.visibility = View.VISIBLE
             btnRegister.visibility = View.GONE
             btnLogin.visibility = View.GONE
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
                 val email= it?.email
-                val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
-                //findNavController().navigate(action)
-                Navigation.findNavController(view).navigate(action)
-                
+                textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
+                textViewWelcomeBack.visibility = View.VISIBLE
+
+                Handler().postDelayed({
+                    val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
+                    Navigation.findNavController(view).navigate(action)
+                }, 2000)
+
+//                val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
+//                //findNavController().navigate(action)
+//                Navigation.findNavController(view).navigate(action)
             }
+
 
         } else {
             Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
