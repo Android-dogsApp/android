@@ -11,6 +11,7 @@ import android.widget.EditText
 import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
+import com.example.dogsandddapters.MainActivity
 import com.example.dogsandddapters.R
 import com.google.firebase.auth.FirebaseAuth
 
@@ -85,6 +86,7 @@ class LogInFragment : Fragment() {
 
             // Perform login authentication here
             loginUser(email, password)
+
         }
     }
 
@@ -95,6 +97,8 @@ class LogInFragment : Fragment() {
                     // Login successful
                     saveLoginCredentials(email, password)
                     navigateToGeneralPosts()
+                    (requireActivity() as MainActivity).setBottomBarVisibility(true)
+
                 } else {
                     // Login failed
                     Toast.makeText(context, "Login failed: ${task.exception?.message}", Toast.LENGTH_SHORT).show()

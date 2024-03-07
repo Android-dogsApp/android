@@ -134,6 +134,8 @@ class EntryFragment : Fragment() {
             textViewWelcomeBack.visibility = View.GONE
             btnRegister.visibility = View.VISIBLE
             btnLogin.visibility = View.VISIBLE
+            (requireActivity() as MainActivity).setBottomBarVisibility(false)
+
 
             btnRegister.setOnClickListener {
                 val action = EntryFragmentDirections.actionEntryFragmentToRegisterFragment()

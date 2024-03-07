@@ -3,6 +3,7 @@ package com.example.dogsandddapters
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
+import android.view.View
 import androidx.appcompat.app.AppCompatActivity
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
@@ -46,6 +47,17 @@ class MainActivity : AppCompatActivity() {
             else -> navController?.let { NavigationUI.onNavDestinationSelected(item, it) } ?: super.onOptionsItemSelected(item)
         }
     }
+
+    fun setBottomBarVisibility(isVisible: Boolean) {
+        val bottomNavigationView = findViewById<BottomNavigationView>(R.id.mainActivityBottomNavigationView)
+
+        if (isVisible) {
+            bottomNavigationView.visibility = View.VISIBLE
+        } else {
+            bottomNavigationView.visibility = View.GONE
+        }
+    }
+
 
 
 
