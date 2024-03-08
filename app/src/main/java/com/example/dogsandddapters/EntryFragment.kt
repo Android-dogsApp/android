@@ -119,7 +119,7 @@ class EntryFragment : Fragment() {
         var isLoggedIn= isLoggedIn()
         if (isLoggedIn) {
             Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
-            //textViewWelcomeBack.visibility = View.VISIBLE
+            textViewWelcomeBack.visibility = View.VISIBLE
             btnRegister.visibility = View.GONE
             btnLogin.visibility = View.GONE
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
