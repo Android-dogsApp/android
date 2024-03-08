@@ -8,6 +8,8 @@ import androidx.room.OnConflictStrategy
 import androidx.room.Query
 import androidx.room.Update
 import com.example.dogsandddapters.Models.PersonPost
+
+
 @Dao
 interface PersonPostsDao {
 
@@ -16,6 +18,9 @@ interface PersonPostsDao {
 
         @Insert(onConflict = OnConflictStrategy.REPLACE)
          fun insert(vararg personpost: PersonPost)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(vararg personpost: PersonPost)
 
 
         @Delete

@@ -17,7 +17,10 @@ interface GeneralPostDao {
      fun getAll(): LiveData<MutableList<GeneralPost>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
-     fun insert(vararg feeds: GeneralPost)
+     fun insert(vararg generalpost: GeneralPost)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertAll(vararg generalpost: GeneralPost)
 
     @Delete
      fun delete(generalpost: GeneralPost)

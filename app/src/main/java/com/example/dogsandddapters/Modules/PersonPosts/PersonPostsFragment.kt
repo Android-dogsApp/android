@@ -43,8 +43,11 @@ class PersonPostsFragment : Fragment() {
 
         progressBar?.visibility = View.VISIBLE
 
-        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts()
-             //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+            Log.i("PersonPostsFragment", "PersonPostsFragment -publisher ${it?.id}")
+            viewModel.personposts = PersonPostModel.instance.getAllpersonPosts(it?.id!!)
+            //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+        }
 
 
 //        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts { newPosts ->
@@ -106,7 +109,9 @@ class PersonPostsFragment : Fragment() {
     }
     private fun reloadData() {
         progressBar?.visibility = View.VISIBLE
-        PersonPostModel.instance.refreshAllpersonPosts()
+        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+            PersonPostModel.instance.refreshAllpersonPosts(it?.id!!)
+        }
         progressBar?.visibility = View.GONE
     }
 

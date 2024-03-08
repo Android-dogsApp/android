@@ -21,7 +21,7 @@ object AppLocalDatabaseGeneralPost {
         Room.databaseBuilder(
             context,
             AppLocalDbGPRepository::class.java,
-            "dbFileName.db"
+            "GeneralPostFileName.db"
         )
             .fallbackToDestructiveMigration()
             .build()

@@ -1,13 +1,15 @@
 package com.example.dogsandddapters.Modules.addPersonPost
 
+import android.Manifest
 import android.app.Activity
+import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
+import android.graphics.drawable.Drawable
 import android.os.Bundle
 import android.provider.MediaStore
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.Menu
 import android.view.MenuInflater
@@ -22,9 +24,6 @@ import androidx.core.app.ActivityCompat
 import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
-import android.Manifest
-import android.app.AlertDialog
-import android.graphics.drawable.Drawable
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
@@ -118,7 +117,7 @@ class addPersonPostFragment : Fragment() {
                 val contact = editTextContact.text.toString()
 
                 val personPost = PersonPost(ID, publisher, request, offer, contact)
-                PersonPostModel.instance.addPersonPost(personPost) {}
+                PersonPostModel.instance.addPersonPost(user?.email!!,personPost) {}
 
                 val generalPost = GeneralPost(ID, publisher, request, offer, contact)
                 GeneralPostModel.instance.addGeneralPost(generalPost) {}

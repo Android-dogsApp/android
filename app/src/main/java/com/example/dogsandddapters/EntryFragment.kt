@@ -76,7 +76,6 @@ package com.example.dogsandddapters
 import android.content.Context
 import android.content.SharedPreferences
 import android.os.Bundle
-import android.os.Handler
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
@@ -125,13 +124,13 @@ class EntryFragment : Fragment() {
             btnLogin.visibility = View.GONE
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
                 val email= it?.email
-                textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
-                textViewWelcomeBack.visibility = View.VISIBLE
+                //textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
+                //textViewWelcomeBack.visibility = View.VISIBLE
 
-                Handler().postDelayed({
+                //Handler().postDelayed({
                     val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
                     Navigation.findNavController(view).navigate(action)
-                }, 2000)
+                //}, 2000)
 
 //                val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
 //                //findNavController().navigate(action)
@@ -145,6 +144,7 @@ class EntryFragment : Fragment() {
             btnRegister.visibility = View.VISIBLE
             btnLogin.visibility = View.VISIBLE
             (requireActivity() as MainActivity).setBottomBarVisibility(false)
+            (requireActivity() as MainActivity).setAddMenuItemVisibility(false)
 
 
             btnRegister.setOnClickListener {

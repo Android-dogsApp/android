@@ -98,6 +98,7 @@ class LogInFragment : Fragment() {
                     saveLoginCredentials(email, password)
                     navigateToGeneralPosts()
                     (requireActivity() as MainActivity).setBottomBarVisibility(true)
+                    (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
 
                 } else {
                     // Login failed

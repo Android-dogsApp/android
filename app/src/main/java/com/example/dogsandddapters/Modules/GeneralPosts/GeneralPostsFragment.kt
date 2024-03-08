@@ -6,6 +6,7 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -51,6 +52,12 @@ class GeneralPostsFragment : Fragment() {
 //            progressBar?.visibility = View.GONE
 //        }
 
+        val btnMoveTopersonPosts: Button = binding.btnMoveTopersonPosts
+        btnMoveTopersonPosts.setOnClickListener {
+            val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToPersonPostsFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+
         GeneralPostsRcyclerView = binding.rvGeneralPostFragmentList
         GeneralPostsRcyclerView?.setHasFixedSize(true)
         GeneralPostsRcyclerView?.layoutManager = LinearLayoutManager(context)
@@ -80,7 +87,7 @@ class GeneralPostsFragment : Fragment() {
         }
 
         binding.pullToRefresh.setOnRefreshListener {
-            reloadData()
+            //reloadData()
         }
         GeneralPostModel.instance.generalPostsListLoadingState.observe(viewLifecycleOwner) { state ->
             binding.pullToRefresh.isRefreshing = state == GeneralPostModel.LoadingState.LOADING
@@ -95,10 +102,10 @@ class GeneralPostsFragment : Fragment() {
 
     }
 
-    override fun onResume() {
-        super.onResume()
-        reloadData()
-    }
+//    override fun onResume() {
+//        super.onResume()
+//        reloadData()
+//    }
 
     private fun reloadData() {
         progressBar?.visibility = View.VISIBLE

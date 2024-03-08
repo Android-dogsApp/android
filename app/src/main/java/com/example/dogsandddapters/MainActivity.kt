@@ -32,10 +32,20 @@ class MainActivity : AppCompatActivity() {
 
     }
 
+    private var isAddMenuItemVisible = true
+
     override fun onCreateOptionsMenu(menu: Menu?): Boolean {
         super.onCreateOptionsMenu(menu)
         menuInflater.inflate(R.menu.menu, menu)
+        val addMenuItem = menu?.findItem(R.id.addPersonPostFragment)
+        addMenuItem?.isVisible = isAddMenuItemVisible
+
         return true
+    }
+
+    fun setAddMenuItemVisibility(isVisible: Boolean) {
+        isAddMenuItemVisible = isVisible
+        invalidateOptionsMenu()
     }
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
