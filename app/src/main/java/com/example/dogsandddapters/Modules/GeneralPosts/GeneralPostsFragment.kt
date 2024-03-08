@@ -87,7 +87,7 @@ class GeneralPostsFragment : Fragment() {
         }
 
         binding.pullToRefresh.setOnRefreshListener {
-            //reloadData()
+            reloadData()
         }
         GeneralPostModel.instance.generalPostsListLoadingState.observe(viewLifecycleOwner) { state ->
             binding.pullToRefresh.isRefreshing = state == GeneralPostModel.LoadingState.LOADING
@@ -102,10 +102,10 @@ class GeneralPostsFragment : Fragment() {
 
     }
 
-//    override fun onResume() {
-//        super.onResume()
-//        reloadData()
-//    }
+    override fun onResume() {
+        super.onResume()
+        reloadData()
+    }
 
     private fun reloadData() {
         progressBar?.visibility = View.VISIBLE

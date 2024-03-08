@@ -65,7 +65,7 @@ class PersonPostModel private constructor() {
             executor.execute {
                 var time = lastUpdated
                 for (personPost in list) {
-                    database.PersonPostsDao().insertAll(personPost)
+                    database.PersonPostsDao().insert(personPost)
 
 
                     Log.i("TAG", "database.PersonPostsDao() ${database.PersonPostsDao().getAll().value?.size}")

@@ -46,7 +46,7 @@ class FirebasePersonPostModel {
         Log.i("getAllPersonPosts", "getAllPersonPosts -publisher ${publisher}")
             db.collection(PERSONPOST_COLLECTION_PATH)
                 .whereGreaterThanOrEqualTo(PersonPost.LAST_UPDATED, Timestamp(since, 0))
-                .whereEqualTo("postpublisher", publisher)
+               // .whereEqualTo("postpublisher", publisher)
                 .get().addOnCompleteListener {
                     when (it.isSuccessful) {
                         true -> {
