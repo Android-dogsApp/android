@@ -122,7 +122,10 @@ class addPersonPostFragment : Fragment() {
                 val generalPost = GeneralPost(ID, publisher, request, offer, contact)
                 GeneralPostModel.instance.addGeneralPost(generalPost) {}
 
-                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                val action = addPersonPostFragmentDirections.actionAddPersonPostFragmentToGeneralPostsFragment()
+                Navigation.findNavController(view).navigate(action)
+
+               // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
             }
         }
 
