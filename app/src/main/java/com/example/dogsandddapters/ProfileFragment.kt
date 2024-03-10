@@ -38,6 +38,7 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
         val email = args.email
         var userId= args.userId
         // Fetch user details using the email
