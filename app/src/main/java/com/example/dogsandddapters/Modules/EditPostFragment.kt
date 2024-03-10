@@ -1,7 +1,10 @@
 package com.example.dogsandddapters.Modules
 
 import android.app.Activity
+import android.app.AlertDialog
+import android.content.ContentValues
 import android.content.Intent
+import android.graphics.Bitmap
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -10,14 +13,20 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.EditText
 import android.widget.ImageView
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
+import androidx.recyclerview.widget.GridLayoutManager
+import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
+import com.example.dogsandddapters.Modules.addPersonPost.ImageSelectionAdapter
+import com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment
 import com.example.dogsandddapters.R
+import com.squareup.picasso.Picasso
 
 class EditPostFragment : Fragment() {
     private val args: EditPostFragmentArgs by navArgs()
@@ -56,8 +65,33 @@ class EditPostFragment : Fragment() {
         imageView = view.findViewById(R.id.imageView)
 
         buttonSelectImage.setOnClickListener {
-            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
-            startActivityForResult(galleryIntent, PICK_IMAGE)
+//            val galleryIntent = Intent(Intent.ACTION_PICK, MediaStore.Images.Media.EXTERNAL_CONTENT_URI)
+//            startActivityForResult(galleryIntent, PICK_IMAGE)
+
+            val dialogView = layoutInflater.inflate(R.layout.dialog_image_selection, null)
+            val recyclerViewImages: RecyclerView = dialogView.findViewById(R.id.recyclerViewImages)
+
+            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(), 4)
+
+            val imageUrls = listOf(
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/1200px-Labrador_Retriever_portrait.jpg",
+                "https://www.southernliving.com/thmb/NnmgOEms-v3uG4T6SRgc8QDGlUA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/gettyimages-837898820-2000-667fc4cc028a43369037e229c9bd52fb.jpg",
+                "https://media.npr.org/assets/img/2022/05/25/gettyimages-917452888-edit_custom-c656c35e4e40bf22799195af846379af6538810c-s1100-c50.jpg",
+                "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2022/6/16/1/shutterstock_1862856634.jpg.rend.hgtvcom.1280.853.suffix/1655430860853.jpeg"
+            )
+
+            val adapter = ImageSelectionAdapter(imageUrls) { imageUrl ->
+                Picasso.get().load(imageUrl).into(imageView)
+            }
+            recyclerViewImages.adapter = adapter
+
+            AlertDialog.Builder(requireContext())
+                .setView(dialogView)
+                .setTitle("Select Image")
+                .setNegativeButton("Cancel") { dialog, _ ->
+                    dialog.dismiss()
+                }
+                .show()
         }
 
         buttonSave.setOnClickListener {
@@ -111,11 +145,46 @@ class EditPostFragment : Fragment() {
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+//        super.onActivityResult(requestCode, resultCode, data)
+//
+//        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
+//            val imageUri = data.data
+//            imageView.setImageURI(imageUri)
+//        }
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == PICK_IMAGE && resultCode == Activity.RESULT_OK && data != null) {
-            val imageUri = data.data
-            imageView.setImageURI(imageUri)
+        if (requestCode == addPersonPostFragment.IMAGE_PICK_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+            val selectedImageUri = data.data
+            Picasso.get().load(selectedImageUri).into(imageView)
         }
+    }
+    private fun saveImageToGallery(bitmap: Bitmap) {
+        // Define the values to insert into the MediaStore
+        val contentValues = ContentValues().apply {
+            put(MediaStore.Images.Media.DISPLAY_NAME, "Image_${System.currentTimeMillis()}.jpg")
+            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
+        }
+
+        // Insert the image into the MediaStore
+        val uri = requireContext().contentResolver.insert(
+            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
+            contentValues
+        )
+
+        // Write the bitmap data to the content resolver
+        uri?.let { imageUri ->
+            requireContext().contentResolver.openOutputStream(imageUri).use { outputStream ->
+                outputStream?.let {
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
+                }
+            }
+            Toast.makeText(requireContext(), "Image saved to gallery", Toast.LENGTH_SHORT).show()
+        } ?: run {
+            Toast.makeText(requireContext(), "Failed to save image", Toast.LENGTH_SHORT).show()
+        }
+    }
+
+    companion object {
+        const val IMAGE_PICK_REQUEST_CODE = 123
     }
 }
