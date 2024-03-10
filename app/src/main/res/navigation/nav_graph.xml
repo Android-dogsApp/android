@@ -150,6 +150,12 @@
         <action
             android:id="@+id/action_editProfileFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_profileFragment"
+            app:destination="@id/profileFragment" />
+        <action
+            android:id="@+id/action_editProfileFragment_to_generalPostsFragment"
+            app:destination="@id/generalPostsFragment" />
     </fragment>
     <fragment
         android:id="@+id/editPostFragment"

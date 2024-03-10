@@ -131,8 +131,8 @@ class EntryFragment : Fragment() {
             btnLogin.visibility = View.GONE
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
                 val email = it?.email
-                //textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
-                //textViewWelcomeBack.visibility = View.VISIBLE
+//                textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
+//                textViewWelcomeBack.visibility = View.VISIBLE
 
                 //Handler().postDelayed({
                 val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")

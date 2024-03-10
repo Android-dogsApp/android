@@ -15,8 +15,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.GeneralPostModel
+import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
 import com.example.dogsandddapters.databinding.FragmentGeneralPostsBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class GeneralPostsFragment : Fragment() {
     var GeneralPostsRcyclerView: RecyclerView? = null
@@ -88,7 +90,15 @@ class GeneralPostsFragment : Fragment() {
             binding.pullToRefresh.isRefreshing = state == GeneralPostModel.LoadingState.LOADING
         }
 
+        val myPostsButton: Button = binding.btnMyPosts
+        myPostsButton.setOnClickListener {
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+                val personId= it?.id
+                val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToPersonPostsFragment(personId!!)
+                Navigation.findNavController(view).navigate(action)
+            }
 
+        }
 
 
 

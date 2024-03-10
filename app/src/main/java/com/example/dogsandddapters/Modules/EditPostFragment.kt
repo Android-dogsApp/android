@@ -25,7 +25,6 @@ import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.Modules.addPersonPost.ImageSelectionAdapter
-import com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment
 import com.example.dogsandddapters.R
 import com.squareup.picasso.Picasso
 
@@ -92,22 +91,48 @@ class EditPostFragment : Fragment() {
                 .show()
         }
 
+//        buttonSave.setOnClickListener {
+//            val postid = editTextPostId.text.toString()
+//            val offer = editTextOffer.text.toString()
+//            val contact = editTextContact.text.toString()
+//            val request = editTextRequest.text.toString()
+//            val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
+//            val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
+//
+//            GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+//                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//            }
+//
+//            PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
+//                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//            }
+//        }
+
         buttonSave.setOnClickListener {
             val postid = editTextPostId.text.toString()
             val offer = editTextOffer.text.toString()
             val contact = editTextContact.text.toString()
             val request = editTextRequest.text.toString()
-            val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
-            val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
 
-            GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
-                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-            }
+            if (postid.isNullOrBlank() || offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()) {
+                // Show an error message to the user, for example, using a Toast
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
+                val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
 
-            PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
-                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                }
+
+                PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
+                    //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                }
             }
+            val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
+            Navigation.findNavController(view).navigate(action)
         }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {

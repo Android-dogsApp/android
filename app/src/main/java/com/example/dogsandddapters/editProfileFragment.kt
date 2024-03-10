@@ -24,9 +24,8 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.Person
 import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Modules.addPersonPost.ImageSelectionAdapter
-import com.squareup.picasso.Picasso
-import com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 
 class editProfileFragment : Fragment() {
     private val args: editProfileFragmentArgs by navArgs()
@@ -105,18 +104,49 @@ class editProfileFragment : Fragment() {
             dialog.show()
         }
 
+//        buttonUpdate?.setOnClickListener {
+//            val id = personId
+//            val name = editTextName.text.toString()
+//            val phoneNumber = editTextPhone.text.toString()
+//            val email = editTextEmail.text.toString()
+//            val dogType = editTextDogTypes.text.toString()
+//            val updatedPerson= Person(name, id, phoneNumber, email, dogType)
+//
+//            PersonModel.instance.updatePerson(updatedPerson){
+//                //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+//            }
+//            val action = editProfileFragmentDirections.actionEditProfileFragmentToGeneralPostsFragment()
+//            Navigation.findNavController(view).navigate(action)
+//        }
+
         buttonUpdate?.setOnClickListener {
             val id = personId
             val name = editTextName.text.toString()
             val phoneNumber = editTextPhone.text.toString()
             val email = editTextEmail.text.toString()
             val dogType = editTextDogTypes.text.toString()
-            val updatedPerson= Person(name, id, phoneNumber, email, dogType)
 
-            PersonModel.instance.updatePerson(updatedPerson){
-                //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+            if (name.isNullOrBlank() || phoneNumber.isNullOrBlank() || email.isNullOrBlank() || dogType.isNullOrBlank()) {
+                // Show an error message to the user, for example, using a Toast
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                val updatedPerson = Person(name, id, phoneNumber, email, dogType)
+
+                PersonModel.instance.updatePerson(FirebaseAuth.getInstance().currentUser?.uid!!,updatedPerson) {
+                    // Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
+                }
             }
+
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+                val personId= it?.id
+                val email = it?.email
+                val action = editProfileFragmentDirections.actionEditProfileFragmentToProfileFragment(email!!,personId!!)
+                Navigation.findNavController(view).navigate(action)
+            }
+//            val action = editProfileFragmentDirections.actionEditProfileFragmentToGeneralPostsFragment()
+//            Navigation.findNavController(view).navigate(action)
         }
+
 
         buttonCancel?.setOnClickListener {
             val action = editProfileFragmentDirections.actionEditProfileFragmentToEntryFragment()
