@@ -8,6 +8,7 @@ import android.content.Intent
 import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
+import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.MediaStore
 import android.view.LayoutInflater
@@ -39,7 +40,6 @@ import java.util.UUID
 class addPersonPostFragment : Fragment() {
 
     private val REQUEST_CODE_STORAGE_PERMISSION = 456 // You can use any unique integer value
-
 
     private lateinit var editTextRequest: EditText
     private lateinit var textViewWordCount: TextView
@@ -74,12 +74,6 @@ class addPersonPostFragment : Fragment() {
         btnUploadImage = view.findViewById(R.id.btnUploadImage)
         imageView = view.findViewById(R.id.imageView)
 
-//        btnUploadImage.setOnClickListener {
-//            openImageChooser()
-//            downloadAndSaveDogPhoto()
-//
-//        }
-
         btnUploadImage.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_image_selection, null)
             val recyclerViewImages: RecyclerView = dialogView.findViewById(R.id.recyclerViewImages)
@@ -107,7 +101,6 @@ class addPersonPostFragment : Fragment() {
                 .show()
         }
 
-
         btnPost.setOnClickListener {
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { user ->
                 val ID: String = UUID.randomUUID().toString()
@@ -125,7 +118,7 @@ class addPersonPostFragment : Fragment() {
                 val action = addPersonPostFragmentDirections.actionAddPersonPostFragmentToGeneralPostsFragment()
                 Navigation.findNavController(view).navigate(action)
 
-               // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
             }
         }
 
@@ -207,10 +200,33 @@ class addPersonPostFragment : Fragment() {
         }
     }
 
-
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()
         super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        ImagePreloadingTask().execute()
+    }
+
+    inner class ImagePreloadingTask : AsyncTask<Void, Void, Unit>() {
+        override fun doInBackground(vararg params: Void?) {
+            preloadImages()
+        }
+
+        private fun preloadImages() {
+            val imageUrls = listOf(
+                "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/1200px-Labrador_Retriever_portrait.jpg",
+                "https://www.southernliving.com/thmb/NnmgOEms-v3uG4T6SRgc8QDGlUA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/gettyimages-837898820-2000-667fc4cc028a43369037e229c9bd52fb.jpg",
+                "https://media.npr.org/assets/img/2022/05/25/gettyimages-917452888-edit_custom-c656c35e4e40bf22799195af846379af6538810c-s1100-c50.jpg",
+                "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2022/6/16/1/shutterstock_1862856634.jpg.rend.hgtvcom.1280.853.suffix/1655430860853.jpeg"
+            )
+
+            for (imageUrl in imageUrls) {
+                Picasso.get().load(imageUrl).fetch()
+            }
+        }
     }
 
     companion object {
