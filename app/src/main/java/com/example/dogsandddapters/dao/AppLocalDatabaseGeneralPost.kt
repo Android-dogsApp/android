@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.base.MyApplication
 
-@Database(entities = [GeneralPost::class], version = 5)
+@Database(entities = [GeneralPost::class], version = 6)
 abstract class AppLocalDbGPRepository : RoomDatabase() {
     abstract fun GeneralPostDao(): GeneralPostDao
 }
@@ -21,7 +21,7 @@ object AppLocalDatabaseGeneralPost {
         Room.databaseBuilder(
             context,
             AppLocalDbGPRepository::class.java,
-            "dbFileName.db"
+            "GeneralPostFileName.db"
         )
             .fallbackToDestructiveMigration()
             .build()

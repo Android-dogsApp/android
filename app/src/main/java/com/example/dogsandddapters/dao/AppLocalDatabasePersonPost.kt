@@ -20,7 +20,7 @@ import com.example.dogsandddapters.base.MyApplication
             Room.databaseBuilder(
                 context,
                 AppLocalDbPPRepository::class.java,
-                "dbFileName.db"
+                "PersonPostFileName.db"
             )
                 .fallbackToDestructiveMigration()
                 .build()

@@ -51,6 +51,7 @@ class GeneralPostModel private constructor() {
                 var time = lastUpdated
                 for (generalPost in list) {
                     database.GeneralPostDao().insert(generalPost)
+                    Log.i("TAG", "GeneralPostDao(): ${database.GeneralPostDao().getAll().value.toString()}")
 
                     generalPost.lastUpdated?.let {
                         if (time < it)

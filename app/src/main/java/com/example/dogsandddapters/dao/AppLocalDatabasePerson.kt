@@ -21,7 +21,7 @@ object AppLocalDatabasePerson {
         Room.databaseBuilder(
             context,
             AppLocalDbPRepository::class.java,
-            "dbFileName.db"
+            "PersonFileName.db"
         )
             .fallbackToDestructiveMigration()
             .build()
