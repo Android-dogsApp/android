@@ -51,6 +51,7 @@ class GeneralPostsFragment : Fragment() {
 //            progressBar?.visibility = View.GONE
 //        }
 
+
         GeneralPostsRcyclerView = binding.rvGeneralPostFragmentList
         GeneralPostsRcyclerView?.setHasFixedSize(true)
         GeneralPostsRcyclerView?.layoutManager = LinearLayoutManager(context)

@@ -8,6 +8,8 @@ import androidx.lifecycle.MutableLiveData
 import com.example.dogsandddapters.dao.AppLocalDatabasePersonPost
 import java.util.concurrent.Executors
 
+
+
 class PersonPostModel private constructor() {
 
     enum class LoadingState {
@@ -32,10 +34,11 @@ class PersonPostModel private constructor() {
         fun onComplete(personPosts: List<PersonPost>)
     }
 
-    fun getAllpersonPosts(): LiveData<MutableList<PersonPost>> {
-        refreshAllpersonPosts()
+    fun getAllpersonPosts(publisher: String): LiveData<MutableList<PersonPost>> {
+        refreshAllpersonPosts(publisher)
         return personPosts
     }
+
 
 //    fun getAllpersonPosts(callback: (List<PersonPost>) -> Unit): LiveData<MutableList<PersonPost>> {
 //        // Assuming refreshAllpersonPosts updates personPosts internally
@@ -48,7 +51,7 @@ class PersonPostModel private constructor() {
 //    }
 
 
-    fun refreshAllpersonPosts() {
+    fun refreshAllpersonPosts(publisher: String)  {
 
         personPostsListLoadingState.value = LoadingState.LOADING
 
@@ -56,13 +59,16 @@ class PersonPostModel private constructor() {
         val lastUpdated: Long = PersonPost.lastUpdated
 
         // 2. Get all updated records from firestore since last update locally
-        FirebasePersonPostModel.getAllPersonPosts(lastUpdated) { list ->
+        FirebasePersonPostModel.getAllPersonPosts(lastUpdated, publisher) { list ->
             Log.i("TAG", "Firebase PersonPost returned ${list.size}, lastUpdated: $lastUpdated")
             // 3. Insert new record to ROOM
             executor.execute {
                 var time = lastUpdated
                 for (personPost in list) {
                     database.PersonPostsDao().insert(personPost)
+
+
+                    Log.i("TAG", "database.PersonPostsDao() ${database.PersonPostsDao().getAll().value?.size}")
 
                     personPost.lastUpdated?.let {
                         if (time < it)
@@ -78,9 +84,9 @@ class PersonPostModel private constructor() {
         }
     }
 
-    fun addPersonPost(personPost: PersonPost, callback: () -> Unit) {
+    fun addPersonPost(publisher: String, personPost: PersonPost, callback: () -> Unit) {
         FirebasePersonPostModel.addPersonPost(personPost) {
-                refreshAllpersonPosts()
+                refreshAllpersonPosts(publisher)
                 callback()
 
         }

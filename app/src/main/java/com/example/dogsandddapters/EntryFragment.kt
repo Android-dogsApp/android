@@ -87,6 +87,7 @@ import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.PersonModel
 import com.google.firebase.auth.FirebaseAuth
 
+
 class EntryFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
@@ -123,11 +124,19 @@ class EntryFragment : Fragment() {
             btnLogin.visibility = View.GONE
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
                 val email= it?.email
-                val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
-                //findNavController().navigate(action)
-                Navigation.findNavController(view).navigate(action)
-                
+                //textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
+                //textViewWelcomeBack.visibility = View.VISIBLE
+
+                //Handler().postDelayed({
+                    val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
+                    Navigation.findNavController(view).navigate(action)
+                //}, 2000)
+
+//                val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
+//                //findNavController().navigate(action)
+//                Navigation.findNavController(view).navigate(action)
             }
+
 
         } else {
             Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
@@ -135,6 +144,7 @@ class EntryFragment : Fragment() {
             btnRegister.visibility = View.VISIBLE
             btnLogin.visibility = View.VISIBLE
             (requireActivity() as MainActivity).setBottomBarVisibility(false)
+            (requireActivity() as MainActivity).setAddMenuItemVisibility(false)
 
 
             btnRegister.setOnClickListener {

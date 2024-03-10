@@ -1,4 +1,3 @@
-<?xml version="1.0" encoding="utf-8"?>
 <LinearLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
@@ -58,6 +57,16 @@
         android:hint="Enter Contact Info"
         android:textStyle="bold"
         android:layout_marginTop="16dp"/>
+
+    <!-- Select Image Button -->
+    <Button
+        android:id="@+id/buttonSelectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_weight="1"
+        android:backgroundTint="#7ED381"
+        android:layout_gravity="center_horizontal"
+        android:text="Select Image"/>
 
     <!-- Button Layout -->
     <LinearLayout

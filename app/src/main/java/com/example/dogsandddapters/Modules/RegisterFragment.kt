@@ -79,6 +79,7 @@ class RegisterFragment : Fragment() {
             registerUser(email, password)
             Navigation.findNavController(requireView()).navigate(R.id.action_registerFragment_to_generalPostsFragment)
             (requireActivity() as MainActivity).setBottomBarVisibility(true)
+            (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
         }
     }
 

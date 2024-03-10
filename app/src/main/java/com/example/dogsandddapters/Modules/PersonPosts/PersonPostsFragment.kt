@@ -8,6 +8,9 @@ import android.view.ViewGroup
 import android.widget.Button
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.LifecycleOwner
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -43,9 +46,29 @@ class PersonPostsFragment : Fragment() {
 
         progressBar?.visibility = View.VISIBLE
 
-        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts()
-             //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+//            Log.i("PersonPostsFragment", "PersonPostsFragment -publisher ${it?.id}")
+//            viewModel.personposts = PersonPostModel.instance.getAllpersonPosts(it?.id!!)
+//            //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//        }
 
+        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { person ->
+            val personId= person?.id
+            viewModel.personposts = PersonPostModel.instance.getAllpersonPosts("")
+            val liveData: LiveData<MutableList<PersonPost>> = PersonPostModel.instance.getAllpersonPosts("")
+            val owner: LifecycleOwner = viewLifecycleOwner
+            liveData.observe(owner, Observer { personPosts ->
+                personPosts?.let {
+                    val iterator = it.iterator()
+                    while (iterator.hasNext()) {
+                        val post = iterator.next()
+                        if (post.publisher != personId) {
+                            iterator.remove()
+                        }
+                    }
+                }
+            })
+        }
 
 //        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts { newPosts ->
 //            //viewModel.addAllPersonPosts(newPosts ?: emptyList())
@@ -106,7 +129,9 @@ class PersonPostsFragment : Fragment() {
     }
     private fun reloadData() {
         progressBar?.visibility = View.VISIBLE
-        PersonPostModel.instance.refreshAllpersonPosts()
+        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+            PersonPostModel.instance.refreshAllpersonPosts(it?.id!!)
+        }
         progressBar?.visibility = View.GONE
     }
 
