@@ -35,29 +35,27 @@
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
+    <!-- Image upload section -->
+    <Button
+        android:id="@+id/btnSelectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Upload Image"
+        android:layout_marginTop="16dp"/>
+
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"/>
+
     <!-- Contact Information -->
-    <LinearLayout
+    <EditText
+        android:id="@+id/editTextContact"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:orientation="horizontal">
-
-        <!-- Phone Number -->
-        <EditText
-            android:id="@+id/editTextcontact"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:hint="Enter Contact Info"
-            android:textStyle="bold"/>
-
-    </LinearLayout>
-
-    <!-- Image -->
-    <ImageView
-        android:id="@+id/imageViewPost"
-        android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:scaleType="centerCrop"
+        android:hint="Enter Contact Info"
+        android:textStyle="bold"
         android:layout_marginTop="16dp"/>
 
     <!-- Select Image Button -->
