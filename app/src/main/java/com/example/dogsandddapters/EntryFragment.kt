@@ -91,6 +91,9 @@ import com.google.firebase.auth.FirebaseAuth
 class EntryFragment : Fragment() {
 
     private lateinit var sharedPreferences: SharedPreferences
+    private lateinit var textViewWelcomeBack: TextView
+    private lateinit var btnRegister: Button
+    private lateinit var btnLogin: Button
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -103,10 +106,14 @@ class EntryFragment : Fragment() {
         //val isLoggedIn = sharedPreferences.getBoolean("isLoggedIn", false)
 
         // Get references to UI elements
-        val textViewWelcomeBack: TextView = view.findViewById(R.id.textViewWelcomeBack)
-        val btnRegister: Button = view.findViewById(R.id.btnRegister)
-        val btnLogin: Button = view.findViewById(R.id.btnLogin)
+        textViewWelcomeBack = view.findViewById(R.id.textViewWelcomeBack)
+        btnRegister = view.findViewById(R.id.btnRegister)
+        btnLogin = view.findViewById(R.id.btnLogin)
 
+        return view
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         fun isLoggedIn(): Boolean {
             // return sharedPreferences.contains("email") && sharedPreferences.contains("password")
             FirebaseAuth.getInstance().currentUser?.let {
@@ -114,22 +121,22 @@ class EntryFragment : Fragment() {
             }
             return false
         }
-
         // Update UI based on login state
-        var isLoggedIn= isLoggedIn()
-        if (isLoggedIn) {
+         var isLoggedIn = isLoggedIn()
+        if (isLoggedIn)
+        {
             Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
             textViewWelcomeBack.visibility = View.VISIBLE
             btnRegister.visibility = View.GONE
             btnLogin.visibility = View.GONE
-            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
-                val email= it?.email
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+                val email = it?.email
                 //textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
                 //textViewWelcomeBack.visibility = View.VISIBLE
 
                 //Handler().postDelayed({
-                    val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
-                    Navigation.findNavController(view).navigate(action)
+                val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
+                Navigation.findNavController(view).navigate(action)
                 //}, 2000)
 
 //                val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
@@ -138,7 +145,8 @@ class EntryFragment : Fragment() {
             }
 
 
-        } else {
+        } else
+        {
             Log.i("EntryFragment", "EntryFragment-isLoggedIn: $isLoggedIn")
             textViewWelcomeBack.visibility = View.GONE
             btnRegister.visibility = View.VISIBLE
@@ -161,8 +169,8 @@ class EntryFragment : Fragment() {
 
         }
 
-
-
-        return view
     }
+
+
+
 }

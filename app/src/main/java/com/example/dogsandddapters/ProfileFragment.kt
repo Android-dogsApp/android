@@ -64,6 +64,12 @@ class ProfileFragment : Fragment() {
             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(email)
             Navigation.findNavController(view).navigate(action)
         }
+        val myPostsButton: Button = binding.moveToMyPostsButton
+        myPostsButton.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToPersonPostsFragment(userId)
+            Navigation.findNavController(view).navigate(action)
+
+        }
 
     }
 

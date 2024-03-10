@@ -84,13 +84,18 @@
         <action
             android:id="@+id/action_profileFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
+        <action
+            android:id="@+id/action_profileFragment_to_personPostsFragment"
+            app:destination="@id/personPostsFragment" />
     </fragment>
     <fragment
         android:id="@+id/addPersonPostFragment"
         android:name="com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment"
         android:label="fragment_add_person_post"
         tools:layout="@layout/fragment_add_person_post" >
-
+        <argument
+            android:name="email"
+            app:argType="string" />
         <action
             android:id="@+id/action_addPersonPostFragment_to_personPostsFragment"
             app:destination="@id/personPostsFragment" />
@@ -122,6 +127,9 @@
         android:id="@+id/personPostsFragment"
         android:name="com.example.dogsandddapters.Modules.PersonPosts.PersonPostsFragment"
         android:label="PersonPostsFragment" >
+        <argument
+            android:name="personID"
+            app:argType="string" />
         <action
             android:id="@+id/action_personPostsFragment_to_addPersonPostFragment"
             app:destination="@id/addPersonPostFragment" />
@@ -157,6 +165,9 @@
         <action
             android:id="@+id/action_editPostFragment_to_personPostsFragment"
             app:destination="@id/personPostsFragment" />
+        <action
+            android:id="@+id/action_editPostFragment_to_generalPostsFragment"
+            app:destination="@id/generalPostsFragment" />
     </fragment>
 
     <fragment

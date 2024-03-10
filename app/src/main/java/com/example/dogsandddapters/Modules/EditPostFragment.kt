@@ -138,7 +138,7 @@ class EditPostFragment : Fragment() {
                     PersonPostModel.instance.deletePersonPost(it) {}
                 }
             }
-            val action = EditPostFragmentDirections.actionEditPostFragmentToPersonPostsFragment()
+            val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
             Navigation.findNavController(view).navigate(action)
         }
     }

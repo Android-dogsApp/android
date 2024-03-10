@@ -98,6 +98,15 @@
             android:backgroundTint="#7ED381"
             android:layout_gravity="center"/> <!-- Center text and button -->
 
+        <Button
+            android:id="@+id/moveToMyPostsButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Move to My Posts"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="#7ED381"
+            android:layout_gravity="center"/>
+
     </LinearLayout>
 
 
