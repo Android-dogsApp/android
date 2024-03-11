@@ -127,9 +127,10 @@ class EditPostFragment : Fragment() {
                 PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
                     //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
                 }
+                val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
+                Navigation.findNavController(view).navigate(action)
             }
-            val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
-            Navigation.findNavController(view).navigate(action)
+
         }
 
     }

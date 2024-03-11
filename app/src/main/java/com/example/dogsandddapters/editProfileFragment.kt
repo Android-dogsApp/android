@@ -135,14 +135,15 @@ class editProfileFragment : Fragment() {
                 PersonModel.instance.updatePerson(FirebaseAuth.getInstance().currentUser?.uid!!,updatedPerson) {
                     // Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
                 }
+                PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+                    val personId= it?.id
+                    val email = it?.email
+                    val action = editProfileFragmentDirections.actionEditProfileFragmentToProfileFragment(email!!,personId!!)
+                    Navigation.findNavController(view).navigate(action)
+                }
             }
 
-            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
-                val personId= it?.id
-                val email = it?.email
-                val action = editProfileFragmentDirections.actionEditProfileFragmentToProfileFragment(email!!,personId!!)
-                Navigation.findNavController(view).navigate(action)
-            }
+
 //            val action = editProfileFragmentDirections.actionEditProfileFragmentToGeneralPostsFragment()
 //            Navigation.findNavController(view).navigate(action)
         }
