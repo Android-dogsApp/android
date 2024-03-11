@@ -27,8 +27,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
-import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
@@ -116,8 +114,8 @@ class addPersonPostFragment : Fragment() {
                     val personPost = PersonPost(ID, publisher, request, offer, contact)
                     PersonPostModel.instance.addPersonPost(user?.email!!, personPost) {}
 
-                    val generalPost = GeneralPost(ID, publisher, request, offer, contact)
-                    GeneralPostModel.instance.addGeneralPost(generalPost) {}
+//                    val generalPost = GeneralPost(ID, publisher, request, offer, contact)
+//                    GeneralPostModel.instance.addGeneralPost(generalPost) {}
 
                     val action = addPersonPostFragmentDirections.actionAddPersonPostFragmentToGeneralPostsFragment()
                     Navigation.findNavController(view).navigate(action)

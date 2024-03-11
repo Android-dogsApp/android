@@ -6,14 +6,14 @@ import android.util.Log
 import androidx.appcompat.app.AppCompatActivity
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
+import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
 import com.example.dogsandddapters.databinding.ActivityGeneralPostRcyclerViewBinding
 
 class GeneralPostsRcyclerViewActivity : AppCompatActivity() {
 
     var generalPostsRcyclerView: RecyclerView? = null
-    var generalposts: List<GeneralPost>? = null
+    var generalposts: List<PersonPost>? = null
     var adapter: GeneralPostsRecyclerAdapter? = null
 
 
@@ -42,7 +42,7 @@ class GeneralPostsRcyclerViewActivity : AppCompatActivity() {
                 Log.i("TAG", "GeneralPostsRecyclerAdapter: Position clicked $position")
             }
 
-            override fun onGeneralPostClicked(generalpost: GeneralPost?) {
+            override fun onGeneralPostClicked(generalpost:PersonPost?) {
                 Log.i("TAG", "GENERAL POST $generalposts")
             }
         }
@@ -52,7 +52,7 @@ class GeneralPostsRcyclerViewActivity : AppCompatActivity() {
 
     interface OnItemClickListener {
         fun onItemClick(position: Int) // General Post
-        fun onGeneralPostClicked(generalpost: GeneralPost?)
+        fun onGeneralPostClicked(generalpost: PersonPost?)
     }
 
     override fun onResume() {

@@ -10,8 +10,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
-import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonModel
+import com.example.dogsandddapters.Models.PersonPostModel
 import com.google.firebase.auth.FirebaseAuth
 
 class PersonSpecificPostFragment : Fragment() {
@@ -35,7 +35,7 @@ class PersonSpecificPostFragment : Fragment() {
         val textViewContact: TextView = view.findViewById(R.id.textViewcontact)
         var publisher: String?
 
-        GeneralPostModel.instance.getGeneralPostById(postId){
+        PersonPostModel.instance.getPersonPostById(postId){
             textViewRequest.text = it?.request
             textViewOffer.text = it?.offer
            textViewContact.text = it?.contact

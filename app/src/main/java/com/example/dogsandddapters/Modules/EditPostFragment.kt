@@ -21,7 +21,6 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
-import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.Modules.addPersonPost.ImageSelectionAdapter
@@ -121,9 +120,9 @@ class EditPostFragment : Fragment() {
                 val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
                 val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
 
-                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
-                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-                }
+//                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+//                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//                }
 
                 PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
                     //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
@@ -142,7 +141,7 @@ class EditPostFragment : Fragment() {
         // Call the preloading task when the fragment is created
         ImagePreloadingTask().execute()
 
-        GeneralPostModel.instance.getGeneralPostById(postId) {
+        PersonPostModel.instance.getPersonPostById(postId) {
             editTextPostId.setText(it?.postid) // Corrected to setText
             editTextRequest.setText(it?.request) // Corrected to setText
             editTextOffer.setText(it?.offer) // Corrected to setText
@@ -155,11 +154,11 @@ class EditPostFragment : Fragment() {
         }
 
         buttonDeletePost.setOnClickListener {
-            GeneralPostModel.instance.getGeneralPostById(postId) {
-                if (it != null) {
-                    GeneralPostModel.instance.deleteGeneralPost(it) {}
-                }
-            }
+//            GeneralPostModel.instance.getGeneralPostById(postId) {
+//                if (it != null) {
+//                    GeneralPostModel.instance.deleteGeneralPost(it) {}
+//                }
+//            }
             PersonPostModel.instance.getPersonPostById(postId) {
                 if (it != null) {
                     PersonPostModel.instance.deletePersonPost(it) {}

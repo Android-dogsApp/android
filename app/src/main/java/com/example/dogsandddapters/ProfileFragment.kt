@@ -38,6 +38,9 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//         var executor = Executors.newSingleThreadExecutor()
+//        executor.execute { AppLocalDatabasePersonPost.db.PersonPostsDao().deleteId("1")
+//        }
 
         val email = args.email
         var userId= args.userId

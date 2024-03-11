@@ -6,19 +6,20 @@ import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
+import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostsRcyclerViewActivity
 import com.example.dogsandddapters.R
 
 class GeneralPostViewHolder(val itemView: View,
                             val listener: GeneralPostsRcyclerViewActivity.OnItemClickListener?,
-                            var generalposts: List<GeneralPost>?): RecyclerView.ViewHolder(itemView) {
+                            var generalposts: List<PersonPost>?): RecyclerView.ViewHolder(itemView) {
 
     var requestTextView: TextView? = null
     var offerTextView: TextView? = null
     var contactTextView: TextView? = null
     var idTextView: TextView? = null
     var imageImageView: ImageView? = null
-    var generalpost: GeneralPost? = null
+    var generalpost: PersonPost? = null
 
     init {
         requestTextView = itemView.findViewById(R.id.requestTextView)
@@ -36,7 +37,7 @@ class GeneralPostViewHolder(val itemView: View,
         }
     }
 
-    fun bind(generalpost: GeneralPost?) {
+    fun bind(generalpost: PersonPost?) {
         this.generalpost = generalpost
         requestTextView?.text = generalpost?.request
         offerTextView?.text = generalpost?.offer

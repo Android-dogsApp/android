@@ -26,8 +26,8 @@ interface PersonPostsDao {
         @Delete
          fun delete(personpost: PersonPost)
 
-//        @Query("DELETE FROM PersonPost WHERE Request = :request")
-//        fun deleteId(request: String)
+        @Query("DELETE FROM PersonPost WHERE Request = :request")
+        fun deleteId(request: String)
 
         @Query("SELECT * FROM PersonPost WHERE postid =:id")
          fun getPersonPostById(id: String): LiveData<PersonPost>
