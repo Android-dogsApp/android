@@ -13,6 +13,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
+import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.PersonModel
@@ -23,6 +24,8 @@ import com.example.dogsandddapters.databinding.FragmentPersonPostsBinding
 import com.google.firebase.auth.FirebaseAuth
 
 class PersonPostsFragment : Fragment() {
+
+    private val args: PersonPostsFragmentArgs by navArgs()
 
     var PersonPostsRcyclerView: RecyclerView? = null
     var adapter: PersonPostsRecyclerAdapter? = null
@@ -36,6 +39,7 @@ class PersonPostsFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        val personID = args.personID
 
         _binding = FragmentPersonPostsBinding.inflate(inflater, container, false)
         val view = binding.root
@@ -48,12 +52,12 @@ class PersonPostsFragment : Fragment() {
 
 //        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
 //            Log.i("PersonPostsFragment", "PersonPostsFragment -publisher ${it?.id}")
-//            viewModel.personposts = PersonPostModel.instance.getAllpersonPosts(it?.id!!)
+//            viewModel.personposts = PersonPostModel.instance.getAllpersonPosts("")
 //            //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
 //        }
 
-        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { person ->
-            val personId= person?.id
+//        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
+//            val personId= it?.id
             viewModel.personposts = PersonPostModel.instance.getAllpersonPosts("")
             val liveData: LiveData<MutableList<PersonPost>> = PersonPostModel.instance.getAllpersonPosts("")
             val owner: LifecycleOwner = viewLifecycleOwner
@@ -62,13 +66,15 @@ class PersonPostsFragment : Fragment() {
                     val iterator = it.iterator()
                     while (iterator.hasNext()) {
                         val post = iterator.next()
-                        if (post.publisher != personId) {
+                        if (post.publisher != personID) {
                             iterator.remove()
                         }
                     }
                 }
             })
-        }
+       //}
+
+
 
 //        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts { newPosts ->
 //            //viewModel.addAllPersonPosts(newPosts ?: emptyList())
@@ -129,9 +135,9 @@ class PersonPostsFragment : Fragment() {
     }
     private fun reloadData() {
         progressBar?.visibility = View.VISIBLE
-        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
-            PersonPostModel.instance.refreshAllpersonPosts(it?.id!!)
-        }
+       // PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+            PersonPostModel.instance.refreshAllpersonPosts("")
+       // }
         progressBar?.visibility = View.GONE
     }
 

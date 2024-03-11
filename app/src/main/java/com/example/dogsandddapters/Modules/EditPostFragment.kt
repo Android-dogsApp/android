@@ -21,11 +21,9 @@ import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.GeneralPost
-import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.Modules.addPersonPost.ImageSelectionAdapter
-import com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment
 import com.example.dogsandddapters.R
 import com.squareup.picasso.Picasso
 
@@ -92,22 +90,49 @@ class EditPostFragment : Fragment() {
                 .show()
         }
 
+//        buttonSave.setOnClickListener {
+//            val postid = editTextPostId.text.toString()
+//            val offer = editTextOffer.text.toString()
+//            val contact = editTextContact.text.toString()
+//            val request = editTextRequest.text.toString()
+//            val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
+//            val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
+//
+//            GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+//                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//            }
+//
+//            PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
+//                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//            }
+//        }
+
         buttonSave.setOnClickListener {
             val postid = editTextPostId.text.toString()
             val offer = editTextOffer.text.toString()
             val contact = editTextContact.text.toString()
             val request = editTextRequest.text.toString()
-            val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
-            val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
 
-            GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
-                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+            if (postid.isNullOrBlank() || offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()) {
+                // Show an error message to the user, for example, using a Toast
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
+                val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
+
+//                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+//                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//                }
+
+                PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
+                    //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                }
+                val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
+                Navigation.findNavController(view).navigate(action)
             }
 
-            PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
-                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-            }
         }
+
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -117,7 +142,7 @@ class EditPostFragment : Fragment() {
         // Call the preloading task when the fragment is created
         ImagePreloadingTask().execute()
 
-        GeneralPostModel.instance.getGeneralPostById(postId) {
+        PersonPostModel.instance.getPersonPostById(postId) {
             editTextPostId.setText(it?.postid) // Corrected to setText
             editTextRequest.setText(it?.request) // Corrected to setText
             editTextOffer.setText(it?.offer) // Corrected to setText
@@ -130,17 +155,17 @@ class EditPostFragment : Fragment() {
         }
 
         buttonDeletePost.setOnClickListener {
-            GeneralPostModel.instance.getGeneralPostById(postId) {
-                if (it != null) {
-                    GeneralPostModel.instance.deleteGeneralPost(it) {}
-                }
-            }
+//            GeneralPostModel.instance.getGeneralPostById(postId) {
+//                if (it != null) {
+//                    GeneralPostModel.instance.deleteGeneralPost(it) {}
+//                }
+//            }
             PersonPostModel.instance.getPersonPostById(postId) {
                 if (it != null) {
                     PersonPostModel.instance.deletePersonPost(it) {}
                 }
             }
-            val action = EditPostFragmentDirections.actionEditPostFragmentToPersonPostsFragment()
+            val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
             Navigation.findNavController(view).navigate(action)
         }
     }

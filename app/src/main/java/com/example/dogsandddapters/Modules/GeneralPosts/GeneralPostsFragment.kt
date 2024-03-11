@@ -6,16 +6,19 @@ import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ProgressBar
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
-import com.example.dogsandddapters.Models.GeneralPostModel
+import com.example.dogsandddapters.Models.PersonModel
+import com.example.dogsandddapters.Models.PersonPost
+import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
 import com.example.dogsandddapters.databinding.FragmentGeneralPostsBinding
+import com.google.firebase.auth.FirebaseAuth
 
 class GeneralPostsFragment : Fragment() {
     var GeneralPostsRcyclerView: RecyclerView? = null
@@ -41,7 +44,7 @@ class GeneralPostsFragment : Fragment() {
 
         progressBar?.visibility = View.VISIBLE
 
-        viewModel.generalposts = GeneralPostModel.instance.getAllgeneralPosts()
+        viewModel.generalposts = PersonPostModel.instance.getAllpersonPosts("")
 
 //        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
 //            this.generalposts = generalposts
@@ -67,7 +70,7 @@ class GeneralPostsFragment : Fragment() {
                 }
             }
 
-            override fun onGeneralPostClicked(generalposts: GeneralPost?) {
+            override fun onGeneralPostClicked(generalposts: PersonPost?) {
                 Log.i("TAG", "General Post $generalposts")
             }
         }
@@ -83,9 +86,22 @@ class GeneralPostsFragment : Fragment() {
         binding.pullToRefresh.setOnRefreshListener {
             reloadData()
         }
-        GeneralPostModel.instance.generalPostsListLoadingState.observe(viewLifecycleOwner) { state ->
-            binding.pullToRefresh.isRefreshing = state == GeneralPostModel.LoadingState.LOADING
+        PersonPostModel.instance.personPostsListLoadingState.observe(viewLifecycleOwner) { state ->
+            binding.pullToRefresh.isRefreshing = state == PersonPostModel.LoadingState.LOADING
         }
+
+        val myPostsButton: Button = binding.btnMyPosts
+        myPostsButton.setOnClickListener {
+            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+                val personId= it?.id
+                val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToPersonPostsFragment(personId!!)
+                Navigation.findNavController(view).navigate(action)
+            }
+
+        }
+
+
+
         return view
 
 //        val addGeneralPostButton: ImageButton = view.findViewById(R.id.ibtnGeneralPostFragmentAddGeneralPost)
@@ -93,6 +109,7 @@ class GeneralPostsFragment : Fragment() {
 //            val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToAddPersonPostFragment()
 //            Navigation.findNavController(view).navigate(action)
 //        }
+
 
     }
 
@@ -103,7 +120,7 @@ class GeneralPostsFragment : Fragment() {
 
     private fun reloadData() {
         progressBar?.visibility = View.VISIBLE
-        GeneralPostModel.instance.refreshAllgeneralPosts()
+        PersonPostModel.instance.refreshAllpersonPosts("")
         progressBar?.visibility = View.GONE
     }
 

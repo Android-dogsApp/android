@@ -139,16 +139,20 @@ class FirebasePersonModel {
 
 
 
-    fun addPerson(person: Person, callback: () -> Unit) {
-        db.collection(PERSONS_COLLECTION_PATH).document(person.id).set(person.json).addOnSuccessListener {
-            callback()
-        }
-    }
+//    fun addPerson(person: Person, callback: () -> Unit) {
+//        db.collection(PERSONS_COLLECTION_PATH).document(person.id).set(person.json).addOnSuccessListener {
+//            callback()
+//        }
+//    }
 
-    fun updatePerson(person: Person, callback: () -> Unit) {
-        db.collection(PERSONS_COLLECTION_PATH).document(person.id).update(person.json).addOnSuccessListener {
+    fun updatePerson(id:String ,person: Person, callback: () -> Unit) {
+        db.collection(PERSONS_COLLECTION_PATH).document(id).update(person.json).addOnSuccessListener {
             callback()
-        }
+            Log.i("FirebasePersonModel", "updatePerson: ${person.id}")
+        }.addOnFailureListener { e ->
+                // Handle failure, log error, or perform additional actions if needed
+                Log.e("FirebasePersonModel", "Error updating person: ${e.message}", e)
+            }
     }
 
 }

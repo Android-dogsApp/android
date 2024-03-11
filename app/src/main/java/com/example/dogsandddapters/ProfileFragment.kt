@@ -38,6 +38,10 @@ class ProfileFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+//         var executor = Executors.newSingleThreadExecutor()
+//        executor.execute { AppLocalDatabasePersonPost.db.PersonPostsDao().deleteId("1")
+//        }
+
         val email = args.email
         var userId= args.userId
         // Fetch user details using the email
@@ -63,6 +67,12 @@ class ProfileFragment : Fragment() {
             Log.i("ProfileFragment", "MoveToEdit-userId: $userId")
             val action = ProfileFragmentDirections.actionProfileFragmentToEditProfileFragment(email)
             Navigation.findNavController(view).navigate(action)
+        }
+        val myPostsButton: Button = binding.moveToMyPostsButton
+        myPostsButton.setOnClickListener {
+            val action = ProfileFragmentDirections.actionProfileFragmentToPersonPostsFragment(userId)
+            Navigation.findNavController(view).navigate(action)
+
         }
 
     }

@@ -99,20 +99,22 @@ class PersonModel private constructor() {
 //    }
 
 
-        fun addPerson(person: Person, callback: () -> Unit) {
-            firebasePersonModel.addPerson(person) {
-                //refreshPerson(person.id) {
-                callback()
-                //}
-            }
-        }
+//        fun addPerson(person: Person, callback: () -> Unit) {
+//            firebasePersonModel.addPerson(person) {
+//                //refreshPerson(person.id) {
+//                callback()
+//                //}
+//            }
+//        }
 
-        fun updatePerson(person: Person, callback: () -> Unit) {
-            firebasePersonModel.updatePerson(person) {
-                database.PersonDao().update(person)
-                //refreshPerson(person.id) {
-                callback()
-                //}
+        fun updatePerson(id:String,person: Person, callback: () -> Unit) {
+            firebasePersonModel.updatePerson(id,person) {
+                executor.execute {
+                    database.PersonDao().update(person)
+                    //refreshPerson(person.id) {
+                    callback()
+                    //}
+                }
             }
         }
 

@@ -27,8 +27,6 @@ import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
-import com.example.dogsandddapters.Models.GeneralPostModel
 import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
@@ -66,7 +64,6 @@ class addPersonPostFragment : Fragment() {
 
     private fun setupUI(view: View) {
         editTextRequest = view.findViewById(R.id.editTextRequest)
-        textViewWordCount = view.findViewById(R.id.textViewWordCount)
         editTextOffer = view.findViewById(R.id.editTextOffer)
         editTextContact = view.findViewById(R.id.editTextContact)
         btnPost = view.findViewById(R.id.btnPost)
@@ -102,25 +99,51 @@ class addPersonPostFragment : Fragment() {
         }
 
         btnPost.setOnClickListener {
-            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { user ->
-                val ID: String = UUID.randomUUID().toString()
-                val publisher = user?.id.toString()
-                val request = editTextRequest.text.toString()
-                val offer = editTextOffer.text.toString()
-                val contact = editTextContact.text.toString()
+            val request = editTextRequest.text.toString()
+            val offer = editTextOffer.text.toString()
+            val contact = editTextContact.text.toString()
 
-                val personPost = PersonPost(ID, publisher, request, offer, contact)
-                PersonPostModel.instance.addPersonPost(user?.email!!,personPost) {}
+            if (request.isNullOrBlank() || offer.isNullOrBlank() || contact.isNullOrBlank()) {
+                // Show an error message to the user, for example, using a Toast
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { user ->
+                    val ID: String = UUID.randomUUID().toString()
+                    val publisher = user?.id.toString()
 
-                val generalPost = GeneralPost(ID, publisher, request, offer, contact)
-                GeneralPostModel.instance.addGeneralPost(generalPost) {}
+                    val personPost = PersonPost(ID, publisher, request, offer, contact)
+                    PersonPostModel.instance.addPersonPost(user?.email!!, personPost) {}
 
-                val action = addPersonPostFragmentDirections.actionAddPersonPostFragmentToGeneralPostsFragment()
-                Navigation.findNavController(view).navigate(action)
+//                    val generalPost = GeneralPost(ID, publisher, request, offer, contact)
+//                    GeneralPostModel.instance.addGeneralPost(generalPost) {}
 
-                // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                    val action = addPersonPostFragmentDirections.actionAddPersonPostFragmentToGeneralPostsFragment()
+                    Navigation.findNavController(view).navigate(action)
+                }
             }
         }
+
+
+//        btnPost.setOnClickListener {
+//            PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) { user ->
+//                val ID: String = UUID.randomUUID().toString()
+//                val publisher = user?.id.toString()
+//                val request = editTextRequest.text.toString()
+//                val offer = editTextOffer.text.toString()
+//                val contact = editTextContact.text.toString()
+//
+//                val personPost = PersonPost(ID, publisher, request, offer, contact)
+//                PersonPostModel.instance.addPersonPost(user?.email!!,personPost) {}
+//
+//                val generalPost = GeneralPost(ID, publisher, request, offer, contact)
+//                GeneralPostModel.instance.addGeneralPost(generalPost) {}
+//
+//                val action = addPersonPostFragmentDirections.actionAddPersonPostFragmentToGeneralPostsFragment()
+//                Navigation.findNavController(view).navigate(action)
+//
+//                // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//            }
+//        }
 
         btnCancel.setOnClickListener {
             Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)

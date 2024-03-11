@@ -4,10 +4,11 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import  com.example.dogsandddapters.Models.GeneralPost
+import com.example.dogsandddapters.Models.PersonPost
 import  com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostsRcyclerViewActivity
 import  com.example.dogsandddapters.R
 
-class GeneralPostsRecyclerAdapter(var generalposts: List<GeneralPost>?): RecyclerView.Adapter<GeneralPostViewHolder>() {
+class GeneralPostsRecyclerAdapter(var generalposts: List<PersonPost>?): RecyclerView.Adapter<GeneralPostViewHolder>() {
 
     var listener: GeneralPostsRcyclerViewActivity.OnItemClickListener? = null
 
