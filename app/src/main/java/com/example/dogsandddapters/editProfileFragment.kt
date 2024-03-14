@@ -49,14 +49,16 @@ class editProfileFragment : Fragment() {
         val email= args.email
 
         val personModel = PersonModel.instance
+         var currentImageUrl: String? = null
         val editTextName: TextView = view.findViewById(R.id.editTextName)
         val editTextDogTypes: TextView = view.findViewById(R.id.editTextDogTypes)
         val editTextPhone: TextView = view.findViewById(R.id.editTextPhone)
         val editTextEmail: TextView = view.findViewById(R.id.editTextEmail)
         val btnUploadImage: Button = view.findViewById(R.id.btnUploadImage)
-        imageView = view.findViewById(R.id.imageView) // Initialize imageView here
+         val imageView1: ImageView = view.findViewById(R.id.imageView1) // Initialize imageView here
         val buttonUpdate: Button = view.findViewById(R.id.buttonUpdate)
         val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
+        imageView = view.findViewById(R.id.imageView) // Initialize imageView here
         var personId= ""
 
         PersonModel.instance.getPersonByEmail(email){
@@ -67,6 +69,11 @@ class editProfileFragment : Fragment() {
             editTextPhone.text = it?.phoneNumber
             editTextEmail.text = it?.email
             personId= it?.id.toString()
+            Picasso.get().load(it?.image)
+                .resize(400, 400)
+                .centerCrop()
+                .into(imageView1)
+            //Picasso.get().load(it?.image).into(imageView1)
             Log.i("EditProfileFragment", " personId: ${personId} ")
         }
 
@@ -84,6 +91,7 @@ class editProfileFragment : Fragment() {
             )
 
             val adapter = ImageSelectionAdapter(imageUrls) { imageUrl ->
+                currentImageUrl = imageUrl
                 // Load the selected image directly into the ImageView
                 Picasso.get().load(imageUrl).into(imageView)
             }
@@ -130,7 +138,7 @@ class editProfileFragment : Fragment() {
                 // Show an error message to the user, for example, using a Toast
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                val updatedPerson = Person(name, id, phoneNumber, email, dogType)
+                val updatedPerson = Person(name, id, phoneNumber, email, dogType,currentImageUrl!!)
 
                 PersonModel.instance.updatePerson(FirebaseAuth.getInstance().currentUser?.uid!!,updatedPerson) {
                     // Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
