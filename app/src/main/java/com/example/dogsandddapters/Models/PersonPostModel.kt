@@ -17,7 +17,7 @@ class PersonPostModel private constructor() {
         LOADED
     }
 
-   private val database = AppLocalDatabasePersonPost.db
+    private val database = AppLocalDatabasePersonPost.db
     private var executor = Executors.newSingleThreadExecutor()
     private var executor2 = Executors.newSingleThreadExecutor()
     private var executor3 = Executors.newSingleThreadExecutor()
@@ -86,8 +86,8 @@ class PersonPostModel private constructor() {
 
     fun addPersonPost(publisher: String, personPost: PersonPost, callback: () -> Unit) {
         FirebasePersonPostModel.addPersonPost(personPost) {
-                refreshAllpersonPosts(publisher)
-                callback()
+            refreshAllpersonPosts(publisher)
+            callback()
 
         }
     }
@@ -101,12 +101,12 @@ class PersonPostModel private constructor() {
     }
 
     fun updatePersonPost(personPost: PersonPost, callback: () -> Unit) {
-            FirebasePersonPostModel.updatePersonPost(personPost) {
-                executor2.execute {
-                    database.PersonPostsDao().updatePersonPost(personPost)
-                }
-                //refreshAllpersonPosts()
-                callback()
+        FirebasePersonPostModel.updatePersonPost(personPost) {
+            executor2.execute {
+                database.PersonPostsDao().updatePersonPost(personPost)
+            }
+            //refreshAllpersonPosts()
+            callback()
         }
 
     }
