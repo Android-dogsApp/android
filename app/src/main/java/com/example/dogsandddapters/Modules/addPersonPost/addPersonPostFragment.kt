@@ -111,7 +111,7 @@ class addPersonPostFragment : Fragment() {
                     val ID: String = UUID.randomUUID().toString()
                     val publisher = user?.id.toString()
 
-                    val personPost = PersonPost(ID, publisher, request, offer, contact)
+                    val personPost = PersonPost(ID, publisher, request, offer, contact, "")
                     PersonPostModel.instance.addPersonPost(user?.email!!, personPost) {}
 
 //                    val generalPost = GeneralPost(ID, publisher, request, offer, contact)

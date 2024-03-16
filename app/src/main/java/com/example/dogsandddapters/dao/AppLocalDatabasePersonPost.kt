@@ -6,7 +6,7 @@ import androidx.room.RoomDatabase
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.base.MyApplication
 
- @Database(entities = [PersonPost::class], version = 4)
+ @Database(entities = [PersonPost::class], version = 5)
     abstract class AppLocalDbPPRepository : RoomDatabase() {
         abstract fun PersonPostsDao(): PersonPostsDao
     }

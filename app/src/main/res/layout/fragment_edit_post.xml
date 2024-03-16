@@ -8,14 +8,7 @@
     android:orientation="vertical"
     android:padding="16dp">
 
-    <!-- Post ID -->
-    <EditText
-        android:id="@+id/editTextPostId"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Post ID"
-        android:textStyle="bold"
-        android:layout_marginBottom="8dp"/>
+
 
     <!-- Request -->
     <EditText
@@ -35,12 +28,21 @@
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:adjustViewBounds="true"
+    android:scaleType="centerInside" />
+
     <!-- Image upload section -->
     <Button
         android:id="@+id/btnSelectImage"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="Upload Image"
+        android:backgroundTint="#7ED381"
         android:layout_marginTop="16dp"/>
 
     <ImageView
@@ -58,15 +60,7 @@
         android:textStyle="bold"
         android:layout_marginTop="16dp"/>
 
-    <!-- Select Image Button -->
-    <Button
-        android:id="@+id/buttonSelectImage"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
-        android:backgroundTint="#7ED381"
-        android:layout_gravity="center_horizontal"
-        android:text="Select Image"/>
+
 
     <!-- Button Layout -->
     <LinearLayout

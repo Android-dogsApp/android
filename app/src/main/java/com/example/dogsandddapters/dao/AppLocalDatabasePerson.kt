@@ -7,7 +7,7 @@ import androidx.room.RoomDatabase
 import com.example.dogsandddapters.Models.Person
 import com.example.dogsandddapters.base.MyApplication
 
-@Database(entities = [Person::class], version = 4)
+@Database(entities = [Person::class], version = 5)
 abstract class AppLocalDbPRepository : RoomDatabase() {
     abstract fun PersonDao(): PersonDao
 }

@@ -10,11 +10,12 @@ data class Person(
     val phoneNumber: String,
     @PrimaryKey val email: String,
     val dogType: String,
+    val image: String,
 
 ){
     //val avatarUrl: String) {
 
-    constructor() : this("", "", "", "", "")
+    constructor() : this("", "", "", "", "", "")
 
     companion object {
 //        var lastUpdated: Long
@@ -35,6 +36,7 @@ data class Person(
         const val PHONE_NUMBER_KEY = "phoneNumber"
         const val EMAIL_KEY = "email"
         const val DOG_TYPE_KEY = "dogType"
+        const val IMAGE_KEY = "image"
        // const val AVATAR_URL_KEY = "avatarUrl"
        //const val LAST_UPDATED = "lastUpdated"
        const val GET_LAST_UPDATED = "get_last_updated"
@@ -46,8 +48,9 @@ data class Person(
             val phoneNumber = json[PHONE_NUMBER_KEY] as? String ?: ""
             val email = json[EMAIL_KEY] as? String ?: ""
             val dogType = json[DOG_TYPE_KEY] as? String ?: ""
+            val image = json[PersonPost.IMAGE_KEY] as? String ?: ""
            // val avatarUrl = json[AVATAR_URL_KEY] as? String ?: ""
-            val person= Person(name, id, phoneNumber, email, dogType)
+            val person= Person(name, id, phoneNumber, email, dogType, image)
 //            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
 //            timestamp?.let {
 //                person.lastUpdated = it.seconds
@@ -65,6 +68,7 @@ data class Person(
                 PHONE_NUMBER_KEY to phoneNumber,
                 EMAIL_KEY to email,
                 DOG_TYPE_KEY to dogType,
+                IMAGE_KEY to image ,
                 //AVATAR_URL_KEY to avatarUrl,
                 //LAST_UPDATED to FieldValue.serverTimestamp()
             )
