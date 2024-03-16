@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
@@ -13,9 +14,12 @@ import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 
 class PersonSpecificPostFragment : Fragment() {
     private val args: PersonSpecificPostFragmentArgs by navArgs()
+
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -33,6 +37,7 @@ class PersonSpecificPostFragment : Fragment() {
         val textViewOffer: TextView = view.findViewById(R.id.textViewOffer)
        // val textViewPhoneNumber : TextView = view.findViewById(R.id.textViewPhoneNumber)
         val textViewContact: TextView = view.findViewById(R.id.textViewcontact)
+        val imageView: ImageView = view.findViewById(R.id.imageView)
         var publisher: String?
 
         PersonPostModel.instance.getPersonPostById(postId){
@@ -40,6 +45,10 @@ class PersonSpecificPostFragment : Fragment() {
             textViewOffer.text = it?.offer
            textViewContact.text = it?.contact
            publisher = it?.publisher
+            Picasso.get().load(it?.image)
+                .resize(400, 400)
+                .centerCrop()
+                .into(imageView)
 
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
                 Log.i("TAG", " PersonSpecificPostFragment: Person ID ${it?.id}")
