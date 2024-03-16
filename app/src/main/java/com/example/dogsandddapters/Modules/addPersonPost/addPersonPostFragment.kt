@@ -47,6 +47,8 @@ class addPersonPostFragment : Fragment() {
     private lateinit var btnCancel: Button
     private lateinit var btnUploadImage: Button
     private lateinit var imageView: ImageView
+    var currentImageUrl: String? = null
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -85,6 +87,7 @@ class addPersonPostFragment : Fragment() {
             )
 
             val adapter = ImageSelectionAdapter(imageUrls) { imageUrl ->
+                currentImageUrl = imageUrl
                 Picasso.get().load(imageUrl).into(imageView)
             }
             recyclerViewImages.adapter = adapter
@@ -111,7 +114,7 @@ class addPersonPostFragment : Fragment() {
                     val ID: String = UUID.randomUUID().toString()
                     val publisher = user?.id.toString()
 
-                    val personPost = PersonPost(ID, publisher, request, offer, contact, "")
+                    val personPost = PersonPost(ID, publisher, request, offer, contact, currentImageUrl!!)
                     PersonPostModel.instance.addPersonPost(user?.email!!, personPost) {}
 
 //                    val generalPost = GeneralPost(ID, publisher, request, offer, contact)

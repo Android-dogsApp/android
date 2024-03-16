@@ -136,7 +136,7 @@ class PersonPostsFragment : Fragment() {
     private fun reloadData() {
         progressBar?.visibility = View.VISIBLE
        // PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
-            PersonPostModel.instance.refreshAllpersonPosts()
+            PersonPostModel.instance.refreshAllpersonPosts("")
        // }
         progressBar?.visibility = View.GONE
     }
