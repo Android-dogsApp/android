@@ -6,6 +6,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Button
+import android.widget.ImageView
 import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +15,7 @@ import androidx.navigation.fragment.navArgs
 import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.databinding.FragmentProfileBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 
 class ProfileFragment : Fragment() {
 
@@ -41,6 +43,7 @@ class ProfileFragment : Fragment() {
 //         var executor = Executors.newSingleThreadExecutor()
 //        executor.execute { AppLocalDatabasePersonPost.db.PersonPostsDao().deleteId("1")
 //        }
+        val imageView2: ImageView = view.findViewById(R.id.imageView2)
 
         val email = args.email
         var userId= args.userId
@@ -54,6 +57,11 @@ class ProfileFragment : Fragment() {
                 if (person != null) {
                     userId= person.id
                 }
+            Picasso.get().load(person?.image)
+                .resize(400, 400)
+                .centerCrop()
+                .into(imageView2)
+
         }
 
         view.findViewById<Button>(R.id.logoutButton).setOnClickListener {

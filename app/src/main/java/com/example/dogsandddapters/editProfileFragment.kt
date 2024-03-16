@@ -55,7 +55,7 @@ class editProfileFragment : Fragment() {
         val editTextPhone: TextView = view.findViewById(R.id.editTextPhone)
         val editTextEmail: TextView = view.findViewById(R.id.editTextEmail)
         val btnUploadImage: Button = view.findViewById(R.id.btnUploadImage)
-         val imageView1: ImageView = view.findViewById(R.id.imageView1) // Initialize imageView here
+         val imageView1: ImageView = view.findViewById(R.id.imageView1)
         val buttonUpdate: Button = view.findViewById(R.id.buttonUpdate)
         val buttonCancel: Button = view.findViewById(R.id.buttonCancel)
         imageView = view.findViewById(R.id.imageView) // Initialize imageView here
