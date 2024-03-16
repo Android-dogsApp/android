@@ -187,11 +187,13 @@ class RegisterFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
-        if (requestCode == EditPostFragment.IMAGE_PICK_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
+        if (requestCode == IMAGE_PICK_REQUEST_CODE && resultCode == Activity.RESULT_OK && data != null) {
             val selectedImageUri = data.data
-            Picasso.get().load(selectedImageUri).into(imageView)
+            currentImageUrl = selectedImageUri.toString() // Save the selected image URL
+            Picasso.get().load(selectedImageUri).into(imageView) // Display the selected image
         }
     }
+
 
     companion object {
         const val IMAGE_PICK_REQUEST_CODE = 123
