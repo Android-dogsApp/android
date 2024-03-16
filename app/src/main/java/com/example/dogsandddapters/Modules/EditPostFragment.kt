@@ -20,17 +20,17 @@ import androidx.navigation.Navigation
 import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.Modules.addPersonPost.ImageSelectionAdapter
 import com.example.dogsandddapters.R
 import com.squareup.picasso.Picasso
 
+
 class EditPostFragment : Fragment() {
     private val args: EditPostFragmentArgs by navArgs()
 
-    private lateinit var editTextPostId: EditText
+    //private lateinit var editTextPostId: EditText
     private lateinit var editTextRequest: EditText
     private lateinit var editTextOffer: EditText
     private lateinit var editTextContact: EditText
@@ -40,6 +40,9 @@ class EditPostFragment : Fragment() {
     private lateinit var buttonSave: Button
     private lateinit var imageView: ImageView
     private var publisher: String? = null
+    private var currentImageUrl: String? = null
+    //private var postId= args.postId
+
 
     private val PICK_IMAGE = 1
 
@@ -51,9 +54,69 @@ class EditPostFragment : Fragment() {
         setupUI(view)
         return view
     }
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+         var postId= args.postId
+
+        // Call the preloading task when the fragment is created
+        ImagePreloadingTask().execute()
+
+        PersonPostModel.instance.getPersonPostById(postId) {
+           // editTextPostId.setText(it?.postid) // Corrected to setText
+            editTextRequest.setText(it?.request) // Corrected to setText
+            editTextOffer.setText(it?.offer) // Corrected to setText
+            editTextContact.setText(it?.contact) // Corrected to setText
+            publisher = it?.publisher
+            Picasso.get().load(it?.image).into(imageView)
+        }
+
+        buttonCancel.setOnClickListener {
+            Navigation.findNavController(it).navigateUp()
+        }
+
+        buttonDeletePost.setOnClickListener {
+//            GeneralPostModel.instance.getGeneralPostById(postId) {
+//                if (it != null) {
+//                    GeneralPostModel.instance.deleteGeneralPost(it) {}
+//                }
+//            }
+            PersonPostModel.instance.getPersonPostById(postId) {
+                if (it != null) {
+                    PersonPostModel.instance.deletePersonPost(it) {}
+                }
+            }
+            val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
+            Navigation.findNavController(view).navigate(action)
+        }
+        buttonSave.setOnClickListener {
+            //val postid = editTextPostId.text.toString()
+            val offer = editTextOffer.text.toString()
+            val contact = editTextContact.text.toString()
+            val request = editTextRequest.text.toString()
+
+            if ( offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()) {
+                // Show an error message to the user, for example, using a Toast
+                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
+            } else {
+                //val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
+                val updatedPersonPost = PersonPost(postId, publisher, request, offer, contact,currentImageUrl!!)
+
+//                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
+//                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+//                }
+
+                PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
+                    //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+                }
+                val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
+                Navigation.findNavController(view).navigate(action)
+            }
+
+        }
+    }
 
     private fun setupUI(view: View) {
-        editTextPostId = view.findViewById(R.id.editTextPostId)
+//        editTextPostId = view.findViewById(R.id.editTextPostId)
         editTextRequest = view.findViewById(R.id.editTextRequest)
         editTextOffer = view.findViewById(R.id.editTextOffer)
         editTextContact = view.findViewById(R.id.editTextContact)
@@ -62,6 +125,9 @@ class EditPostFragment : Fragment() {
         buttonSelectImage = view.findViewById(R.id.btnSelectImage)
         buttonSave = view.findViewById(R.id.buttonSave)
         imageView = view.findViewById(R.id.imageView)
+        val imageView1: ImageView = view.findViewById(R.id.imageView1)
+
+
 
         buttonSelectImage.setOnClickListener {
             val dialogView = layoutInflater.inflate(R.layout.dialog_image_selection, null)
@@ -77,7 +143,11 @@ class EditPostFragment : Fragment() {
             )
 
             val adapter = ImageSelectionAdapter(imageUrls) { imageUrl ->
-                Picasso.get().load(imageUrl).into(imageView)
+                currentImageUrl = imageUrl
+                Picasso.get().load(imageUrl)
+                    .resize(600, 600)
+                    .centerCrop()
+                    .into(imageView)
             }
             recyclerViewImages.adapter = adapter
 
@@ -107,68 +177,11 @@ class EditPostFragment : Fragment() {
 //            }
 //        }
 
-        buttonSave.setOnClickListener {
-            val postid = editTextPostId.text.toString()
-            val offer = editTextOffer.text.toString()
-            val contact = editTextContact.text.toString()
-            val request = editTextRequest.text.toString()
 
-            if (postid.isNullOrBlank() || offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()) {
-                // Show an error message to the user, for example, using a Toast
-                Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
-            } else {
-                val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
-                val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact,"")
-
-//                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
-//                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-//                }
-
-                PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
-                    //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-                }
-                val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
-                Navigation.findNavController(view).navigate(action)
-            }
-
-        }
 
     }
 
-    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        super.onViewCreated(view, savedInstanceState)
-        val postId = args.postId
 
-        // Call the preloading task when the fragment is created
-        ImagePreloadingTask().execute()
-
-        PersonPostModel.instance.getPersonPostById(postId) {
-            editTextPostId.setText(it?.postid) // Corrected to setText
-            editTextRequest.setText(it?.request) // Corrected to setText
-            editTextOffer.setText(it?.offer) // Corrected to setText
-            editTextContact.setText(it?.contact) // Corrected to setText
-            publisher = it?.publisher
-        }
-
-        buttonCancel.setOnClickListener {
-            Navigation.findNavController(it).navigateUp()
-        }
-
-        buttonDeletePost.setOnClickListener {
-//            GeneralPostModel.instance.getGeneralPostById(postId) {
-//                if (it != null) {
-//                    GeneralPostModel.instance.deleteGeneralPost(it) {}
-//                }
-//            }
-            PersonPostModel.instance.getPersonPostById(postId) {
-                if (it != null) {
-                    PersonPostModel.instance.deletePersonPost(it) {}
-                }
-            }
-            val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
-            Navigation.findNavController(view).navigate(action)
-        }
-    }
 
     private fun saveImageToGallery(bitmap: Bitmap) {
         // Define the values to insert into the MediaStore
