@@ -118,7 +118,7 @@ class EditPostFragment : Fragment() {
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
                 val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
-                val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
+                val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact,"")
 
 //                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
 //                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
