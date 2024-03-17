@@ -5,10 +5,10 @@ import android.view.View
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
-import com.example.dogsandddapters.Models.GeneralPost
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostsRcyclerViewActivity
 import com.example.dogsandddapters.R
+import com.squareup.picasso.Picasso
 
 class GeneralPostViewHolder(val itemView: View,
                             val listener: GeneralPostsRcyclerViewActivity.OnItemClickListener?,
@@ -45,5 +45,6 @@ class GeneralPostViewHolder(val itemView: View,
         idTextView?.text = generalpost?.postid
         //TODO: ADD PUBLISHER - THROUGH THE FIREBASE ♥
         //imageImageView?.text= generalpost?.image
+
     }
 }

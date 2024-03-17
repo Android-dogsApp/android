@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Modules.PersonPosts.PersonPostsRcyclerViewActivity
 import com.example.dogsandddapters.R
+import com.squareup.picasso.Picasso
 
 class PersonPostViewHolder(val itemView: View,
                            val listener: PersonPostsRcyclerViewActivity.OnItemClickListener?,
@@ -42,7 +43,10 @@ class PersonPostViewHolder(val itemView: View,
         offerTextView?.text = personpost?.offer
         contactTextView?.text = personpost?.contact
         idTextView?.text = personpost?.postid
+
         //TODO: ADD PUBLISHER - THROUGH THE FIREBASE ♥
-       //imageImageView?.text= generalpost?.image
+//       imageImageView?.text= personpost?.image
+
+
     }
 }
