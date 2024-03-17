@@ -45,6 +45,12 @@ class GeneralPostViewHolder(val itemView: View,
         idTextView?.text = generalpost?.postid
         //TODO: ADD PUBLISHER - THROUGH THE FIREBASE ♥
         //imageImageView?.text= generalpost?.image
-
-    }
+        val imageUrl = generalpost?.image
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(imageUrl)
+                .resize(400, 400)
+                .centerCrop()
+                .into(imageImageView)
+           }
+       }
 }

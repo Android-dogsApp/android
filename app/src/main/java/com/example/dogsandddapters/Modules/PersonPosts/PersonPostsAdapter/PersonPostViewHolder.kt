@@ -46,7 +46,13 @@ class PersonPostViewHolder(val itemView: View,
 
         //TODO: ADD PUBLISHER - THROUGH THE FIREBASE ♥
 //       imageImageView?.text= personpost?.image
+        val imageUrl = personpost?.image
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(imageUrl)
+                .resize(400, 400)
+                .centerCrop()
+                .into(imageImageView)
+           }
 
-
-    }
+        }
 }

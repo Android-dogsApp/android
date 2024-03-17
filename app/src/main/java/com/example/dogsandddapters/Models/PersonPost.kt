@@ -27,7 +27,7 @@ data class PersonPost(
                     .appContext?.getSharedPreferences("TAG", Context.MODE_PRIVATE)
                     ?.getLong(GET_LAST_UPDATED, 0) ?: 0
             }
-        set(value)
+            set(value)
             {
                 MyApplication.Globals
                     .appContext?.getSharedPreferences("TAG", Context.MODE_PRIVATE)
