@@ -19,6 +19,7 @@ import com.example.dogsandddapters.Models.PersonPostModel
 import com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostAdapter.GeneralPostsRecyclerAdapter
 import com.example.dogsandddapters.databinding.FragmentGeneralPostsBinding
 import com.google.firebase.auth.FirebaseAuth
+import com.squareup.picasso.Picasso
 
 class GeneralPostsFragment : Fragment() {
     var GeneralPostsRcyclerView: RecyclerView? = null
@@ -112,6 +113,7 @@ class GeneralPostsFragment : Fragment() {
 
 
     }
+
 
     override fun onResume() {
         super.onResume()

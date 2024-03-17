@@ -8,7 +8,6 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.dogsandddapters.Models.PersonPost
 import com.example.dogsandddapters.Modules.PersonPosts.PersonPostsRcyclerViewActivity
 import com.example.dogsandddapters.R
-import com.squareup.picasso.Callback
 import com.squareup.picasso.Picasso
 
 class PersonPostViewHolder(val itemView: View,
@@ -19,14 +18,14 @@ class PersonPostViewHolder(val itemView: View,
     var offerTextView: TextView? = null
     var contactTextView: TextView? = null
     var idTextView: TextView? = null
-    var imageView: ImageView? = null
+    var imageImageView: ImageView? = null
     var personpost: PersonPost? = null
 
     init {
         requestTextView = itemView.findViewById(R.id.requestTextViewperson)
         offerTextView = itemView.findViewById(R.id.offerTextViewperson)
         contactTextView = itemView.findViewById(R.id.contactTextViewperson)
-        imageView = itemView.findViewById(R.id.postImageViewperson)
+        imageImageView = itemView.findViewById(R.id.postImageViewperson)
         idTextView = itemView.findViewById(R.id.personPostIdTextViewperson)
 
 
@@ -38,18 +37,6 @@ class PersonPostViewHolder(val itemView: View,
         }
     }
 
-//    fun bind(personpost: PersonPost?) {
-//        this.personpost = personpost
-//        requestTextView?.text = personpost?.request
-//        offerTextView?.text = personpost?.offer
-//        contactTextView?.text = personpost?.contact
-//        idTextView?.text = personpost?.postid
-////        Picasso.get().load(personpost?.image)
-////            .resize(400, 400)
-////            .centerCrop()
-////            .into(imageView)
-//    }
-
     fun bind(personpost: PersonPost?) {
         this.personpost = personpost
         requestTextView?.text = personpost?.request
@@ -57,24 +44,15 @@ class PersonPostViewHolder(val itemView: View,
         contactTextView?.text = personpost?.contact
         idTextView?.text = personpost?.postid
 
-        // Load image using Picasso
-        personpost?.image?.let { imageUrl ->
-            if (!imageUrl.isNullOrEmpty()) {
-                Picasso.get().load(imageUrl)
-                    .resize(400, 400)
-                    .centerCrop()
-                    .into(imageView, object : Callback {
-                        override fun onSuccess() {
-                            // Image loaded successfully
-                        }
+        //TODO: ADD PUBLISHER - THROUGH THE FIREBASE ♥
+//       imageImageView?.text= personpost?.image
+        val imageUrl = personpost?.image
+        if (!imageUrl.isNullOrEmpty()) {
+            Picasso.get().load(imageUrl)
+                .resize(400, 400)
+                .centerCrop()
+                .into(imageImageView)
+           }
 
-                        override fun onError(e: Exception?) {
-                            // Log or handle the error
-                            Log.e("Picasso", "Error loading image", e)
-                        }
-                    })
-            }
         }
-    }
-
 }
