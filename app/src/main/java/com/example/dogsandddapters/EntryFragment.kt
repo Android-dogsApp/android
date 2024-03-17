@@ -114,6 +114,8 @@ class EntryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (requireActivity() as MainActivity).setBottomBarVisibility(false)
+        (requireActivity() as MainActivity).setAddMenuItemVisibility(false)
         fun isLoggedIn(): Boolean {
             // return sharedPreferences.contains("email") && sharedPreferences.contains("password")
             FirebaseAuth.getInstance().currentUser?.let {

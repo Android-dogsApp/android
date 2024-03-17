@@ -26,6 +26,7 @@ class ProfileFragment : Fragment() {
 
 
     override fun onCreateView(
+
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
@@ -39,6 +40,8 @@ class ProfileFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        (requireActivity() as MainActivity).setBottomBarVisibility(true)
+        (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
         super.onViewCreated(view, savedInstanceState)
 //         var executor = Executors.newSingleThreadExecutor()
 //        executor.execute { AppLocalDatabasePersonPost.db.PersonPostsDao().deleteId("1")
