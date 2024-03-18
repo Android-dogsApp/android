@@ -85,6 +85,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.PersonModel
+import com.example.dogsandddapters.dao.AppLocalDatabaseGeneralPost
+import com.example.dogsandddapters.dao.AppLocalDatabasePersonPost
 import com.google.firebase.auth.FirebaseAuth
 
 
@@ -114,6 +116,88 @@ class EntryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db1")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db2")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("michalpost")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db3")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("t")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("r")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("g")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("y")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("i")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("o")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("m")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("a")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("dbm")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("k")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("p")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("e")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("find a babysitter")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("a")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("babysitter")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("food for dogs")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("toys for dogs")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("fun saturday")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("sedrickloveyou")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("test")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("11")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("hi")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("archi124")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("test123")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("db")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("db1")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("db2")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("michalpost")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("db3")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("t")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("r")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("g")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("y")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("i")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("o")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("m")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("a")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("dbm")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("k")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("p")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("e")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("find a babysitter")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("a")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("babysitter")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("food for dogs")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("toys for dogs")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("fun saturday")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("sedrickloveyou")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("test")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("11")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("hi")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("archi124")
+//        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("test123")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         (requireActivity() as MainActivity).setBottomBarVisibility(false)
         (requireActivity() as MainActivity).setAddMenuItemVisibility(false)
         fun isLoggedIn(): Boolean {
