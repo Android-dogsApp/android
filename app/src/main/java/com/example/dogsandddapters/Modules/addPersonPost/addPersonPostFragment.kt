@@ -77,13 +77,17 @@ class addPersonPostFragment : Fragment() {
             val dialogView = layoutInflater.inflate(R.layout.dialog_image_selection, null)
             val recyclerViewImages: RecyclerView = dialogView.findViewById(R.id.recyclerViewImages)
 
-            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(), 2)
+            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(), 4)
 
             val imageUrls = listOf(
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/1200px-Labrador_Retriever_portrait.jpg",
                 "https://www.southernliving.com/thmb/NnmgOEms-v3uG4T6SRgc8QDGlUA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/gettyimages-837898820-2000-667fc4cc028a43369037e229c9bd52fb.jpg",
                 "https://media.npr.org/assets/img/2022/05/25/gettyimages-917452888-edit_custom-c656c35e4e40bf22799195af846379af6538810c-s1100-c50.jpg",
-                "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2022/6/16/1/shutterstock_1862856634.jpg.rend.hgtvcom.1280.853.suffix/1655430860853.jpeg"
+                "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2022/6/16/1/shutterstock_1862856634.jpg.rend.hgtvcom.1280.853.suffix/1655430860853.jpeg",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk3KLVZIUhN5iz6Oi536EKkrPxmwyFLSdZYg&usqp=CAU",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcKoNPyXFo2Ky2df6gTWWt798wE-jc54YjHQ&usqp=CAU",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLLGZu8QQ3XEZMVLNfCqG4BkRt395-iXYgpw&usqp=CAU",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb2XLEhBVAalPWyrDqrua8Z34AXGqRY4y9SQ&usqp=CAU"
             )
 
             val adapter = ImageSelectionAdapter(imageUrls) { imageUrl ->
@@ -149,7 +153,8 @@ class addPersonPostFragment : Fragment() {
 //        }
 
         btnCancel.setOnClickListener {
-            Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
+            val action = addPersonPostFragmentDirections.actionAddPersonPostFragmentToGeneralPostsFragment()
+                Navigation.findNavController(view).navigate(action)
         }
     }
 
@@ -167,20 +172,20 @@ class addPersonPostFragment : Fragment() {
             Picasso.get().load(selectedImageUri).into(imageView)
         }
     }
-    private fun checkStoragePermission(): Boolean {
-        val permission = ContextCompat.checkSelfPermission(
-            requireContext(),
-            Manifest.permission.WRITE_EXTERNAL_STORAGE
-        )
-        return permission == PackageManager.PERMISSION_GRANTED
-    }
-    private fun requestStoragePermission() {
-        ActivityCompat.requestPermissions(
-            requireActivity(),
-            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
-            REQUEST_CODE_STORAGE_PERMISSION
-        )
-    }
+//    private fun checkStoragePermission(): Boolean {
+//        val permission = ContextCompat.checkSelfPermission(
+//            requireContext(),
+//            Manifest.permission.WRITE_EXTERNAL_STORAGE
+//        )
+//        return permission == PackageManager.PERMISSION_GRANTED
+//    }
+//    private fun requestStoragePermission() {
+//        ActivityCompat.requestPermissions(
+//            requireActivity(),
+//            arrayOf(Manifest.permission.WRITE_EXTERNAL_STORAGE),
+//            REQUEST_CODE_STORAGE_PERMISSION
+//        )
+//    }
 
     // Inside your Fragment class
     private fun downloadAndSaveDogPhoto() {
@@ -246,7 +251,11 @@ class addPersonPostFragment : Fragment() {
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/1200px-Labrador_Retriever_portrait.jpg",
                 "https://www.southernliving.com/thmb/NnmgOEms-v3uG4T6SRgc8QDGlUA=/1500x0/filters:no_upscale():max_bytes(150000):strip_icc()/gettyimages-837898820-2000-667fc4cc028a43369037e229c9bd52fb.jpg",
                 "https://media.npr.org/assets/img/2022/05/25/gettyimages-917452888-edit_custom-c656c35e4e40bf22799195af846379af6538810c-s1100-c50.jpg",
-                "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2022/6/16/1/shutterstock_1862856634.jpg.rend.hgtvcom.1280.853.suffix/1655430860853.jpeg"
+                "https://hgtvhome.sndimg.com/content/dam/images/hgtv/fullset/2022/6/16/1/shutterstock_1862856634.jpg.rend.hgtvcom.1280.853.suffix/1655430860853.jpeg",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTk3KLVZIUhN5iz6Oi536EKkrPxmwyFLSdZYg&usqp=CAU",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRcKoNPyXFo2Ky2df6gTWWt798wE-jc54YjHQ&usqp=CAU",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRLLGZu8QQ3XEZMVLNfCqG4BkRt395-iXYgpw&usqp=CAU",
+                "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTb2XLEhBVAalPWyrDqrua8Z34AXGqRY4y9SQ&usqp=CAU"
             )
 
             for (imageUrl in imageUrls) {

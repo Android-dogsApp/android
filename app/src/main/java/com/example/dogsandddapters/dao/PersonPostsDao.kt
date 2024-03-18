@@ -30,7 +30,7 @@ interface PersonPostsDao {
         fun deleteId(request: String)
 
         @Query("SELECT * FROM PersonPost WHERE postid =:id")
-         fun getPersonPostById(id: String): LiveData<PersonPost>
+        infix fun getPersonPostById(id: String): LiveData<PersonPost>
 
         //@Query("SELECT * FROM PersonPost WHERE postid =:id")
         @Update
