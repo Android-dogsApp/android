@@ -26,7 +26,7 @@ interface GeneralPostDao {
      fun delete(generalpost: GeneralPost)
 
     @Query("SELECT * FROM GeneralPost WHERE postid =:id")
-     fun getGeneralPostById(id: String):  LiveData<GeneralPost>
+    infix fun getGeneralPostById(id: String):  LiveData<GeneralPost>
 
     //@Query("SELECT * FROM GeneralPost WHERE postid =:id")
     @Update

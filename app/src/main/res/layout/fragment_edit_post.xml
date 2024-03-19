@@ -28,13 +28,21 @@
         android:textStyle="bold"
         android:layout_marginBottom="8dp"/>
 
+    <EditText
+        android:id="@+id/editTextContact"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:hint="Enter Contact Info"
+        android:textStyle="bold"
+        android:layout_marginTop="16dp"/>
+
     <ImageView
         android:id="@+id/imageView1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="16dp"
         android:adjustViewBounds="true"
-    android:scaleType="centerInside" />
+        android:scaleType="centerInside" />
 
     <!-- Image upload section -->
     <Button
@@ -45,6 +53,7 @@
         android:backgroundTint="#7ED381"
         android:layout_marginTop="16dp"/>
 
+
     <ImageView
         android:id="@+id/imageView"
         android:layout_width="wrap_content"
@@ -52,13 +61,6 @@
         android:layout_marginTop="16dp"/>
 
     <!-- Contact Information -->
-    <EditText
-        android:id="@+id/editTextContact"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:hint="Enter Contact Info"
-        android:textStyle="bold"
-        android:layout_marginTop="16dp"/>
 
 
 
