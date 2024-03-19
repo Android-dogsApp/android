@@ -5,7 +5,6 @@ import android.app.AlertDialog
 import android.content.Intent
 import android.os.AsyncTask
 import android.os.Bundle
-import android.provider.MediaStore
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -25,7 +24,6 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.auth.FirebaseAuthUserCollisionException
 import com.google.firebase.firestore.FirebaseFirestore
 import com.squareup.picasso.Picasso
-import java.io.IOException
 
 class RegisterFragment : Fragment() {
 
@@ -40,7 +38,8 @@ class RegisterFragment : Fragment() {
     private var cancelButton: Button? = null
     private var btnUploadImage: Button? = null
     private var imageView: ImageView? = null
-    var currentImageUrl: String? = null
+    var currentImageUrl: String?= null
+   // var currentImageUrl: String? = "https://upload.wikimedia.org/wikipedia/commons/f/f4/User_Avatar_2.png"
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -111,6 +110,7 @@ class RegisterFragment : Fragment() {
         ImagePreloadingTask().execute()
 
         registerButton?.setOnClickListener {
+            var filled= true
             val email = emailEditText?.text.toString().trim()
             val password = passwordEditText?.text.toString().trim()
 
@@ -120,9 +120,13 @@ class RegisterFragment : Fragment() {
             }
 
             registerUser(email, password)
-            Navigation.findNavController(requireView()).navigate(R.id.action_registerFragment_to_generalPostsFragment)
-            (requireActivity() as MainActivity).setBottomBarVisibility(true)
-            (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
+
+//                Navigation.findNavController(requireView())
+//                    .navigate(R.id.action_registerFragment_to_generalPostsFragment)
+//                (requireActivity() as MainActivity).setBottomBarVisibility(true)
+//                (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
+
+
         }
     }
 
@@ -157,42 +161,128 @@ class RegisterFragment : Fragment() {
                     val user = auth.currentUser
                     if (user != null) {
                         val userId = user.uid
-                        val name = nameEditText?.text.toString()
-                        val id = idEditText?.text.toString()
-                        val phoneNumber = phoneNumberEditText?.text.toString()
-                        val dogType = dogTypeEditText?.text.toString()
+                        var name = nameEditText?.text.toString()
+                        var id = idEditText?.text.toString()
+                        var phoneNumber = phoneNumberEditText?.text.toString()
+                        var dogType = dogTypeEditText?.text.toString()
 
-                        val person = Person(name, id, phoneNumber, email, dogType, currentImageUrl!!)
+                        // Check each field and update flag accordingly
+                        if (name.isNullOrBlank() || id.isNullOrBlank() || phoneNumber.isNullOrBlank() || dogType.isNullOrBlank() || currentImageUrl.isNullOrEmpty()) {
+//                            name = "NeedToBeFilled"
+//                            id = "NeedToBeFilled"
+//                            phoneNumber = "NeedToBeFilled"
+//                            dogType = "NeedToBeFilled"
+                            Toast.makeText(
+                                requireContext(),
+                                "Please fill in all fields",
+                                Toast.LENGTH_SHORT
+                            ).show()
 
-                        val db = FirebaseFirestore.getInstance()
-                        db.collection("persons")
-                            .document(userId)
-                            .set(person)
-                            .addOnSuccessListener {
-                                // Log.i(TAG, "DocumentSnapshot added with ID: $userId")
-                            }
-                            .addOnFailureListener { e ->
-                                // Log.i(TAG, "Error adding document", e)
-                            }
+                        } else {
+                            val person = Person(name, id, phoneNumber, email, dogType, currentImageUrl!!)
+                            val db = FirebaseFirestore.getInstance()
+                            db.collection("persons")
+                                .document(userId)
+                                .set(person)
+                                .addOnSuccessListener {
+                                    Toast.makeText(
+                                        context,
+                                        "Registration successful",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                .addOnFailureListener { e ->
+                                    Toast.makeText(
+                                        context,
+                                        "Error adding document: ${e.message}",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                            Navigation.findNavController(requireView())
+                                .navigate(R.id.action_registerFragment_to_generalPostsFragment)
+                            (requireActivity() as MainActivity).setBottomBarVisibility(true)
+                            (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
 
-                        Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT).show()
+                        }
                     } else {
                         Toast.makeText(context, "User is null", Toast.LENGTH_SHORT).show()
                     }
+
                 } else {
                     val exception = task.exception
                     if (exception is FirebaseAuthUserCollisionException) {
                         Toast.makeText(context, "Email is already in use", Toast.LENGTH_SHORT).show()
                     } else {
-                        Toast.makeText(
-                            context,
-                            "Registration failed: ${exception?.message}",
-                            Toast.LENGTH_SHORT
-                        ).show()
+                        Toast.makeText(context, "Registration failed: ${exception?.message}", Toast.LENGTH_SHORT).show()
                     }
+
                 }
             }
+
     }
+
+
+//    private fun registerUser(email: String, password: String) {
+//        auth.createUserWithEmailAndPassword(email, password)
+//            .addOnCompleteListener(requireActivity()) { task ->
+//                if (task.isSuccessful) {
+//                    val user = auth.currentUser
+//                    if (user != null) {
+//                        val userId = user.uid
+//                        val name = nameEditText?.text.toString()
+//                        val id = idEditText?.text.toString()
+//                        val phoneNumber = phoneNumberEditText?.text.toString()
+//                        val dogType = dogTypeEditText?.text.toString()
+//                        if (name.isNullOrBlank() || id.isNullOrBlank() || phoneNumber.isNullOrBlank() || dogType.isNullOrBlank() || currentImageUrl.isNullOrEmpty()) {
+//                            Toast.makeText(
+//                                requireContext(),
+//                                "Please fill in all fields",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                            return@addOnCompleteListener
+//                        } else {
+//                            val person =
+//                                Person(name, id, phoneNumber, email, dogType, currentImageUrl!!)
+//
+//
+//                            //val person = Person(name, id, phoneNumber, email, dogType, currentImageUrl!!)
+//
+//                            val db = FirebaseFirestore.getInstance()
+//                            db.collection("persons")
+//                                .document(userId)
+//                                .set(person)
+//                                .addOnSuccessListener {
+//                                    // Log.i(TAG, "DocumentSnapshot added with ID: $userId")
+//                                }
+//                                .addOnFailureListener { e ->
+//                                    // Log.i(TAG, "Error adding document", e)
+//                                }
+//
+//
+//                            Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT)
+//                                .show()
+//                         }
+//                    } else {
+//                            Toast.makeText(context, "User is null", Toast.LENGTH_SHORT).show()
+//                    }
+//                } else {
+//                        val exception = task.exception
+//                        if (exception is FirebaseAuthUserCollisionException) {
+//                            Toast.makeText(context, "Email is already in use", Toast.LENGTH_SHORT)
+//                                .show()
+//                            return@addOnCompleteListener
+//                        } else {
+//                            Toast.makeText(
+//                                context,
+//                                "Registration failed: ${exception?.message}",
+//                                Toast.LENGTH_SHORT
+//                            ).show()
+//                            return@addOnCompleteListener
+//                        }
+//                }
+//
+//            }
+//    }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)

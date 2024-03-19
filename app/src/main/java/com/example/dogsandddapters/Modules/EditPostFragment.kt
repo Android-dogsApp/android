@@ -94,7 +94,7 @@ class EditPostFragment : Fragment() {
             val contact = editTextContact.text.toString()
             val request = editTextRequest.text.toString()
 
-            if ( offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()) {
+            if ( offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()|| currentImageUrl.isNullOrEmpty()) {
                 // Show an error message to the user, for example, using a Toast
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {

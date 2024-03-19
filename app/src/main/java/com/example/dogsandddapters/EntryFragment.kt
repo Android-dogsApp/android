@@ -85,9 +85,8 @@ import android.widget.TextView
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import com.example.dogsandddapters.Models.PersonModel
-import com.example.dogsandddapters.dao.AppLocalDatabaseGeneralPost
-import com.example.dogsandddapters.dao.AppLocalDatabasePersonPost
 import com.google.firebase.auth.FirebaseAuth
+import java.util.concurrent.Executors
 
 
 class EntryFragment : Fragment() {
@@ -116,12 +115,13 @@ class EntryFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db1")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db2")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("michalpost")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("db3")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("t")
+         var executor = Executors.newSingleThreadExecutor()
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("find a baybysitter")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("a")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("baybysitter")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("food for dogs")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("toys for dogs")
+//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("fun saturday")
 //        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("r")
 //        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("g")
 //        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("y")
@@ -133,18 +133,20 @@ class EntryFragment : Fragment() {
 //        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("k")
 //        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("p")
 //        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("e")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("find a babysitter")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("a")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("babysitter")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("food for dogs")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("toys for dogs")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("fun saturday")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("sedrickloveyou")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("test")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("11")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("hi")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("archi124")
-//        AppLocalDatabasePersonPost.db.PersonPostsDao()getPersonPostById("test123")
+//        executor.execute {
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("find a babysitter")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("a")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("babysitter")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("food for dogs")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("toys for dog")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("fun saturday")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("sedrickloveyou")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("test")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("11")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("hi")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("archi124")
+//            AppLocalDatabasePersonPost.db.PersonPostsDao() deleteId ("test123")
+//        }
 //        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("db")
 //        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("db1")
 //        AppLocalDatabaseGeneralPost.db.GeneralPostDao()getGeneralPostById("db2")
@@ -208,6 +210,7 @@ class EntryFragment : Fragment() {
             return false
         }
         // Update UI based on login state
+        //FirebaseAuth.getInstance().signOut()
          var isLoggedIn = isLoggedIn()
         if (isLoggedIn)
         {
@@ -216,6 +219,8 @@ class EntryFragment : Fragment() {
             btnRegister.visibility = View.GONE
             btnLogin.visibility = View.GONE
             PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
+                Log.i("EntryFragment", "isLoggedIn: ${FirebaseAuth.getInstance().currentUser?.uid}")
+
                 val email = it?.email
 //                textViewWelcomeBack.text = "Welcome back, ${it?.name}!"
 //                textViewWelcomeBack.visibility = View.VISIBLE

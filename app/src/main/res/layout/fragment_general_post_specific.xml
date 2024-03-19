@@ -25,16 +25,16 @@
 
             <!-- Post ID Label -->
             <TextView
-                android:id="@+id/postIdLabelTextView"
+                android:id="@+id/publisherTextView"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Post ID: "
+                android:text="The Publisher: "
                 android:textStyle="bold"
                 android:textSize="18sp"/>
 
             <!-- Post ID Value -->
             <TextView
-                android:id="@+id/textViewPostId"
+                android:id="@+id/textViewPublisher"
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"

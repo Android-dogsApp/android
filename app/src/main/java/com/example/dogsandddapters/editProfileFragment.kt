@@ -140,7 +140,7 @@ class editProfileFragment : Fragment() {
             val email = editTextEmail.text.toString()
             val dogType = editTextDogTypes.text.toString()
 
-            if (name.isNullOrBlank() || phoneNumber.isNullOrBlank() || email.isNullOrBlank() || dogType.isNullOrBlank()) {
+            if (name.isNullOrBlank() || phoneNumber.isNullOrBlank() || email.isNullOrBlank() || dogType.isNullOrBlank() || currentImageUrl.isNullOrEmpty()) {
                 // Show an error message to the user, for example, using a Toast
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {

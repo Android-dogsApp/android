@@ -27,10 +27,10 @@ interface PersonPostsDao {
          fun delete(personpost: PersonPost)
 
         @Query("DELETE FROM PersonPost WHERE Request = :request")
-        fun deleteId(request: String)
+        infix fun deleteId(request: String)
 
         @Query("SELECT * FROM PersonPost WHERE postid =:id")
-        infix fun getPersonPostById(id: String): LiveData<PersonPost>
+         fun getPersonPostById(id: String): LiveData<PersonPost>
 
         //@Query("SELECT * FROM PersonPost WHERE postid =:id")
         @Update
