@@ -1,11 +1,9 @@
 package com.example.dogsandddapters.Modules.addPersonPost
 
-import android.Manifest
 import android.app.Activity
 import android.app.AlertDialog
 import android.content.ContentValues
 import android.content.Intent
-import android.content.pm.PackageManager
 import android.graphics.Bitmap
 import android.graphics.drawable.Drawable
 import android.os.AsyncTask
@@ -21,8 +19,6 @@ import android.widget.EditText
 import android.widget.ImageView
 import android.widget.TextView
 import android.widget.Toast
-import androidx.core.app.ActivityCompat
-import androidx.core.content.ContextCompat
 import androidx.fragment.app.Fragment
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
@@ -110,7 +106,7 @@ class addPersonPostFragment : Fragment() {
             val offer = editTextOffer.text.toString()
             val contact = editTextContact.text.toString()
 
-            if (request.isNullOrBlank() || offer.isNullOrBlank() || contact.isNullOrBlank()) {
+            if (request.isNullOrBlank() || offer.isNullOrBlank() || contact.isNullOrBlank()  || currentImageUrl.isNullOrEmpty()){
                 // Show an error message to the user, for example, using a Toast
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {

@@ -35,12 +35,14 @@ class PersonSpecificPostFragment : Fragment() {
         Log.i("TAG", " PersonSpecificPostFragment: Post ID $postId")
         val textViewRequest: TextView = view.findViewById(R.id.textViewRequest)
         val textViewOffer: TextView = view.findViewById(R.id.textViewOffer)
+        val textViewPublisher: TextView = view.findViewById(R.id.textViewPublisher)
        // val textViewPhoneNumber : TextView = view.findViewById(R.id.textViewPhoneNumber)
         val textViewContact: TextView = view.findViewById(R.id.textViewcontact)
         val imageView: ImageView = view.findViewById(R.id.imageViewPost)
         var publisher: String?
 
         PersonPostModel.instance.getPersonPostById(postId){
+            textViewPublisher.text = it?.publisher
             textViewRequest.text = it?.request
             textViewOffer.text = it?.offer
            textViewContact.text = it?.contact
