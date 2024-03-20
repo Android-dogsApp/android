@@ -210,7 +210,7 @@ class EntryFragment : Fragment() {
             return false
         }
         // Update UI based on login state
-        //FirebaseAuth.getInstance().signOut()
+        FirebaseAuth.getInstance().signOut()
          var isLoggedIn = isLoggedIn()
         if (isLoggedIn)
         {
