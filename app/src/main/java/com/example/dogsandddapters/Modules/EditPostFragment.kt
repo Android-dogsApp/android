@@ -30,7 +30,6 @@ import com.squareup.picasso.Picasso
 class EditPostFragment : Fragment() {
     private val args: EditPostFragmentArgs by navArgs()
 
-    //private lateinit var editTextPostId: EditText
     private lateinit var editTextRequest: EditText
     private lateinit var editTextOffer: EditText
     private lateinit var editTextContact: EditText
@@ -41,7 +40,6 @@ class EditPostFragment : Fragment() {
     private lateinit var imageView: ImageView
     private var publisher: String? = null
     private var currentImageUrl: String? = null
-    //private var postId= args.postId
 
 
     private val PICK_IMAGE = 1
@@ -75,11 +73,7 @@ class EditPostFragment : Fragment() {
         }
 
         buttonDeletePost.setOnClickListener {
-//            GeneralPostModel.instance.getGeneralPostById(postId) {
-//                if (it != null) {
-//                    GeneralPostModel.instance.deleteGeneralPost(it) {}
-//                }
-//            }
+
             PersonPostModel.instance.getPersonPostById(postId) {
                 if (it != null) {
                     PersonPostModel.instance.deletePersonPost(it) {}
@@ -101,12 +95,9 @@ class EditPostFragment : Fragment() {
                 //val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
                 val updatedPersonPost = PersonPost(postId, publisher, request, offer, contact,currentImageUrl!!)
 
-//                GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
-//                   // Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-//                }
+
 
                 PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
-                    //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
                 }
                 val action = EditPostFragmentDirections.actionEditPostFragmentToGeneralPostsFragment()
                 Navigation.findNavController(view).navigate(action)
@@ -170,24 +161,6 @@ class EditPostFragment : Fragment() {
                 }
                 .show()
         }
-
-//        buttonSave.setOnClickListener {
-//            val postid = editTextPostId.text.toString()
-//            val offer = editTextOffer.text.toString()
-//            val contact = editTextContact.text.toString()
-//            val request = editTextRequest.text.toString()
-//            val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
-//            val updatedPersonPost = PersonPost(postid, publisher, request, offer, contact)
-//
-//            GeneralPostModel.instance.updateGeneralPost(updatedGeneralPost) {
-//                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-//            }
-//
-//            PersonPostModel.instance.updatePersonPost(updatedPersonPost) {
-//                Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-//            }
-//        }
-
 
 
     }

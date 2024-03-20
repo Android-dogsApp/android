@@ -81,7 +81,7 @@ class editProfileFragment : Fragment() {
             val dialogView = layoutInflater.inflate(R.layout.dialog_image_selection, null)
             val recyclerViewImages: RecyclerView = dialogView.findViewById(R.id.recyclerViewImages)
 
-            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(), 2)
+            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(),4)
 
             val imageUrls = listOf(
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/1200px-Labrador_Retriever_portrait.jpg",
@@ -117,24 +117,9 @@ class editProfileFragment : Fragment() {
                 }
                 .create()
 
-            // Show the dialog after attaching the adapter to the RecyclerView
             dialog.show()
         }
 
-//        buttonUpdate?.setOnClickListener {
-//            val id = personId
-//            val name = editTextName.text.toString()
-//            val phoneNumber = editTextPhone.text.toString()
-//            val email = editTextEmail.text.toString()
-//            val dogType = editTextDogTypes.text.toString()
-//            val updatedPerson= Person(name, id, phoneNumber, email, dogType)
-//
-//            PersonModel.instance.updatePerson(updatedPerson){
-//                //Navigation.findNavController(it).popBackStack(R.id.PersonPostsFragment, false)
-//            }
-//            val action = editProfileFragmentDirections.actionEditProfileFragmentToGeneralPostsFragment()
-//            Navigation.findNavController(view).navigate(action)
-//        }
 
         buttonUpdate?.setOnClickListener {
             val id = personId
@@ -160,9 +145,6 @@ class editProfileFragment : Fragment() {
                 }
             }
 
-
-//            val action = editProfileFragmentDirections.actionEditProfileFragmentToGeneralPostsFragment()
-//            Navigation.findNavController(view).navigate(action)
         }
 
 
@@ -179,13 +161,11 @@ class editProfileFragment : Fragment() {
             put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
         }
 
-        // Insert the image into the MediaStore
         val uri = requireContext().contentResolver.insert(
             MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
             contentValues
         )
 
-        // Write the bitmap data to the content resolver
         uri?.let { imageUri ->
             requireContext().contentResolver.openOutputStream(imageUri).use { outputStream ->
                 outputStream?.let {
@@ -232,7 +212,6 @@ class editProfileFragment : Fragment() {
                 "https://m.media-amazon.com/images/I/81jViwAqYxL._AC_UL480_FMwebp_QL65_.jpg",
                 "https://m.media-amazon.com/images/I/81mkoOlGsTL._AC_UL480_FMwebp_QL65_.jpg"
             )
-
             for (imageUrl in imageUrls) {
                 Picasso.get().load(imageUrl).fetch()
             }

@@ -50,14 +50,7 @@ class PersonPostsFragment : Fragment() {
 
         progressBar?.visibility = View.VISIBLE
 
-//        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!) {
-//            Log.i("PersonPostsFragment", "PersonPostsFragment -publisher ${it?.id}")
-//            viewModel.personposts = PersonPostModel.instance.getAllpersonPosts("")
-//            //Navigation.findNavController(it).popBackStack(R.id.personPostsFragment, false)
-//        }
 
-//        PersonModel.instance.getPerson(FirebaseAuth.getInstance().currentUser?.uid!!){
-//            val personId= it?.id
             viewModel.personposts = PersonPostModel.instance.getAllpersonPosts("")
             val liveData: LiveData<MutableList<PersonPost>> = PersonPostModel.instance.getAllpersonPosts("")
             val owner: LifecycleOwner = viewLifecycleOwner
@@ -72,14 +65,7 @@ class PersonPostsFragment : Fragment() {
                     }
                 }
             })
-       //}
 
-
-
-//        viewModel.personposts = PersonPostModel.instance.getAllpersonPosts { newPosts ->
-//            //viewModel.addAllPersonPosts(newPosts ?: emptyList())
-//            //Navigation.findNavController(view).popBackStack(R.id.personPostsFragment, false)
-//        }
 
         val btnMoveToProfile: Button = binding.btnMoveToProfile
         btnMoveToProfile.setOnClickListener {

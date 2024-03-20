@@ -43,8 +43,6 @@ class GeneralPostViewHolder(val itemView: View,
         offerTextView?.text = generalpost?.offer
         contactTextView?.text = generalpost?.contact
         idTextView?.text = generalpost?.postid
-        //TODO: ADD PUBLISHER - THROUGH THE FIREBASE ♥
-        //imageImageView?.text= generalpost?.image
         val imageUrl = generalpost?.image
         if (!imageUrl.isNullOrEmpty()) {
             Picasso.get().load(imageUrl)

@@ -43,9 +43,6 @@ class ProfileFragment : Fragment() {
         (requireActivity() as MainActivity).setBottomBarVisibility(true)
         (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
         super.onViewCreated(view, savedInstanceState)
-//         var executor = Executors.newSingleThreadExecutor()
-//        executor.execute { AppLocalDatabasePersonPost.db.PersonPostsDao().deleteId("1")
-//        }
         val imageView2: ImageView = view.findViewById(R.id.imageView2)
 
         val email = args.email

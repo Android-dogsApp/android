@@ -92,6 +92,7 @@ class RegisterFragment : Fragment() {
             val adapter = ImageSelectionAdapter(imageUrls) { imageUrl ->
                 currentImageUrl = imageUrl
                 Picasso.get().load(imageUrl).into(imageView)
+
             }
             recyclerViewImages.adapter = adapter
 
@@ -125,11 +126,6 @@ class RegisterFragment : Fragment() {
             }
 
             registerUser(email, password)
-
-//                Navigation.findNavController(requireView())
-//                    .navigate(R.id.action_registerFragment_to_generalPostsFragment)
-//                (requireActivity() as MainActivity).setBottomBarVisibility(true)
-//                (requireActivity() as MainActivity).setAddMenuItemVisibility(true)
 
 
         }
@@ -176,12 +172,8 @@ class RegisterFragment : Fragment() {
                         var phoneNumber = phoneNumberEditText?.text.toString()
                         var dogType = dogTypeEditText?.text.toString()
 
-                        // Check each field and update flag accordingly
                         if (name.isNullOrBlank() || id.isNullOrBlank() || phoneNumber.isNullOrBlank() || dogType.isNullOrBlank() || currentImageUrl.isNullOrEmpty()) {
-//                            name = "NeedToBeFilled"
-//                            id = "NeedToBeFilled"
-//                            phoneNumber = "NeedToBeFilled"
-//                            dogType = "NeedToBeFilled"
+
                             Toast.makeText(
                                 requireContext(),
                                 "Please fill in all fields",
@@ -231,70 +223,6 @@ class RegisterFragment : Fragment() {
             }
 
     }
-
-
-//    private fun registerUser(email: String, password: String) {
-//        auth.createUserWithEmailAndPassword(email, password)
-//            .addOnCompleteListener(requireActivity()) { task ->
-//                if (task.isSuccessful) {
-//                    val user = auth.currentUser
-//                    if (user != null) {
-//                        val userId = user.uid
-//                        val name = nameEditText?.text.toString()
-//                        val id = idEditText?.text.toString()
-//                        val phoneNumber = phoneNumberEditText?.text.toString()
-//                        val dogType = dogTypeEditText?.text.toString()
-//                        if (name.isNullOrBlank() || id.isNullOrBlank() || phoneNumber.isNullOrBlank() || dogType.isNullOrBlank() || currentImageUrl.isNullOrEmpty()) {
-//                            Toast.makeText(
-//                                requireContext(),
-//                                "Please fill in all fields",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                            return@addOnCompleteListener
-//                        } else {
-//                            val person =
-//                                Person(name, id, phoneNumber, email, dogType, currentImageUrl!!)
-//
-//
-//                            //val person = Person(name, id, phoneNumber, email, dogType, currentImageUrl!!)
-//
-//                            val db = FirebaseFirestore.getInstance()
-//                            db.collection("persons")
-//                                .document(userId)
-//                                .set(person)
-//                                .addOnSuccessListener {
-//                                    // Log.i(TAG, "DocumentSnapshot added with ID: $userId")
-//                                }
-//                                .addOnFailureListener { e ->
-//                                    // Log.i(TAG, "Error adding document", e)
-//                                }
-//
-//
-//                            Toast.makeText(context, "Registration successful", Toast.LENGTH_SHORT)
-//                                .show()
-//                         }
-//                    } else {
-//                            Toast.makeText(context, "User is null", Toast.LENGTH_SHORT).show()
-//                    }
-//                } else {
-//                        val exception = task.exception
-//                        if (exception is FirebaseAuthUserCollisionException) {
-//                            Toast.makeText(context, "Email is already in use", Toast.LENGTH_SHORT)
-//                                .show()
-//                            return@addOnCompleteListener
-//                        } else {
-//                            Toast.makeText(
-//                                context,
-//                                "Registration failed: ${exception?.message}",
-//                                Toast.LENGTH_SHORT
-//                            ).show()
-//                            return@addOnCompleteListener
-//                        }
-//                }
-//
-//            }
-//    }
-
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
 
@@ -308,6 +236,5 @@ class RegisterFragment : Fragment() {
 
     companion object {
         const val IMAGE_PICK_REQUEST_CODE = 123
-        // const val TAG = "RegisterFragment"
     }
 }

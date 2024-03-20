@@ -70,9 +70,6 @@ data class GeneralPost(
                 LAST_UPDATED to FieldValue.serverTimestamp(),
                 PUBLISHER_KEY to publisher!!
             )
-//            publisher?.let {
-//                map[PUBLISHER_KEY] = it.name
-//            } // Change 'name' to the actual property you want to include
-//            return map
+
         }
 }

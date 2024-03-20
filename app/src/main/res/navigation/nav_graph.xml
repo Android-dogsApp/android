@@ -9,8 +9,7 @@
     <fragment
         android:id="@+id/entryFragment"
         android:name="com.example.dogsandddapters.EntryFragment"
-        android:label="fragment_entry"
-        tools:layout="@layout/fragment_entry" >
+        tools:layout="@layout/fragment_entry">
         <action
             android:id="@+id/action_entryFragment_to_logInFragment"
             app:destination="@id/logInFragment" />
@@ -33,7 +32,6 @@
     <fragment
         android:id="@+id/logInFragment"
         android:name="com.example.dogsandddapters.Modules.LogInFragment"
-        android:label="fragment_log_in"
         tools:layout="@layout/fragment_log_in" >
         <action
             android:id="@+id/action_logInFragment_to_generalPostsFragment"
@@ -51,8 +49,7 @@
     <fragment
         android:id="@+id/generalPostsFragment"
         android:name="com.example.dogsandddapters.Modules.GeneralPosts.GeneralPostsFragment"
-        android:label="fragment_general_posts"
-        tools:layout="@layout/fragment_general_posts" >
+        tools:layout="@layout/fragment_general_posts">
         <action
             android:id="@+id/action_generalPostsFragment_to_generalPostSpecificFragment"
             app:destination="@id/generalPostSpecificFragment" />
@@ -70,8 +67,7 @@
     <fragment
         android:id="@+id/profileFragment"
         android:name="com.example.dogsandddapters.ProfileFragment"
-        android:label="fragment_profile"
-        tools:layout="@layout/fragment_profile" >
+        tools:layout="@layout/fragment_profile">
         <argument
             android:name="email"
             app:argType="string" />
@@ -91,8 +87,7 @@
     <fragment
         android:id="@+id/addPersonPostFragment"
         android:name="com.example.dogsandddapters.Modules.addPersonPost.addPersonPostFragment"
-        android:label="fragment_add_person_post"
-        tools:layout="@layout/fragment_add_person_post" >
+        tools:layout="@layout/fragment_add_person_post">
         <argument
             android:name="email"
             app:argType="string" />
@@ -106,13 +101,11 @@
     <fragment
         android:id="@+id/generalPostSpecificFragment"
         android:name="com.example.dogsandddapters.GeneralPostSpecificFragment"
-        android:label="fragment_general_post_specific"
         tools:layout="@layout/fragment_general_post_specific" />
     <fragment
         android:id="@+id/registerFragment"
         android:name="com.example.dogsandddapters.Modules.RegisterFragment"
-        android:label="fragment_register"
-        tools:layout="@layout/fragment_register" >
+        tools:layout="@layout/fragment_register">
         <action
             android:id="@+id/action_registerFragment_to_entryFragment"
             app:destination="@id/entryFragment" />
@@ -128,8 +121,7 @@
     </fragment>
     <fragment
         android:id="@+id/personPostsFragment"
-        android:name="com.example.dogsandddapters.Modules.PersonPosts.PersonPostsFragment"
-        android:label="PersonPostsFragment" >
+        android:name="com.example.dogsandddapters.Modules.PersonPosts.PersonPostsFragment">
         <argument
             android:name="personID"
             app:argType="string" />
@@ -145,8 +137,7 @@
     </fragment>
     <fragment
         android:id="@+id/editProfileFragment"
-        android:name="com.example.dogsandddapters.editProfileFragment"
-        android:label="editProfileFragment" >
+        android:name="com.example.dogsandddapters.editProfileFragment">
         <argument
             android:name="email"
             app:argType="string" />
@@ -163,8 +154,7 @@
     <fragment
         android:id="@+id/editPostFragment"
         android:name="com.example.dogsandddapters.Modules.EditPostFragment"
-        android:label="fragment_edit_post"
-        tools:layout="@layout/fragment_edit_post" >
+        tools:layout="@layout/fragment_edit_post">
         <argument
             android:name="postId"
             app:argType="string" />
@@ -181,8 +171,7 @@
 
     <fragment
         android:id="@+id/personSpecificPostFragment"
-        android:name="com.example.dogsandddapters.PersonSpecificPostFragment"
-        android:label="PersonSpecificPostFragment" >
+        android:name="com.example.dogsandddapters.PersonSpecificPostFragment">
         <argument
             android:name="postId"
             app:argType="string" />
@@ -192,6 +181,5 @@
     </fragment>
     <fragment
         android:id="@+id/restApiFragment"
-        android:name="com.example.dogsandddapters.RestApiFragment"
-        android:label="RestApiFragment" />
+        android:name="com.example.dogsandddapters.RestApiFragment" />
 </navigation>

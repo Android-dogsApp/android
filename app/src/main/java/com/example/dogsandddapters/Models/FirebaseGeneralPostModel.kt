@@ -49,12 +49,7 @@ class FirebaseGeneralPostModel {
         }
     }
 
-//    fun getGeneralPostById(postid: String, callback: (GeneralPost?) -> Unit) {
-//        db.collection(GENERALPOST_COLLECTION_PATH).document(postid).get().addOnSuccessListener {
-//            val generalPost = GeneralPost.fromJSON(it.data)
-//            callback(generalPost)
-//        }
-//    }
+
 
     fun getGeneralPostById(postid: String, callback: (GeneralPost?) -> Unit) {
         db.collection(GENERALPOST_COLLECTION_PATH).document(postid).get().addOnSuccessListener { documentSnapshot ->

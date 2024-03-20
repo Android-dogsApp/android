@@ -32,7 +32,6 @@ class LogInFragment : Fragment() {
         EmailEditText = view.findViewById(R.id.editTextEmail)
         passwordEditText = view.findViewById(R.id.editTextPassword)
         loginButton = view.findViewById(R.id.buttonLogin)
-//        cancelButton = view.findViewById(R.id.buttonCancel)
 
         loginButton.setOnClickListener {
             val email = EmailEditText.text.toString().trim()
@@ -47,10 +46,6 @@ class LogInFragment : Fragment() {
             loginUser(email, password)
         }
 
-//        cancelButton.setOnClickListener {
-//            val action = LogInFragmentDirections.actionLogInFragmentToEntryFragment()
-//            Navigation.findNavController(view).navigate(action)
-//        }
 
         return view
     }
@@ -60,35 +55,20 @@ class LogInFragment : Fragment() {
 
         sharedPreferences = requireActivity().getSharedPreferences("loginPrefs", Context.MODE_PRIVATE)
         auth = FirebaseAuth.getInstance()
+
+    }
+//    private fun showLoginScreen() {
+//        // Show the login screen
+//        // Implement your login logic here
+//        loginButton.setOnClickListener {
+//            val email = EmailEditText.text.toString()
+//            val password = passwordEditText.text.toString()
 //
-//        if (isLoggedIn()) {
-//            // Check if the saved credentials are valid
-//            val email = sharedPreferences.getString("email", "")
-//            val password = sharedPreferences.getString("password", "")
+//            // Perform login authentication here
+//            loginUser(email, password)
 //
-//            if (!email.isNullOrEmpty() && !password.isNullOrEmpty()) {
-//                loginUser(email, password)
-//            } else {
-//                // If credentials are missing or invalid, show the login screen
-//                showLoginScreen()
-//            }
-//        } else {
-//            // If user is not logged in, show the login screen
-//            showLoginScreen()
 //        }
-    }
-    private fun showLoginScreen() {
-        // Show the login screen
-        // Implement your login logic here
-        loginButton.setOnClickListener {
-            val email = EmailEditText.text.toString()
-            val password = passwordEditText.text.toString()
-
-            // Perform login authentication here
-            loginUser(email, password)
-
-        }
-    }
+//    }
 
     private fun loginUser(email: String, password: String) {
         auth.signInWithEmailAndPassword(email, password)
@@ -106,13 +86,13 @@ class LogInFragment : Fragment() {
                 }
             }
     }
-    private fun isLoggedIn(): Boolean {
-       // return sharedPreferences.contains("email") && sharedPreferences.contains("password")
-        FirebaseAuth.getInstance().currentUser?.let {
-            return true
-        }
-        return false
-    }
+//    private fun isLoggedIn(): Boolean {
+//       // return sharedPreferences.contains("email") && sharedPreferences.contains("password")
+//        FirebaseAuth.getInstance().currentUser?.let {
+//            return true
+//        }
+//        return false
+//    }
 
 
     private fun navigateToGeneralPosts() {
