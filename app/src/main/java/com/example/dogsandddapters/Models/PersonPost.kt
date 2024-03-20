@@ -55,9 +55,7 @@ data class PersonPost(
             val image = json[IMAGE_KEY] as? String ?: ""
             val personPost= PersonPost(postid, publisher, request, offer, contact, image)
 
-//            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
-//            timestamp?.let {
-//                personPost.lastUpdated= it.seconds
+
             val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
             timestamp?.let {
                 personPost.lastUpdated = it.seconds
@@ -80,9 +78,6 @@ data class PersonPost(
                 PUBLISHER_KEY to publisher!!
 
             )
-//            publisher?.let {
-//                map[PUBLISHER_KEY] = it.name
-//            } // Change 'name' to the actual property you want to include
-//            return map
+
         }
 }

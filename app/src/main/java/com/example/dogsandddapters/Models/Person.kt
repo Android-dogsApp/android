@@ -12,24 +12,13 @@ data class Person(
     val dogType: String,
     val image: String,
 
-){
-    //val avatarUrl: String) {
+)
+{
+
 
     constructor() : this("", "", "", "", "", "")
 
     companion object {
-//        var lastUpdated: Long
-//            get() {
-//                return MyApplication.Globals
-//                    .appContext?.getSharedPreferences("TAG", Context.MODE_PRIVATE)
-//                    ?.getLong(GET_LAST_UPDATED, 0) ?: 0
-//            }
-//            set(value) {
-//                MyApplication.Globals
-//                    ?.appContext
-//                    ?.getSharedPreferences("TAG", Context.MODE_PRIVATE)?.edit()
-//                    ?.putLong(GET_LAST_UPDATED, value)?.apply()
-//            }
 
         const val NAME_KEY = "name"
         const val ID_KEY = "id"
@@ -37,8 +26,6 @@ data class Person(
         const val EMAIL_KEY = "email"
         const val DOG_TYPE_KEY = "dogType"
         const val IMAGE_KEY = "image"
-       // const val AVATAR_URL_KEY = "avatarUrl"
-       //const val LAST_UPDATED = "lastUpdated"
        const val GET_LAST_UPDATED = "get_last_updated"
 
 
@@ -49,12 +36,8 @@ data class Person(
             val email = json[EMAIL_KEY] as? String ?: ""
             val dogType = json[DOG_TYPE_KEY] as? String ?: ""
             val image = json[PersonPost.IMAGE_KEY] as? String ?: ""
-           // val avatarUrl = json[AVATAR_URL_KEY] as? String ?: ""
             val person= Person(name, id, phoneNumber, email, dogType, image)
-//            val timestamp: Timestamp? = json[LAST_UPDATED] as? Timestamp
-//            timestamp?.let {
-//                person.lastUpdated = it.seconds
-//            }
+
             return person
         }
     }
@@ -69,8 +52,7 @@ data class Person(
                 EMAIL_KEY to email,
                 DOG_TYPE_KEY to dogType,
                 IMAGE_KEY to image ,
-                //AVATAR_URL_KEY to avatarUrl,
-                //LAST_UPDATED to FieldValue.serverTimestamp()
+
             )
         }
 }

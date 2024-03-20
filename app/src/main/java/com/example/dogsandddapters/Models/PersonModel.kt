@@ -31,26 +31,6 @@ class PersonModel private constructor() {
         }
     }
 
-//    fun getPersonByEmail(email: String, callback: (Person?) -> Unit) {
-//        database.PersonDao().getPersonByEmail(email).observeForever { person ->
-//            if (person != null) {
-//                // If person found in local database
-//                callback(person)
-//            } else {
-//                // If person not found in local database, check Firebase
-//                firebasePersonModel.getPersonByEmail(email) { user ->
-//                    if (user != null) {
-//                        // If user found in Firebase, insert into local database
-//                        database.PersonDao().insert(user)
-//                        callback(user)
-//                    } else {
-//                        // User not found in local database or Firebase
-//                        callback(null)
-//                    }
-//                }
-//            }
-//        }
-//    }
 
 
     fun getPersonByEmail(email: String, callback: (Person?) -> Unit): LiveData<Person> {
@@ -63,49 +43,6 @@ class PersonModel private constructor() {
     }
 
 
-//    fun getPerson(id: String, callback: (Person?) -> Unit) : LiveData<Person>{
-//        personLiveData =database.PersonDao().getPersonById(id)
-//        refreshPerson(id){
-//            callback(it)
-//        }
-//        return personLiveData!!
-//    }
-
-//    fun getPerson(id: String, callback: () -> Unit) {
-//        val person = firebasePersonModel.getPerson(id){
-//            callback()
-//        }
-//        return person;
-//    }
-
-//    private fun refreshPerson(id: String, callback: (Person?) -> Unit) {
-//        personLoadingState.value = LoadingState.LOADING
-//        val lastUpdated: Long = Person.lastUpdated
-//        firebasePersonModel.getPerson(lastUpdated, id) { person ->
-//            callback(person) // fills the profile fields with the person's data
-//            executor.execute {
-//                var time = lastUpdated
-//                if (person != null) {
-//                    database.PersonDao().insert(person)
-//                }
-//                person?.lastUpdated?.let {
-//                        if (time < it)
-//                            time = person.lastUpdated ?: System.currentTimeMillis()
-//                }
-//                Person.lastUpdated = time
-//                personLoadingState.postValue(LoadingState.LOADED)
-//            }
-//        }
-//    }
-
-
-//        fun addPerson(person: Person, callback: () -> Unit) {
-//            firebasePersonModel.addPerson(person) {
-//                //refreshPerson(person.id) {
-//                callback()
-//                //}
-//            }
-//        }
 
         fun updatePerson(id:String,person: Person, callback: () -> Unit) {
             firebasePersonModel.updatePerson(id,person) {

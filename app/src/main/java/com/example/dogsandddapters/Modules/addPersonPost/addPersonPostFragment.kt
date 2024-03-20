@@ -155,48 +155,6 @@ class addPersonPostFragment : Fragment() {
 
 
 
-//    private fun downloadAndSaveDogPhoto() {
-//        val imageUrl = "https://thumbor.forbes.com/thumbor/fit-in/900x510/https://www.forbes.com/advisor/wp-content/uploads/2023/07/top-20-small-dog-breeds.jpeg.jpg"
-//        Picasso.get().load(imageUrl).into(object : com.squareup.picasso.Target {
-//            override fun onBitmapLoaded(bitmap: Bitmap?, from: Picasso.LoadedFrom?) {
-//                bitmap?.let { saveImageToGallery(it) }
-//            }
-//
-//            override fun onBitmapFailed(e: java.lang.Exception?, errorDrawable: Drawable?) {
-//                // Handle failure
-//            }
-//
-//            override fun onPrepareLoad(placeHolderDrawable: Drawable?) {
-//                // Prepare to load
-//            }
-//        })
-//    }
-
-//    private fun saveImageToGallery(bitmap: Bitmap) {
-//        // Define the values to insert into the MediaStore
-//        val contentValues = ContentValues().apply {
-//            put(MediaStore.Images.Media.DISPLAY_NAME, "Image_${System.currentTimeMillis()}.jpg")
-//            put(MediaStore.Images.Media.MIME_TYPE, "image/jpeg")
-//        }
-
-        // Insert the image into the MediaStore
-//        val uri = requireContext().contentResolver.insert(
-//            MediaStore.Images.Media.EXTERNAL_CONTENT_URI,
-//            contentValues
-//        )
-//
-//        // Write the bitmap data to the content resolver
-//        uri?.let { imageUri ->
-//            requireContext().contentResolver.openOutputStream(imageUri).use { outputStream ->
-//                outputStream?.let {
-//                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, it)
-//                }
-//            }
-//            Toast.makeText(requireContext(), "Image saved to gallery", Toast.LENGTH_SHORT).show()
-//        } ?: run {
-//            Toast.makeText(requireContext(), "Failed to save image", Toast.LENGTH_SHORT).show()
-//        }
-//    }
 
     override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
         menu.clear()

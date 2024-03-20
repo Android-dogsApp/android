@@ -19,10 +19,7 @@ class PersonPostListActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_person_post_list)
-//
-//        Model.instance.getAllStudents { students ->
-//            this.students = students
-//        }
+
 
         personPostListView = findViewById(R.id.lvpersonPostList)
         personPostListView?.adapter = PersonPostsListAdapter(personPosts)
@@ -45,14 +42,7 @@ class PersonPostListActivity : AppCompatActivity() {
             var view: View? = null
             if (convertView == null) {
                 view = LayoutInflater.from(parent?.context).inflate(R.layout.person_post_layout_row, parent, false)
-//                    val studentCheckbox: CheckBox? = view?.findViewById(R.id.cbStudentListRow)
-//                    studentCheckbox?.setOnClickListener {
-//
-//                        (studentCheckbox?.tag as? Int)?.let {tag ->
-//                            var student = students?.get(tag)
-//                            student?.isChecked = studentCheckbox?.isChecked ?: false
-//                        }
-//                    }
+
             }
 
             view = view ?: convertView

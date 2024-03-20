@@ -47,13 +47,6 @@ class GeneralPostsFragment : Fragment() {
 
         viewModel.generalposts = PersonPostModel.instance.getAllpersonPosts("")
 
-//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-//            this.generalposts = generalposts
-//            adapter?.generalposts = generalposts
-//            adapter?.notifyDataSetChanged()
-//
-//            progressBar?.visibility = View.GONE
-//        }
 
 
         GeneralPostsRcyclerView = binding.rvGeneralPostFragmentList
@@ -105,11 +98,6 @@ class GeneralPostsFragment : Fragment() {
 
         return view
 
-//        val addGeneralPostButton: ImageButton = view.findViewById(R.id.ibtnGeneralPostFragmentAddGeneralPost)
-//        addGeneralPostButton.setOnClickListener {
-//            val action = GeneralPostsFragmentDirections.actionGeneralPostsFragmentToAddPersonPostFragment()
-//            Navigation.findNavController(view).navigate(action)
-//        }
 
 
     }
