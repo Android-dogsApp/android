@@ -19,6 +19,16 @@
             android:textStyle="bold"
             android:layout_marginBottom="4dp"
             android:layout_gravity="center"/>
+        <TextView
+            android:id="@+id/contactInfoLabel"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="My Information:"
+            android:textSize="18sp"
+            android:layout_marginTop="16dp"
+            android:layout_marginBottom="8dp"
+            android:textStyle="bold"
+            android:gravity="center"/>
 
         <!-- Name TextView -->
         <TextView
@@ -43,16 +53,7 @@
             android:layout_gravity="center"/> <!-- Center text -->
 
         <!-- Contact Info Section -->
-        <TextView
-            android:id="@+id/contactInfoLabel"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Contact Information"
-            android:textSize="18sp"
-            android:layout_marginTop="16dp"
-            android:layout_marginBottom="8dp"
-            android:textStyle="bold"
-            android:gravity="center"/>
+
 
         <!-- Phone TextView -->
         <TextView
