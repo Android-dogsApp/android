@@ -88,7 +88,6 @@ import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.dao.AppLocalDatabasePersonPost
 import com.google.firebase.auth.FirebaseAuth
 import java.util.concurrent.Executors
-import com.example.dogsandddapters.dao.PersonPostsDao
 
 
 class EntryFragment : Fragment() {
@@ -135,7 +134,7 @@ class EntryFragment : Fragment() {
             return false
         }
         // Update UI based on login state
-        FirebaseAuth.getInstance().signOut()
+        //FirebaseAuth.getInstance().signOut()
          var isLoggedIn = isLoggedIn()
         if (isLoggedIn)
         {
