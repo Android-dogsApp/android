@@ -81,7 +81,7 @@ class editProfileFragment : Fragment() {
             val dialogView = layoutInflater.inflate(R.layout.dialog_image_selection, null)
             val recyclerViewImages: RecyclerView = dialogView.findViewById(R.id.recyclerViewImages)
 
-            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(), 2)
+            recyclerViewImages.layoutManager = GridLayoutManager(requireContext(),4)
 
             val imageUrls = listOf(
                 "https://upload.wikimedia.org/wikipedia/commons/thumb/9/90/Labrador_Retriever_portrait.jpg/1200px-Labrador_Retriever_portrait.jpg",
