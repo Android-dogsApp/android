@@ -10,9 +10,6 @@ import com.example.dogsandddapters.Models.Person
 @Dao
 interface PersonDao {
 
-//    @Query("SELECT * FROM Person")
-//    //fun getAll(): List<Person>
-
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(vararg person: Person)
 

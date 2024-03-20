@@ -19,54 +19,6 @@ class FirebasePersonPostModel {
         db.firestoreSettings = settings
     }
 
-//    fun getAllPersonPosts(since: Long, publisher: String, callback: (List<PersonPost>) -> Unit) {
-//        Log.i("getAllPersonPosts", "getAllPersonPosts - publisher $publisher")
-//        db.collection(PERSONPOST_COLLECTION_PATH)
-//            //.whereEqualTo("postpublisher", publisher)
-//            .whereGreaterThanOrEqualTo("lastUpdated", Timestamp(since, 0))
-//            .get()
-//            .addOnCompleteListener { task ->
-//                if (task.isSuccessful) {
-//                    val personPosts: MutableList<PersonPost> = mutableListOf()
-//                    for (json in task.result) {
-//                        val personPost = PersonPost.fromJSON(json.data)
-//                        if (personPost != null) {
-//                            personPosts.add(personPost)
-//                        }
-//                    }
-//                    callback(personPosts)
-//                } else {
-//                    Log.e("getAllPersonPosts", "Error getting documents: ${task.exception}")
-//                    callback(listOf())
-//                }
-//            }
-//    }
-
-//    fun getAllPersonPosts(since: Long,publisher: String, callback: (List<PersonPost>) -> Unit){
-//        Log.i("getAllPersonPosts", "getAllPersonPosts -publisher ${publisher}")
-//        db.collection(PERSONPOST_COLLECTION_PATH)
-//            .whereGreaterThanOrEqualTo(PersonPost.LAST_UPDATED, Timestamp(since, 0))
-//            // .whereEqualTo("postpublisher", publisher)
-//            .get().addOnCompleteListener {
-//                when (it.isSuccessful) {
-//                    true -> {
-//                        val personPosts: MutableList<PersonPost> = mutableListOf()
-//                        for (json in it.result) {
-//                            val personPost = PersonPost.fromJSON(json.data)
-//                            if (personPost != null) {
-//                                personPosts.add(personPost)
-//                            }
-//
-//                        }
-//                        callback(personPosts)
-//                    }
-//                    false -> callback(listOf())
-//                }
-//            }
-//    }
-
-
-
 
     fun getAllPersonPosts(since: Long,publisher: String, callback: (List<PersonPost>) -> Unit){
         Log.i("getAllPersonPosts", "getAllPersonPosts -publisher ${publisher}")
@@ -97,7 +49,7 @@ class FirebasePersonPostModel {
         }
     }
 
-//
+
 
     fun getPersonPostById(postid: String, callback: (PersonPost?) -> Unit) {
         db.collection(PERSONPOST_COLLECTION_PATH).document(postid).get().addOnSuccessListener { documentSnapshot ->

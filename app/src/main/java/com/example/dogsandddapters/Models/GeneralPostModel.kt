@@ -40,7 +40,7 @@ class GeneralPostModel private constructor() {
 
         generalPostsListLoadingState.value = LoadingState.LOADING
 
-        // 1. Get last local update
+        // 1. Get last updated time from local data
         val lastUpdated: Long = GeneralPost.lastUpdated
 
         // 2. Get all updated records from firestore since last update locally

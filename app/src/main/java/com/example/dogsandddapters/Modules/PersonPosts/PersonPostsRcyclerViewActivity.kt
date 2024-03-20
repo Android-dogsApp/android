@@ -25,11 +25,7 @@ class PersonPostsRcyclerViewActivity : AppCompatActivity() {
         binding = ActivityPersonPostRcyclerViewBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-//            this.generalposts = generalposts
-//            adapter?.generalposts = generalposts
-//            adapter?.notifyDataSetChanged()
-//        }
+
 
        personPostsRcyclerView = binding.rvPersonPostRecyclerList
         personPostsRcyclerView?.setHasFixedSize(true)
@@ -57,11 +53,6 @@ class PersonPostsRcyclerViewActivity : AppCompatActivity() {
 
     override fun onResume() {
         super.onResume()
-//
-//        GeneralPostModel.instance.getAllGeneralPosts { generalposts ->
-//            this.generalposts = generalposts
-//            adapter?.generalposts = generalposts
-//            adapter?.notifyDataSetChanged()
-//        }
+
     }
 }

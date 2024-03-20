@@ -28,7 +28,7 @@ interface GeneralPostDao {
     @Query("SELECT * FROM GeneralPost WHERE postid =:id")
     infix fun getGeneralPostById(id: String):  LiveData<GeneralPost>
 
-    //@Query("SELECT * FROM GeneralPost WHERE postid =:id")
+
     @Update
      fun updateGeneralPost(generalpost: GeneralPost)
 

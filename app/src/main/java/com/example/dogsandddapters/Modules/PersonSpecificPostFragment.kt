@@ -75,37 +75,7 @@ class PersonSpecificPostFragment : Fragment() {
                 }
             }
        }
-//
-//        PersonModel.instance.getPersonByEmail(email) {
-//            val personId= it?.id
-//            if(personId == publisher) {
-//                val editButton: Button = view.findViewById(R.id.buttonEdit)
-//                editButton.setOnClickListener {
-//                    val action =
-//                        PersonSpecificPostFragmentDirections.actionPersonSpecificPostFragmentToEditPostFragment(
-//                            postId
-//                        )
-//                    Navigation.findNavController(view).navigate(action)
-//
-//                }
-//            }
-//
-//        }
 
-
-
-
-
-
-
-//        //CAN EDIT POST ONLY IF IT BELONGS TO THE USER!
-//        val editButton: Button = view.findViewById(R.id.buttonEdit)
-//
-//        editButton.setOnClickListener {
-//            val action = PersonSpecificPostFragmentDirections.actionPersonSpecificPostFragmentToEditPostFragment(postId)
-//            Navigation.findNavController(view).navigate(action)
-//
-//        }
     }
 
 

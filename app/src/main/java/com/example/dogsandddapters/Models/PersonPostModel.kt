@@ -40,15 +40,7 @@ class PersonPostModel private constructor() {
     }
 
 
-//    fun getAllpersonPosts(callback: (List<PersonPost>) -> Unit): LiveData<MutableList<PersonPost>> {
-//        // Assuming refreshAllpersonPosts updates personPosts internally
-//        refreshAllpersonPosts()
-//
-//        // Pass the current value of personPosts to the callback
-//        callback(personPosts.value.orEmpty())
-//
-//        return personPosts
-//    }
+
 
 
     fun refreshAllpersonPosts(publisher: String)  {
@@ -105,7 +97,6 @@ class PersonPostModel private constructor() {
             executor2.execute {
                 database.PersonPostsDao().updatePersonPost(personPost)
             }
-            //refreshAllpersonPosts()
             callback()
         }
 

@@ -9,7 +9,5 @@ interface DogApiService {
     @GET("breed/{breed}/list")
     fun getSubBreeds(@Path("breed") breed: String): Call<DogApiResponse>
 
-//    @GET("api/breeds/list")
-//    fun getAllBreeds(): Call<DogApiResponse>
 }
 
