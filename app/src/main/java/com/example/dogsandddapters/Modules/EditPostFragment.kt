@@ -8,6 +8,7 @@ import android.graphics.Bitmap
 import android.os.AsyncTask
 import android.os.Bundle
 import android.provider.MediaStore
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -66,6 +67,7 @@ class EditPostFragment : Fragment() {
             editTextContact.setText(it?.contact) // Corrected to setText
             publisher = it?.publisher
             Picasso.get().load(it?.image).into(imageView)
+            currentImageUrl = it?.image
         }
 
         buttonCancel.setOnClickListener {
@@ -88,11 +90,13 @@ class EditPostFragment : Fragment() {
             val contact = editTextContact.text.toString()
             val request = editTextRequest.text.toString()
 
-            if ( offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()|| currentImageUrl.isNullOrEmpty()) {
+            if ( offer.isNullOrBlank() || contact.isNullOrBlank() || request.isNullOrBlank()) {
                 // Show an error message to the user, for example, using a Toast
                 Toast.makeText(requireContext(), "Please fill in all fields", Toast.LENGTH_SHORT).show()
             } else {
-                //val updatedGeneralPost = GeneralPost(postid, publisher, request, offer, contact)
+
+                Log.i("EditPostFragment", "currentImageUrl: $currentImageUrl")
+
                 val updatedPersonPost = PersonPost(postId, publisher, request, offer, contact,currentImageUrl!!)
 
 

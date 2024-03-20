@@ -14,7 +14,6 @@ import com.example.dogsandddapters.Models.PersonModel
 import com.example.dogsandddapters.dao.AppLocalDatabasePersonPost
 import com.google.firebase.auth.FirebaseAuth
 import java.util.concurrent.Executors
-import com.example.dogsandddapters.dao.PersonPostsDao
 
 
 class EntryFragment : Fragment() {
@@ -73,9 +72,6 @@ class EntryFragment : Fragment() {
 
                 val action = EntryFragmentDirections.actionEntryFragmentToProfileFragment(email!!, "")
                 Navigation.findNavController(view).navigate(action)
-
-
-         Navigation.findNavController(view).navigate(action)
             }
 
 
