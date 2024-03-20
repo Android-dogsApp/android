@@ -154,6 +154,8 @@ class RegisterFragment : Fragment() {
         }
     }
 
+
+
     private fun registerUser(email: String, password: String) {
         auth.createUserWithEmailAndPassword(email, password)
             .addOnCompleteListener(requireActivity()) { task ->
@@ -177,6 +179,7 @@ class RegisterFragment : Fragment() {
                                 "Please fill in all fields",
                                 Toast.LENGTH_SHORT
                             ).show()
+                            user.delete()
 
                         } else {
                             val person = Person(name, id, phoneNumber, email, dogType, currentImageUrl!!)
