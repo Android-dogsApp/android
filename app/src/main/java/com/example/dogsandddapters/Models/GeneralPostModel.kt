@@ -25,6 +25,7 @@ class GeneralPostModel private constructor() {
     val generalPostsListLoadingState: MutableLiveData<LoadingState> = MutableLiveData(LoadingState.LOADED)
     companion object {
         val instance: GeneralPostModel = GeneralPostModel()
+
     }
 
     interface GetAllPersonsListener {
